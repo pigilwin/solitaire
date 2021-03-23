@@ -1,6 +1,11 @@
-export const Heart = (): JSX.Element => {
+interface SuitIconProps {
+    width: number;
+    height: number;
+}
+
+export const Heart = ({width, height}: SuitIconProps): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
+        <svg fill="red" xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
             <g transform="rotate(45,300,300)">
                 <rect x="150" y="150" height="350" width="350" />
                 <circle cx="150" cy="325" r="175" />
@@ -10,17 +15,17 @@ export const Heart = (): JSX.Element => {
     );
 };
 
-export const Diamond = (): JSX.Element => {
+export const Diamond = ({width, height}: SuitIconProps): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
+        <svg fill="red" xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
             <rect x="100" y="100" width="400" height="400" transform="rotate(45,300,300)" />
         </svg>
     );
 };
 
-export const Spade = (): JSX.Element => {
+export const Spade = ({width, height}: SuitIconProps): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
             <defs>
                 <mask id="stem-mask">
                     <rect width="100%" height="100%" fill="#fff"/>
@@ -38,9 +43,9 @@ export const Spade = (): JSX.Element => {
     );
 };
 
-export const Club = (): JSX.Element => {
+export const Club = ({width, height}: SuitIconProps): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
             <defs>
                 <mask id="stem-mask">
                     <rect width="100%" height="100%" fill="#fff"/>
