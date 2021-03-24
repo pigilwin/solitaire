@@ -1,6 +1,18 @@
+import { useDispatch } from "react-redux";
+import { initialiseGame } from "../../store/game/gameSlice";
 import { GameButton } from "./Button";
 
 export const GameBar = (): JSX.Element => {
+    
+    const dispatch = useDispatch();
+
+    const newGameClickHandler = () => {
+        dispatch(initialiseGame());
+    };
+    const leaderboardClickHandler = () => {};
+    const settingsClickHandler = () => {};
+    
+    
     return (
         <nav className="w-full bg-white shadow-lg border-b border-green-500 h-16">
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -9,13 +21,13 @@ export const GameBar = (): JSX.Element => {
                 </div>
                 <div className="flex flex-row">
                     <div className="px-1">
-                        <GameButton buttonText="New Game"/>
+                        <GameButton buttonText="New Game" onClick={newGameClickHandler}/>
                     </div>
                     <div className="px-1">
-                        <GameButton buttonText="Leaderboard"/>
+                        <GameButton buttonText="Leaderboard" onClick={leaderboardClickHandler}/>
                     </div>
                     <div className="px-1">
-                        <GameButton buttonText="Settings"/>
+                        <GameButton buttonText="Settings" onClick={settingsClickHandler}/>
                     </div>
                 </div>
             </div>

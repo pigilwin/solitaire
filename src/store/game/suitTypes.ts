@@ -16,6 +16,11 @@ export interface Solitaire {
     five: SolitaireCard[];
     sixth: SolitaireCard[];
     seventh: SolitaireCard[];
+    diamond: SolitaireCard[];
+    heart: SolitaireCard[];
+    spade: SolitaireCard[];
+    club: SolitaireCard[];
+    draw: SolitaireCard[];
 }
 
 export interface SolitaireCard {

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { generateGame } from './game';
 import { Solitaire } from './suitTypes';
 
 export const initialState: Solitaire =  {
@@ -12,13 +13,25 @@ export const initialState: Solitaire =  {
     fourth: [],
     five: [],
     sixth: [],
-    seventh: []
+    seventh: [],
+    heart: [],
+    diamond: [],
+    spade: [],
+    club: [],
+    draw: []
 };
 
 const gameSlice = createSlice({
     name: 'game',
     initialState,
-    reducers: {}
+    reducers: {
+        initialiseGame(state) {
+            return generateGame();
+        }
+    }
 });
 
 export const reducer = gameSlice.reducer;
+export const {
+    initialiseGame
+} = gameSlice.actions;
