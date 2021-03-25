@@ -1,8 +1,11 @@
-import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
+import { Solitaire, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
 
-export const TopBar = (): JSX.Element => {
+interface TopBarProps {
+    solitaire: Solitaire;
+}
+export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
 
     return (
         <div className="flex flex-wrap mt-5">

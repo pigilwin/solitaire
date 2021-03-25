@@ -1,8 +1,12 @@
-import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd"
-import { GameBar } from "./components/GameBar"
+import { DragDropContext, DropResult, ResponderProvided } from "react-beautiful-dnd";
+import { GameBar } from "./components/GameBar";
 import { Board } from "./board";
+import { useSelector } from "react-redux";
+import { currentGameSelector } from "../store/game/gameSlice";
 
 export const Game = (): JSX.Element => {
+
+    const solitaire = useSelector(currentGameSelector);
 
     const onDragEndHandler = (result: DropResult, provided: ResponderProvided) => {
 
@@ -12,7 +16,7 @@ export const Game = (): JSX.Element => {
         <div className="min-h-screen bg-green-300">
             <GameBar/>
             <DragDropContext onDragEnd={onDragEndHandler}>
-                <Board/>
+                <Board solitaire={solitaire}/>
             </DragDropContext>
         </div>
     );

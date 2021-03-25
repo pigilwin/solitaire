@@ -1,11 +1,15 @@
 import { TopBar } from "./components/board/TopBar";
 import { Columns } from "./components/board/Columns";
+import { Solitaire } from "../store/game/suitTypes";
 
-export const Board = (): JSX.Element => {
+interface BoardProps {
+    solitaire: Solitaire;
+}
+export const Board = ({solitaire}: BoardProps): JSX.Element => {
     return (
         <div id="board">
-            <TopBar/>
-            <Columns/>
+            <TopBar solitaire={solitaire}/>
+            <Columns solitaire={solitaire}/>
         </div>
     );
 };
