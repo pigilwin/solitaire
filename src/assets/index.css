@@ -10,3 +10,12 @@
     @apply rounded-md;
     @apply shadow-md;
 }
+
+.playing-card-container {
+    @apply w-44;
+    @apply h-64;
+    @apply border-2;
+    @apply border-black;
+    @apply rounded-md;
+    @apply shadow-md;
+}
