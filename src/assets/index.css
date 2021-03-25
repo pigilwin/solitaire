@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .playing-card {
-    @apply w-40;
-    @apply h-60;
+    @apply w-32;
+    @apply h-44;
     @apply border-2;
     @apply border-black;
     @apply rounded-md;
@@ -12,8 +12,8 @@
 }
 
 .playing-card-container {
-    @apply w-44;
-    @apply h-64;
+    @apply w-32;
+    @apply h-44;
     @apply border-2;
     @apply border-black;
     @apply rounded-md;
