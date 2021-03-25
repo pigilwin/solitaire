@@ -1,4 +1,5 @@
-import { Solitaire, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
+import { Droppable } from 'react-beautiful-dnd';
+import { Solitaire, SolitaireCard, SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
 
@@ -19,18 +20,37 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
             </div>
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
                 <div className="px-2">
-                    <EmptyFinalCard type={SUIT_TYPE_HEART}/>
+                    {generateFinalContainer(solitaire.heart, SUIT_TYPE_HEART)}
                 </div>
                 <div className="px-2">
-                    <EmptyFinalCard type={SUIT_TYPE_DIAMOND}/>
+                    {generateFinalContainer(solitaire.diamond, SUIT_TYPE_DIAMOND)}
                 </div>
                 <div className="px-2">
-                    <EmptyFinalCard type={SUIT_TYPE_CLUB}/>
+                    {generateFinalContainer(solitaire.club, SUIT_TYPE_CLUB)}
                 </div>
                 <div className="px-2">
-                    <EmptyFinalCard type={SUIT_TYPE_SPADE}/>
+                    {generateFinalContainer(solitaire.spade, SUIT_TYPE_SPADE)}
                 </div>
             </div>
         </div>
     );
 };
+
+const generateFinalContainer = (cards: SolitaireCard[], type: SUIT): JSX.Element => {
+
+    if (cards.length === 0) {
+        return (
+            <Droppable droppableId={"final-index-" + type}>
+                {(provided, snapshot) => (
+                <div ref={provided.innerRef}{...provided.droppableProps}>
+                    <EmptyFinalCard type={type}/>
+                    {provided.placeholder}
+                </div>
+            )}
+            </Droppable>
+        );
+    }
+
+    return <EmptyFinalCard type={type}/>
+
+}
