@@ -7,22 +7,22 @@ const smallHeight: number = 20;
 const largeWidth: number = 80;
 const largeHeight: number = 80;
 
-export const resolveSmallSuitIcon = (type: string): JSX.Element => {
+export const resolveSmallSuitIcon = (type: string, opacity: boolean): JSX.Element => {
 
     let icon: JSX.Element | null = null;
 
     switch (type) {
         case SUIT_TYPE_SPADE:
-            icon = <Spade width={smallWidth} height={smallHeight}/>;
+            icon = <Spade width={smallWidth} height={smallHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_CLUB:
-            icon = <Club width={smallWidth} height={smallHeight}/>
+            icon = <Club width={smallWidth} height={smallHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_HEART:
-            icon = <Heart width={smallWidth} height={smallHeight}/>
+            icon = <Heart width={smallWidth} height={smallHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_DIAMOND:
-            icon = <Diamond width={smallWidth} height={smallHeight}/>
+            icon = <Diamond width={smallWidth} height={smallHeight} usingOpacity={opacity}/>;
             break;
         default:
             throw new Error('No icon found for ' + type);
@@ -31,22 +31,22 @@ export const resolveSmallSuitIcon = (type: string): JSX.Element => {
 };
 
 
-export const resolveLargeSuitIcon = (type: string): JSX.Element => {
+export const resolveLargeSuitIcon = (type: string, opacity: boolean): JSX.Element => {
 
     let icon: JSX.Element | null = null;
 
     switch (type) {
         case SUIT_TYPE_SPADE:
-            icon = <Spade width={largeWidth} height={largeHeight}/>;
+            icon = <Spade width={largeWidth} height={largeHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_CLUB:
-            icon = <Club width={largeWidth} height={largeHeight}/>
+            icon = <Club width={largeWidth} height={largeHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_HEART:
-            icon = <Heart width={largeWidth} height={largeHeight}/>
+            icon = <Heart width={largeWidth} height={largeHeight} usingOpacity={opacity}/>;
             break;
         case SUIT_TYPE_DIAMOND:
-            icon = <Diamond width={largeWidth} height={largeHeight}/>
+            icon = <Diamond width={largeWidth} height={largeHeight} usingOpacity={opacity}/>;
             break;
         default:
             throw new Error('No icon found for ' + type);

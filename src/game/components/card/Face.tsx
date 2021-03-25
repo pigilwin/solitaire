@@ -6,8 +6,8 @@ interface FaceProps {
 }
 export const Face = ({index, type}: FaceProps): JSX.Element => {
     
-    const small = resolveSmallSuitIcon(type);
-    const large = resolveLargeSuitIcon(type);
+    const small = resolveSmallSuitIcon(type, false);
+    const large = resolveLargeSuitIcon(type, false);
     
     return (
         <div className="playing-card relative flex flex-col justify-center">
