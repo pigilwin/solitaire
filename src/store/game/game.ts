@@ -38,13 +38,13 @@ export const generateGame = (): Solitaire => {
         heart: [],
         club: [],
         spade: [],
-        first: generateColumn(deck, 1),
-        second: generateColumn(deck, 2),
-        third: generateColumn(deck, 3),
-        fourth: generateColumn(deck, 4),
+        one: generateColumn(deck, 1),
+        two: generateColumn(deck, 2),
+        three: generateColumn(deck, 3),
+        four: generateColumn(deck, 4),
         five: generateColumn(deck, 5),
-        sixth: generateColumn(deck, 6),
-        seventh: generateColumn(deck, 7),
+        six: generateColumn(deck, 6),
+        seven: generateColumn(deck, 7),
         draw: deck
     };
     
