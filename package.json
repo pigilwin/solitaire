@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
+    "@types/react-beautiful-dnd": "^13.0.0",
     "idb": "^5.0.8",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
