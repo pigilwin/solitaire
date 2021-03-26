@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import { SolitaireCard } from "../../../store/game/suitTypes";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
@@ -50,14 +50,32 @@ interface CardProps {
     maxDepth: number;
 }
 const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
-    
+    /**
+     * Preview is not used but is now disabled
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [{isDragging}, drag, preview] = useDrag(() => ({
-        type: 'card-' + index,
+        type: 'card',
         item: card,
         collect: (m) => {
             return {
                 isDragging: m.isDragging() 
             };
+        }
+    }), []);
+
+    /**
+     * CollectionOptions is not used but is now disabled
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [CollectionOptions, drop] = useDrop(() => ({
+        accept: 'card',
+        drop: (i, monitor) => {
+            console.log(i, monitor);
+        },
+        canDrop: (i, monitor) => {
+            console.log(i, monitor);
+            return true;
         }
     }), []);
 
@@ -82,10 +100,22 @@ const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChild
         );
     }
 
+    if (index !== 0){
+
+        return (
+            <div className={className} ref={drag}>
+                <Face index={card.index} type={card.suit}/>
+                {children}
+            </div>
+        );
+    }
+
     return (
         <div className={className} ref={drag}>
-            <Face index={card.index} type={card.suit}/>
-            {children}
+            <div className="droppable" ref={drop}>
+                <Face index={card.index} type={card.suit}/>
+                {children}
+            </div>
         </div>
     );
 };
