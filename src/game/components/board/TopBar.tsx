@@ -1,4 +1,5 @@
 import { Solitaire, SolitaireCard, SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
+import { EmptyCardNoDrop } from "./EmptyCardNoDrop";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
 
@@ -13,7 +14,7 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
                     <EmptyCardSpace/>
                 </div>
                 <div className="px-2">
-                    <EmptyCardSpace/>
+                    <EmptyCardNoDrop/>
                 </div>
             </div>
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
