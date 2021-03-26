@@ -1,4 +1,3 @@
-import { Droppable } from "react-beautiful-dnd";
 import { Solitaire, SolitaireCard } from "../../../store/game/suitTypes";
 import { Column } from "./Column";
 import { EmptyCardSpace } from "./EmptyCardSpace";
@@ -25,16 +24,7 @@ export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
 const getColumnContent = (cards: SolitaireCard[], column: string): JSX.Element => {
 
     if (cards.length === 0) {
-        return (
-            <Droppable droppableId={"column-index-" + column}>
-                {(provided, snapshot) => (
-                <div ref={provided.innerRef}{...provided.droppableProps}>
-                    <EmptyCardSpace/>
-                    {provided.placeholder}
-                </div>
-            )}
-            </Droppable>
-        );
+        return <EmptyCardSpace/>;
     }
 
     return <Column cards={cards} column={column}/>

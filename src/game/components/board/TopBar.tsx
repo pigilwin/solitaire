@@ -1,4 +1,3 @@
-import { Droppable } from 'react-beautiful-dnd';
 import { Solitaire, SolitaireCard, SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
@@ -7,7 +6,6 @@ interface TopBarProps {
     solitaire: Solitaire;
 }
 export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
-
     return (
         <div className="flex flex-wrap mt-5">
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
@@ -39,16 +37,7 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
 const generateFinalContainer = (cards: SolitaireCard[], type: SUIT): JSX.Element => {
 
     if (cards.length === 0) {
-        return (
-            <Droppable droppableId={"final-index-" + type}>
-                {(provided, snapshot) => (
-                <div ref={provided.innerRef}{...provided.droppableProps}>
-                    <EmptyFinalCard type={type}/>
-                    {provided.placeholder}
-                </div>
-            )}
-            </Droppable>
-        );
+        return <EmptyFinalCard type={type}/>;
     }
 
     return <EmptyFinalCard type={type}/>

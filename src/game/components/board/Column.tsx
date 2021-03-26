@@ -1,6 +1,6 @@
-import { SolitaireCard } from "../../../store/game/suitTypes";
-import { Draggable, Droppable } from "react-beautiful-dnd";
 import { PropsWithChildren } from "react";
+import { useDrag } from "react-dnd";
+import { SolitaireCard } from "../../../store/game/suitTypes";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 
@@ -39,16 +39,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element => {
         );
     }
 
-    return (
-        <Droppable droppableId={"column-droppable-index"}>
-            {(provided, snapshot) => (
-                <div ref={provided.innerRef}{...provided.droppableProps} className="flex flex-col">
-                    {child}
-                    {provided.placeholder}
-                </div>
-            )}
-        </Droppable>
-    );
+    return child;
 };
 
 interface CardProps {
@@ -60,51 +51,41 @@ interface CardProps {
 }
 const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
     
-    const className = initial ? "" : "card-container";
+    const [{isDragging}, drag, preview] = useDrag(() => ({
+        type: 'card-' + index,
+        item: card,
+        collect: (m) => {
+            return {
+                isDragging: m.isDragging() 
+            };
+        }
+    }), []);
 
-    const draggableCard = (
-        <Draggable draggableId={"column-index-" + column} index={index}>
-            {(provided, snapshot) => (
-                <div 
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className={className}
-                    style={provided.draggableProps.style}
-                >
-                    {getCardType(card)}
-                    {children}
-                </div>
-            )}
-        </Draggable>
-    );
+    const classes = [];
 
-    if (index !== maxDepth) {
-        return draggableCard;
+    if (isDragging) {
+        classes.push('invisible');
     }
 
+    if (!initial) {
+        classes.push("card-container");
+    }
+
+    const className = classes.join(' ');
+
+    if (!card.showing) {
+        return (
+            <div className={className}>
+                <Back/>
+                {children}
+            </div>
+        );
+    }
 
     return (
-        <Droppable droppableId={"column-droppable-last"}>
-            {(provided, snapshot) => (
-                <div ref={provided.innerRef}{...provided.droppableProps} className="flex flex-col">
-                    {draggableCard}
-                    {provided.placeholder}
-                </div>
-            )}
-        </Droppable>
+        <div className={className} ref={drag}>
+            <Face index={card.index} type={card.suit}/>
+            {children}
+        </div>
     );
-};
-
-/**
- * Get the card type
- * @param {SolitaireCard} card 
- * @returns {JSX.Element} 
- */
-const getCardType = (card: SolitaireCard): JSX.Element => {
-    if (card.showing) {
-        return (<Face index={card.index} type={card.suit}/>);
-    }
-
-    return (<Back/>);
 };
