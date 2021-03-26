@@ -1,5 +1,6 @@
 import { Droppable } from "react-beautiful-dnd";
 import { Solitaire, SolitaireCard } from "../../../store/game/suitTypes";
+import { Column } from "./Column";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 
 interface ColumnsProps {
@@ -36,6 +37,6 @@ const getColumnContent = (cards: SolitaireCard[], column: string): JSX.Element =
         );
     }
 
-    return <EmptyCardSpace/>
+    return <Column cards={cards} column={column}/>
 
 };

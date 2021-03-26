@@ -9,6 +9,7 @@
     @apply border-black;
     @apply rounded-md;
     @apply shadow-md;
+    @apply bg-white;
 }
 
 .playing-card-container {
@@ -18,4 +19,9 @@
     @apply border-black;
     @apply rounded-md;
     @apply shadow-md;
+}
+
+.card-container {
+    flex: 100px 1 0;
+    @apply -mt-32;
 }
