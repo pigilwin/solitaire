@@ -1,10 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../rootReducer';
-import { generateGame } from './game';
+import { deepCopy } from '../util';
+import { drawCardFromRemainingAddToDraw } from './gameBuilder';
+import { generateGame } from './initialiseGame';
 import { Game, Solitaire } from './suitTypes';
 
 export const initialState: Game =  {
-    game: null
+    game: {
+        id: '',
+        score: 0,
+        start: 0,
+        end: 0,
+        final: {
+            heart: [],
+            diamond: [],
+            club: [],
+            spade: []
+        },
+        columns: {
+            one: [],
+            two: [],
+            three: [],
+            four: [],
+            five: [],
+            six: [],
+            seven: []
+        },
+        draw: {
+            remaining: [],
+            draw: []
+        }
+    }
 };
 
 const gameSlice = createSlice({
@@ -12,16 +38,22 @@ const gameSlice = createSlice({
     initialState,
     reducers: {
         initialiseGame(state) {
-            const newGame = state;
-            newGame.game = generateGame();
-            return newGame;
+            const newState = state;
+            newState.game = generateGame();
+            return newState;
+        },
+        drawCardFromDeck(state) {
+            const newState = deepCopy<Game>(state);
+            newState.game = drawCardFromRemainingAddToDraw(newState.game);
+            return newState;
         }
     }
 });
 
 export const reducer = gameSlice.reducer;
 export const {
-    initialiseGame
+    initialiseGame,
+    drawCardFromDeck
 } = gameSlice.actions;
 
-export const currentGameSelector = (state: RootState): Solitaire | null => state.gameReducer.game;
+export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
