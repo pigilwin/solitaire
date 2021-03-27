@@ -1,4 +1,6 @@
 import { useDrop } from "react-dnd";
+import { canCardBeDroppedOnToFinal } from "../../../store/game/cardDropper";
+import { SolitaireCard } from "../../../store/game/suitTypes";
 import { resolveLargeSuitIcon } from "../card/SuitBuilder";
 
 interface EmptyFinalCardProps {
@@ -12,14 +14,13 @@ export const EmptyFinalCard = ({type}: EmptyFinalCardProps): JSX.Element => {
      * CollectionOptions is not used but is now disabled
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop(() => ({
+    const [CollectionOptions, drop] = useDrop<SolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (i, monitor) => {
             console.log(i, monitor);
         },
-        canDrop: (i, monitor) => {
-            console.log(i, monitor);
-            return true;
+        canDrop: (drag) => {
+            return canCardBeDroppedOnToFinal(drag, type, []);
         }
     }), []);
 
