@@ -9,13 +9,13 @@ export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
     return (
         <div id="columns" className="mt-10">
             <div className="flex flex-row space-x-5 justify-around">
-                {getColumnContent(solitaire.one, 'one')}
-                {getColumnContent(solitaire.two, 'two')}
-                {getColumnContent(solitaire.three, 'three')}
-                {getColumnContent(solitaire.four, 'four')}
-                {getColumnContent(solitaire.five, 'five')}
-                {getColumnContent(solitaire.six, 'six')}
-                {getColumnContent(solitaire.seven, 'seven')}
+                {getColumnContent(solitaire.columns.one, 'one')}
+                {getColumnContent(solitaire.columns.two, 'two')}
+                {getColumnContent(solitaire.columns.three, 'three')}
+                {getColumnContent(solitaire.columns.four, 'four')}
+                {getColumnContent(solitaire.columns.five, 'five')}
+                {getColumnContent(solitaire.columns.six, 'six')}
+                {getColumnContent(solitaire.columns.seven, 'seven')}
             </div>
         </div>
     );

@@ -12,7 +12,7 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
         <div className="flex flex-wrap mt-5">
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
                 <div className="px-2">
-                    <RemainingDraw remaining={solitaire.draw}/>
+                    <RemainingDraw remaining={solitaire.draw.remaining}/>
                 </div>
                 <div className="px-2">
                     <EmptyCardNoDrop/>
@@ -20,16 +20,16 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
             </div>
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
                 <div className="px-2">
-                    {generateFinalContainer(solitaire.heart, SUIT_TYPE_HEART)}
+                    {generateFinalContainer(solitaire.final.heart, SUIT_TYPE_HEART)}
                 </div>
                 <div className="px-2">
-                    {generateFinalContainer(solitaire.diamond, SUIT_TYPE_DIAMOND)}
+                    {generateFinalContainer(solitaire.final.diamond, SUIT_TYPE_DIAMOND)}
                 </div>
                 <div className="px-2">
-                    {generateFinalContainer(solitaire.club, SUIT_TYPE_CLUB)}
+                    {generateFinalContainer(solitaire.final.club, SUIT_TYPE_CLUB)}
                 </div>
                 <div className="px-2">
-                    {generateFinalContainer(solitaire.spade, SUIT_TYPE_SPADE)}
+                    {generateFinalContainer(solitaire.final.spade, SUIT_TYPE_SPADE)}
                 </div>
             </div>
         </div>

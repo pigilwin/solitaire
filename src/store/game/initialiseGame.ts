@@ -34,18 +34,25 @@ export const generateGame = (): Solitaire => {
         start: 0,
         end: 0,
         score: 0,
-        diamond: [],
-        heart: [],
-        club: [],
-        spade: [],
-        one: generateColumn(deck, 1),
-        two: generateColumn(deck, 2),
-        three: generateColumn(deck, 3),
-        four: generateColumn(deck, 4),
-        five: generateColumn(deck, 5),
-        six: generateColumn(deck, 6),
-        seven: generateColumn(deck, 7),
-        draw: deck
+        final: {
+            diamond: [],
+            heart: [],
+            club: [],
+            spade: [],
+        },
+        columns: {
+            one: generateColumn(deck, 1),
+            two: generateColumn(deck, 2),
+            three: generateColumn(deck, 3),
+            four: generateColumn(deck, 4),
+            five: generateColumn(deck, 5),
+            six: generateColumn(deck, 6),
+            seven: generateColumn(deck, 7),
+        },
+        draw: {
+            remaining: deck,
+            draw: []
+        }
     };
     
     return solitaireDeck;

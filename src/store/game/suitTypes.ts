@@ -10,11 +10,7 @@ export interface Game {
     game: Solitaire | null;
 }
 
-export interface Solitaire {
-    id: string;
-    score: number;
-    start: number;
-    end: number;
+export interface SolitaireColumn {
     one: SolitaireCard[];
     two: SolitaireCard[];
     three: SolitaireCard[];
@@ -22,11 +18,28 @@ export interface Solitaire {
     five: SolitaireCard[];
     six: SolitaireCard[];
     seven: SolitaireCard[];
+}
+
+export interface SolitaireFinal {
     diamond: SolitaireCard[];
     heart: SolitaireCard[];
     spade: SolitaireCard[];
     club: SolitaireCard[];
+}
+
+export interface SolitaireDraw {
     draw: SolitaireCard[];
+    remaining: SolitaireCard[];
+}
+
+export interface Solitaire {
+    id: string;
+    score: number;
+    start: number;
+    end: number;
+    columns: SolitaireColumn;
+    final: SolitaireFinal;
+    draw: SolitaireDraw;
 }
 
 export interface SolitaireCard {
