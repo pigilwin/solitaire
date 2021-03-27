@@ -2,6 +2,7 @@ import { Solitaire, SolitaireCard, SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT
 import { EmptyCardNoDrop } from "./EmptyCardNoDrop";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
+import { FinalFaceCard } from "./FinalFaceCard";
 
 interface TopBarProps {
     solitaire: Solitaire;
@@ -41,6 +42,6 @@ const generateFinalContainer = (cards: SolitaireCard[], type: SUIT): JSX.Element
         return <EmptyFinalCard type={type}/>;
     }
 
-    return <EmptyFinalCard type={type}/>
+    return <FinalFaceCard type={type} cards={cards}/>
 
 }
