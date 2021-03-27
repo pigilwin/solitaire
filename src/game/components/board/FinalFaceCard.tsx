@@ -23,11 +23,11 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
         }
     }), []);
 
-    const index = (cards.pop() as SolitaireCard).index;
+    const cardNumber = (cards.pop() as SolitaireCard).cardNumber;
     
     return (
         <div ref={drop}>
-            <Face index={index} type={type}/>
+            <Face index={cardNumber} type={type}/>
         </div>
     );
 }

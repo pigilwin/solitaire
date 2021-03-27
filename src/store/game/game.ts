@@ -74,11 +74,12 @@ const generateDeck = (): SolitaireCard[] => {
     const order: string[] = generateStandardSuitOrder();
 
     [SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE].forEach((suit) => {
-        order.forEach((card) => {
+        order.forEach((card, index) => {
             deck.push({
                 suit: suit,
-                index: card,
                 showing: false,
+                cardNumber: card,
+                index: index,
                 color: [SUIT_TYPE_CLUB, SUIT_TYPE_SPADE].indexOf(suit) === -1 ? "RED": "BLACK"
             });
         });

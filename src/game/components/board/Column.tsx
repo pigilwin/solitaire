@@ -3,6 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { SolitaireCard } from "../../../store/game/suitTypes";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
+import { canCardBeDroppedOnToColumn } from "../../../store/game/cardDropper";
 
 
 interface ColumnProps {
@@ -56,14 +57,13 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
      * CollectionOptions is not used but is now disabled
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop(() => ({
+    const [CollectionOptions, drop] = useDrop<SolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (i, monitor) => {
             console.log(i, card);
         },
         canDrop: (i, monitor) => {
-            console.log(i, card);
-            return true;
+            return canCardBeDroppedOnToColumn(i, card);
         }
     }), []);
 
@@ -108,7 +108,7 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
 
         return (
             <div className={className} ref={drag}>
-                <Face index={card.index} type={card.suit}/>
+                <Face index={card.cardNumber} type={card.suit}/>
                 {children}
             </div>
         );
@@ -122,7 +122,7 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
     return (
         <div className={className} ref={drag}>
             <div className="droppable" ref={drop}>
-                <Face index={card.index} type={card.suit}/>
+                <Face index={card.cardNumber} type={card.suit}/>
                 {children}
             </div>
         </div>

@@ -31,7 +31,8 @@ export interface Solitaire {
 
 export interface SolitaireCard {
     suit: SUIT;
-    index: string;
+    cardNumber: string;
     showing: boolean;
+    index: number;
     color: COLOR;
 }
