@@ -7,7 +7,7 @@ export type SUIT = typeof SUIT_TYPE_SPADE | typeof SUIT_TYPE_CLUB | typeof SUIT_
 export type COLOR = "RED" | "BLACK";
 
 export interface Game {
-    game: Solitaire;
+    game: Solitaire | null;
 }
 
 export interface Solitaire {

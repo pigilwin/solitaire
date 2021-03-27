@@ -9,6 +9,14 @@ export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
 
+    if (solitaire === null) {
+        return (
+            <div className="min-h-screen bg-green-300">
+                <GameBar/>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-green-300">
             <GameBar/>
