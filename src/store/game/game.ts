@@ -78,7 +78,8 @@ export const generateDeck = (): SolitaireCard[] => {
             deck.push({
                 suit: suit,
                 index: card,
-                showing: false
+                showing: false,
+                color: [SUIT_TYPE_CLUB, SUIT_TYPE_SPADE].indexOf(suit) === -1 ? "RED": "BLACK"
             });
         });
     });

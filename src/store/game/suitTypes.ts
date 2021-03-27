@@ -4,6 +4,7 @@ export const SUIT_TYPE_DIAMOND: string = 'DIAMOND';
 export const SUIT_TYPE_CLUB: string = 'CLUB';
 
 export type SUIT = typeof SUIT_TYPE_SPADE | typeof SUIT_TYPE_CLUB | typeof SUIT_TYPE_DIAMOND | typeof SUIT_TYPE_HEART;
+export type COLOR = "RED" | "BLACK";
 
 export interface Game {
     game: Solitaire;
@@ -32,4 +33,5 @@ export interface SolitaireCard {
     suit: SUIT;
     index: string;
     showing: boolean;
+    color: COLOR;
 }

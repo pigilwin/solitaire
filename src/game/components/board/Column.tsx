@@ -71,26 +71,38 @@ const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChild
     const [CollectionOptions, drop] = useDrop(() => ({
         accept: 'card',
         drop: (i, monitor) => {
-            console.log(i, monitor);
+            console.log(i, card);
         },
         canDrop: (i, monitor) => {
-            console.log(i, monitor);
+            console.log(i, card);
             return true;
         }
     }), []);
 
     const classes = [];
 
+    /**
+     * If the card is being being dragged 
+     * then hide the card stack
+     */
     if (isDragging) {
         classes.push('invisible');
     }
 
+    /**
+     * If its not the initial card then 
+     * assign the container class to apply
+     * the margin
+     */
     if (!initial) {
         classes.push("card-container");
     }
 
     const className = classes.join(' ');
 
+    /**
+     * If the card is not set to show then show the back
+     */
     if (!card.showing) {
         return (
             <div className={className}>
@@ -100,6 +112,10 @@ const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChild
         );
     }
 
+    /**
+     * If the card is not the last then 
+     * its allowed to be dragged
+     */
     if (index !== 0){
 
         return (
@@ -110,6 +126,11 @@ const Card = ({card, column, children, index, initial, maxDepth}: PropsWithChild
         );
     }
 
+    /**
+     * If the card is the last then
+     * its allowed to be dragged and
+     * dropped onto
+     */
     return (
         <div className={className} ref={drag}>
             <div className="droppable" ref={drop}>
