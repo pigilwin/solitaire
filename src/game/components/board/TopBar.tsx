@@ -1,8 +1,8 @@
 import { Solitaire, SolitaireCard, SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../store/game/suitTypes";
 import { EmptyCardNoDrop } from "./EmptyCardNoDrop";
-import { EmptyCardSpace } from "./EmptyCardSpace";
 import { EmptyFinalCard } from "./EmptyFinalCard";
 import { FinalFaceCard } from "./FinalFaceCard";
+import { RemainingDraw } from "./RemainingDraw";
 
 interface TopBarProps {
     solitaire: Solitaire;
@@ -12,7 +12,7 @@ export const TopBar = ({solitaire}: TopBarProps): JSX.Element => {
         <div className="flex flex-wrap mt-5">
             <div className="w-1/2 overflow-hidden flex flex-row justify-center">
                 <div className="px-2">
-                    <EmptyCardSpace/>
+                    <RemainingDraw remaining={solitaire.draw}/>
                 </div>
                 <div className="px-2">
                     <EmptyCardNoDrop/>
