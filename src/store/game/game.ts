@@ -57,7 +57,7 @@ export const generateGame = (): Solitaire => {
  * @param {number} amount 
  * @returns {SolitaireCard[]}
  */
-export const generateColumn = (deck: SolitaireCard[], amount: number): SolitaireCard[] => {
+const generateColumn = (deck: SolitaireCard[], amount: number): SolitaireCard[] => {
     const column = deck.splice(0, amount);
     column[column.length - 1].showing = true;
     return column;
@@ -67,7 +67,7 @@ export const generateColumn = (deck: SolitaireCard[], amount: number): Solitaire
  * Generate the deck in standard order
  * @returns {SolitaireCard[]}
  */
-export const generateDeck = (): SolitaireCard[] => {
+const generateDeck = (): SolitaireCard[] => {
 
     const deck: SolitaireCard[] = [];
     
