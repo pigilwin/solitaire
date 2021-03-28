@@ -1,4 +1,4 @@
-import { SolitaireDraw } from "../../../../../store/game/suitTypes";
+import { SolitaireCard, SolitaireDraw } from "../../../../../store/game/suitTypes";
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
 
@@ -12,8 +12,22 @@ export const Draw = ({draw}: DrawProps): JSX.Element => {
                 <RemainingDraw remaining={draw.remaining}/>
             </div>
             <div className="px-2">
-                <DrawCard draw={draw.draw}/>
+                {getDrawCard(draw.draw)}
             </div>
         </div>
     );
 };
+
+const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
+
+    /**
+     * If no draws have been found then show a empty card space
+     */
+    if (cards.length === 0) {
+        return (<div className="playing-card-container"></div>);
+    }
+
+    const card = cards[cards.length - 1];
+
+    return <DrawCard card={card}/>;
+}
