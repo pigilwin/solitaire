@@ -1,9 +1,9 @@
 import { useDrag } from "react-dnd";
-import { SolitaireCard } from "../../../../../store/game/types/game";
+import { ColumnAwareSolitaireCard } from "../../../../../store/game/types/game";
 import { Face } from "../../../card/Face";
 
 interface DrawCardProps {
-    card: SolitaireCard;
+    card: ColumnAwareSolitaireCard;
 }
 export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
     

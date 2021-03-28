@@ -1,11 +1,12 @@
 import { PropsWithChildren } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { SolitaireCard } from "../../../store/game/types/game";
+import { ColumnAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/cardDropper";
 import { useDispatch } from "react-redux";
 import { moveCardToColumnAction } from "../../../store/game/gameSlice";
+import { makeCardColumnAware } from "../../../store/game/columnHelper";
 
 
 interface ColumnProps {
@@ -22,8 +23,11 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
      * only apply the margin if its any card apart from the last
      */
     for (let i = depth - 1; i >= 0; i--) {
+
+        const columnAwareCard = makeCardColumnAware(cards[i], column);
+
         child = (<Card 
-            card={cards[i]} 
+            card={columnAwareCard} 
             index={i} 
             column={column}
             maxDepth={depth}
@@ -35,7 +39,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
 };
 
 interface CardProps {
-    card: SolitaireCard;
+    card: ColumnAwareSolitaireCard;
     column: string;
     index: number;
     maxDepth: number;
@@ -44,7 +48,7 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
     
     const dispatch = useDispatch();
 
-    const [{isDragging}, drag] = useDrag(() => ({
+    const [{isDragging}, drag] = useDrag<ColumnAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
         type: 'card',
         item: card,
         collect: (m) => {
@@ -54,9 +58,9 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
         }
     }), []);
 
-    const [, drop] = useDrop<SolitaireCard, void, void>(() => ({
+    const [, drop] = useDrop<ColumnAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (dropCard, m) => {
+        drop: (dropCard) => {
             dispatch(moveCardToColumnAction({
                 column: column,
                 drag: card,

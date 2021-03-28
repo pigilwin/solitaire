@@ -49,7 +49,7 @@ export interface Game {
 }
 
 export interface MoveCardToColumnPayload {
-    drop: SolitaireCard;
-    drag: SolitaireCard;
+    drop: ColumnAwareSolitaireCard;
+    drag: ColumnAwareSolitaireCard;
     column: string;
 }
