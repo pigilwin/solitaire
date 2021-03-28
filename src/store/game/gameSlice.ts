@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../rootReducer';
 import { deepCopy } from '../util';
-import { drawCardFromRemainingAddToDraw, moveCard, moveCardToEmptyColumn, moveCardToFinalColumn } from './gameBuilder';
+import { drawCardFromRemainingAddToDraw, moveCard } from './builder/gameBuilder';
+import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
+import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
 import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from './types/game';
 

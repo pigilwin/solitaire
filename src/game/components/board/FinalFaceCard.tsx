@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { canCardBeDroppedOnToFinal } from "../../../store/game/cardDropper";
+import { canCardBeDroppedOnToFinal } from "../../../store/game/builder/cardDropper";
 import { moveCardToFinalColumnAction } from "../../../store/game/gameSlice";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";

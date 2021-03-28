@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
-import { canCardBeDroppedOnToColumn } from "../../../store/game/cardDropper";
+import { canCardBeDroppedOnToColumn } from "../../../store/game/builder/cardDropper";
 import { useDispatch } from "react-redux";
 import { moveCardToColumnAction } from "../../../store/game/gameSlice";
 import { makeCardColumnAware } from "../../../store/game/columnHelper";
