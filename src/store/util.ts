@@ -1,6 +1,7 @@
 /**
  * Deep copy
- * @param target
+ * @param {T} target
+ * @returns {T}
  */
  export const deepCopy = <T>(target: T): T => {
     if (target === null) {
