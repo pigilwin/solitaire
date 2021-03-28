@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { drawCardFromDeck } from "../../../store/game/gameSlice";
-import { SolitaireCard } from "../../../store/game/suitTypes";
-import { Back } from "../card/Back";
+import { drawCardFromDeck } from "../../../../../store/game/gameSlice";
+import { SolitaireCard } from "../../../../../store/game/suitTypes";
+import { Back } from "../../../card/Back";
 import { RefreshCard } from "./RefreshCard";
 
 interface RemainingDrawProps {
