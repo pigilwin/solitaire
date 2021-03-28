@@ -3,7 +3,7 @@ import { RootState } from '../rootReducer';
 import { deepCopy } from '../util';
 import { drawCardFromRemainingAddToDraw, moveCardToColumn } from './gameBuilder';
 import { generateGame } from './initialiseGame';
-import { Game, MoveCardToColumnPayload, Solitaire } from './types/game';
+import { Game, MoveCardPayload, Solitaire } from './types/game';
 
 export const initialState: Game =  {
     game: {
@@ -47,7 +47,7 @@ const gameSlice = createSlice({
             newState.game = drawCardFromRemainingAddToDraw(newState.game);
             return newState;
         },
-        moveCardToColumnAction(state: Game, action: PayloadAction<MoveCardToColumnPayload>) {
+        moveCardToColumnAction(state: Game, action: PayloadAction<MoveCardPayload>) {
             const newState = deepCopy<Game>(state);
             newState.game = moveCardToColumn(newState.game, action.payload);
             return newState;

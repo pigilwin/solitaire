@@ -48,8 +48,7 @@ export interface Game {
     game: Solitaire;
 }
 
-export interface MoveCardToColumnPayload {
+export interface MoveCardPayload {
     drop: ColumnAwareSolitaireCard;
     drag: ColumnAwareSolitaireCard;
-    column: string;
 }

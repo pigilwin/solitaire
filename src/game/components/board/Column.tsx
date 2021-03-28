@@ -28,8 +28,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
 
         child = (<Card 
             card={columnAwareCard} 
-            index={i} 
-            column={column}
+            index={i}
             maxDepth={depth}
             >{child}</Card>
         );
@@ -40,11 +39,10 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
 
 interface CardProps {
     card: ColumnAwareSolitaireCard;
-    column: string;
     index: number;
     maxDepth: number;
 }
-const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
+const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
     
     const dispatch = useDispatch();
 
@@ -62,7 +60,6 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
         accept: 'card',
         drop: (dropCard) => {
             dispatch(moveCardToColumnAction({
-                column: column,
                 drag: card,
                 drop: dropCard
             }));
