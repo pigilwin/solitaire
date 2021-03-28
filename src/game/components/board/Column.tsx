@@ -39,11 +39,8 @@ interface CardProps {
     maxDepth: number;
 }
 const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
-    /**
-     * Preview is not used but is now disabled
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [{isDragging}, drag, preview] = useDrag(() => ({
+    
+    const [{isDragging}, drag] = useDrag(() => ({
         type: 'card',
         item: card,
         collect: (m) => {
@@ -53,11 +50,7 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
         }
     }), []);
 
-    /**
-     * CollectionOptions is not used but is now disabled
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop<SolitaireCard, void, void>(() => ({
+    const [, drop] = useDrop<SolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (i, monitor) => {
             console.log(i, card);
