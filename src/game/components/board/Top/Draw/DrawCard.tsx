@@ -1,9 +1,9 @@
 import { useDrag } from "react-dnd";
-import { ColumnAwareSolitaireCard } from "../../../../../store/game/types/game";
+import { LocationAwareSolitaireCard } from "../../../../../store/game/types/game";
 import { Face } from "../../../card/Face";
 
 interface DrawCardProps {
-    card: ColumnAwareSolitaireCard;
+    card: LocationAwareSolitaireCard;
 }
 export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
     

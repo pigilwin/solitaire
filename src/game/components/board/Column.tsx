@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { ColumnAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
+import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/cardDropper";
@@ -24,7 +24,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
      */
     for (let i = depth - 1; i >= 0; i--) {
 
-        const columnAwareCard = makeCardColumnAware(cards[i], column);
+        const columnAwareCard = makeCardColumnAware(cards[i], 'columns', column);
 
         child = (<Card 
             card={columnAwareCard} 
@@ -38,7 +38,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
 };
 
 interface CardProps {
-    card: ColumnAwareSolitaireCard;
+    card: LocationAwareSolitaireCard;
     index: number;
     maxDepth: number;
 }
@@ -46,7 +46,7 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
     
     const dispatch = useDispatch();
 
-    const [{isDragging}, drag] = useDrag<ColumnAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
+    const [{isDragging}, drag] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
         type: 'card',
         item: card,
         collect: (m) => {
@@ -56,7 +56,7 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
         }
     }), []);
 
-    const [, drop] = useDrop<ColumnAwareSolitaireCard, void, void>(() => ({
+    const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (dropCard) => {
             dispatch(moveCardToColumnAction({

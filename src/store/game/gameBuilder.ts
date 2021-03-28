@@ -7,10 +7,15 @@ export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     return newGame;
 }
 
-export const moveCardToColumn = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
+export const moveCard = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
     const newGame: Solitaire = {...game};
-    
-    console.log();
 
+    if (payload.drag.location.namespace === 'draw' || payload.drag.location.namespace === 'final') {
+        console.log('not implemented just yet');
+        return newGame;
+    }
+
+    console.log(payload);
+    
     return newGame;
 }

@@ -18,8 +18,11 @@ export interface SolitaireCard {
     color: COLOR;
 }
 
-export interface ColumnAwareSolitaireCard extends SolitaireCard {
-    column: string;
+export interface LocationAwareSolitaireCard extends SolitaireCard {
+    location: {
+        namespace: string;
+        area: string;
+    };
 }
 
 export interface SolitaireFinal {
@@ -49,6 +52,6 @@ export interface Game {
 }
 
 export interface MoveCardPayload {
-    drop: ColumnAwareSolitaireCard;
-    drag: ColumnAwareSolitaireCard;
+    drop: LocationAwareSolitaireCard;
+    drag: LocationAwareSolitaireCard;
 }

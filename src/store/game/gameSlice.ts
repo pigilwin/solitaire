@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../rootReducer';
 import { deepCopy } from '../util';
-import { drawCardFromRemainingAddToDraw, moveCardToColumn } from './gameBuilder';
+import { drawCardFromRemainingAddToDraw, moveCard } from './gameBuilder';
 import { generateGame } from './initialiseGame';
 import { Game, MoveCardPayload, Solitaire } from './types/game';
 
@@ -49,7 +49,7 @@ const gameSlice = createSlice({
         },
         moveCardToColumnAction(state: Game, action: PayloadAction<MoveCardPayload>) {
             const newState = deepCopy<Game>(state);
-            newState.game = moveCardToColumn(newState.game, action.payload);
+            newState.game = moveCard(newState.game, action.payload);
             return newState;
         }
     }
