@@ -18,6 +18,10 @@ export interface SolitaireCard {
     color: COLOR;
 }
 
+export interface ColumnAwareSolitaireCard extends SolitaireCard {
+    column: string;
+}
+
 export interface SolitaireFinal {
     diamond: SolitaireCard[];
     heart: SolitaireCard[];
