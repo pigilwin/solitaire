@@ -7,7 +7,7 @@ interface DrawCardProps {
 }
 export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
     
-    const [, drag, ] = useDrag(() => ({
+    const [collection, drag, ] = useDrag(() => ({
         type: 'card',
         item: card,
         collect: (m) => {
@@ -17,8 +17,17 @@ export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
         }
     }), []);
 
+    const classes = [];
+
+    /**
+     * If the current item is being dragged then hide the container
+     */
+    if (collection.isDragging) {
+        classes.push('invisible');
+    }
+
     return (
-        <div ref={drag}>
+        <div ref={drag} className={classes.join(' ')}>
             <Face type={card.suit} index={card.cardNumber}/>
         </div>
     );
