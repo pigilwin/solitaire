@@ -1,6 +1,8 @@
 import { useDrop } from "react-dnd";
+import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "../../../../../store/game/cardDropper";
-import { SolitaireCard } from "../../../../../store/game/types/game";
+import { moveCardToFinalColumnAction } from "../../../../../store/game/gameSlice";
+import { LocationAwareSolitaireCard } from "../../../../../store/game/types/game";
 import { resolveLargeSuitIcon } from "../../../card/SuitBuilder";
 
 interface EmptyFinalCardProps {
@@ -8,16 +10,17 @@ interface EmptyFinalCardProps {
 }
 export const EmptyFinalCard = ({type}: EmptyFinalCardProps): JSX.Element => {
     
+    const dispatch = useDispatch();
+
     const large = resolveLargeSuitIcon(type);
 
-    /**
-     * CollectionOptions is not used but is now disabled
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop<SolitaireCard, void, void>(() => ({
+    const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (i, monitor) => {
-            console.log(i, monitor);
+        drop: (drag) => {
+            dispatch(moveCardToFinalColumnAction({
+                drag: drag,
+                column: type.toLowerCase()
+            }));
         },
         canDrop: (drag) => {
             return canCardBeDroppedOnToFinal(drag, type, []);

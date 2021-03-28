@@ -1,5 +1,8 @@
 import { useDrop } from "react-dnd";
-import { SolitaireCard } from "../../../store/game/types/game";
+import { useDispatch } from "react-redux";
+import { canCardBeDroppedOnToFinal } from "../../../store/game/cardDropper";
+import { moveCardToFinalColumnAction } from "../../../store/game/gameSlice";
+import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";
 import { Face } from "../card/Face";
 
@@ -9,25 +12,25 @@ interface FinalFaceCardProps {
 }
 export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element => {
     
-    /**
-     * CollectionOptions is not used but is now disabled
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop(() => ({
+    const dispatch = useDispatch();
+
+    const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (i, monitor) => {
-            console.log(i, monitor);
+        drop: (drag) => {
+            dispatch(moveCardToFinalColumnAction({
+                drag: drag,
+                column: type.toLowerCase()
+            }));
         },
-        canDrop: (i, monitor) => {
-            console.log(i, monitor);
-            return true;
+        canDrop: (drag) => {
+            return canCardBeDroppedOnToFinal(drag, type, []);
         }
     }), []);
 
-    const cardNumber = (cards.pop() as SolitaireCard).cardNumber;
+    const cardNumber = cards[cards.length -1].cardNumber;
     
     return (
-        <div ref={drop}>
+        <div className="droppable" ref={drop}>
             <Face index={cardNumber} type={type}/>
         </div>
     );

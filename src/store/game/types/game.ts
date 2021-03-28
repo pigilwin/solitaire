@@ -60,3 +60,8 @@ export interface MoveCardToEmptyColumnPayload {
     drag: LocationAwareSolitaireCard;
     column: string;
 }
+
+export interface MoveCardToFinalColumnPayload {
+    drag: LocationAwareSolitaireCard;
+    column: string;
+}
