@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../rootReducer';
 import { deepCopy } from '../util';
-import { drawCardFromRemainingAddToDraw } from './gameBuilder';
+import { drawCardFromRemainingAddToDraw, moveCardToColumn } from './gameBuilder';
 import { generateGame } from './initialiseGame';
 import { Game, MoveCardToColumnPayload, Solitaire } from './types/game';
 
@@ -37,27 +37,29 @@ const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
-        initialiseGame(state: Game) {
+        initialiseGameAction(state: Game) {
             const newState = state;
             newState.game = generateGame();
             return newState;
         },
-        drawCardFromDeck(state: Game) {
+        drawCardFromDeckAction(state: Game) {
             const newState = deepCopy<Game>(state);
             newState.game = drawCardFromRemainingAddToDraw(newState.game);
             return newState;
         },
-        moveCardToColumn(state: Game, action: PayloadAction<MoveCardToColumnPayload>) {
-            console.log(action.payload);
+        moveCardToColumnAction(state: Game, action: PayloadAction<MoveCardToColumnPayload>) {
+            const newState = deepCopy<Game>(state);
+            newState.game = moveCardToColumn(newState.game, action.payload);
+            return newState;
         }
     }
 });
 
 export const reducer = gameSlice.reducer;
 export const {
-    initialiseGame,
-    drawCardFromDeck,
-    moveCardToColumn
+    initialiseGameAction,
+    drawCardFromDeckAction,
+    moveCardToColumnAction
 } = gameSlice.actions;
 
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;

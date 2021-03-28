@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { initialiseGame } from "../../store/game/gameSlice";
+import { initialiseGameAction } from "../../store/game/gameSlice";
 import { GameButton } from "./Button";
 
 export const GameBar = (): JSX.Element => {
@@ -7,7 +7,7 @@ export const GameBar = (): JSX.Element => {
     const dispatch = useDispatch();
 
     const newGameClickHandler = () => {
-        dispatch(initialiseGame());
+        dispatch(initialiseGameAction());
     };
     const leaderboardClickHandler = () => {};
     const settingsClickHandler = () => {};
