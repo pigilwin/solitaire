@@ -60,8 +60,8 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
         accept: 'card',
         drop: (dropCard) => {
             dispatch(moveCardToColumnAction({
-                drag: card,
-                drop: dropCard
+                drag: dropCard,
+                drop: card
             }));
         },
         canDrop: (drop) => {
