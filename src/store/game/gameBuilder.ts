@@ -1,4 +1,4 @@
-import { LocationAwareSolitaireCard, MoveCardPayload, Solitaire, SolitaireCard, SolitaireColumn } from "./types/game";
+import { LocationAwareSolitaireCard, MoveCardPayload, MoveCardToEmptyColumnPayload, Solitaire, SolitaireCard, SolitaireColumn } from "./types/game";
 
 export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};
@@ -28,7 +28,7 @@ const moveCardBetweenColumns = (game: Solitaire, payload: MoveCardPayload): Soli
     /**
      * Find the column from the current location
      */
-    const dragColumn = columnFromLocation(game, payload.drag);
+    const dragColumn = columnFromLocation(game, payload.drag.location.namespace, payload.drag.location.area);
 
     /**
      * Find the index of the card being dragged
@@ -53,7 +53,7 @@ const moveCardBetweenColumns = (game: Solitaire, payload: MoveCardPayload): Soli
      * Find the column from the location and attach
      * the cards being moved
      */
-    columnFromLocation(game, payload.drop).push(...removedCards);
+    columnFromLocation(game, payload.drop.location.namespace, payload.drop.location.area).push(...removedCards);
 
     /**
      * Find the latest card in the column and flip it
@@ -65,9 +65,46 @@ const moveCardBetweenColumns = (game: Solitaire, payload: MoveCardPayload): Soli
     return game;
 };
 
-const columnFromLocation = (game: Solitaire, locationAwareCard: LocationAwareSolitaireCard): SolitaireCard[] => {
-    const columns: SolitaireColumn = (game[locationAwareCard.location.namespace as keyof Solitaire] as SolitaireColumn);
-    const column: SolitaireCard[] = columns[locationAwareCard.location.area as keyof SolitaireColumn];
+export const moveCardToEmptyColumn = (game: Solitaire, payload: MoveCardToEmptyColumnPayload): Solitaire => {
+
+    const emptyColumn = columnFromLocation(game, 'columns', payload.column);
+
+    /**
+     * Find the column from the current location
+     */
+    const dragColumn = columnFromLocation(game, payload.drag.location.namespace, payload.drag.location.area);
+
+    /**
+     * Find the index of the card being dragged
+     */
+     const dragIndex = findIndexOfCardWithinColumn(dragColumn, payload.drag);
+
+     /**
+      * If its not found then something odd is 
+      * happening just return the unmodiffied game
+      * unmodified
+      */
+     if (dragIndex === -1) {
+         return game;
+     }
+
+     /**
+     * Remove the cards from the index and above
+     */
+    const removedCards = dragColumn.splice(dragIndex);
+
+    /**
+     * Add the removed cards
+     */
+    emptyColumn.push(...removedCards);
+
+    return game;
+}
+
+
+const columnFromLocation = (game: Solitaire, namespace: string, area: string): SolitaireCard[] => {
+    const columns: SolitaireColumn = (game[namespace as keyof Solitaire] as SolitaireColumn);
+    const column: SolitaireCard[] = columns[area as keyof SolitaireColumn];
     return column;
 }
 

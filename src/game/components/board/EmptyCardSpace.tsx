@@ -1,21 +1,28 @@
 import { useDrop } from "react-dnd";
+import { useDispatch } from "react-redux";
+import { canCardBeDroppedToEmptyColumn } from "../../../store/game/cardDropper";
+import { moveCardToEmptyColumnAction } from "../../../store/game/gameSlice";
+import { LocationAwareSolitaireCard } from "../../../store/game/types/game";
 
-export const EmptyCardSpace = (): JSX.Element => {
+interface EmptyCardSpaceProps {
+    column: string;
+}
+export const EmptyCardSpace = ({column}: EmptyCardSpaceProps): JSX.Element => {
     
-    /**
-     * CollectionOptions is not used but is now disabled
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [CollectionOptions, drop] = useDrop(() => ({
+    const dispatch = useDispatch();
+
+    const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (i, monitor) => {
-            console.log(i, monitor);
+        drop: (card) => {
+            dispatch(moveCardToEmptyColumnAction({
+                drag: card,
+                column: column
+            }));
         },
-        canDrop: (i, monitor) => {
-            console.log(i, monitor);
-            return true;
+        canDrop: (card) => {
+            return canCardBeDroppedToEmptyColumn(card);
         }
-    }), []);
+    }), [column]);
     
     return (
         <div ref={drop} className="playing-card-container"></div>

@@ -24,7 +24,7 @@ export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
 const getColumnContent = (cards: SolitaireCard[], column: string): JSX.Element => {
 
     if (cards.length === 0) {
-        return <EmptyCardSpace/>;
+        return <EmptyCardSpace column={column}/>;
     }
 
     return <Column cards={cards} column={column}/>

@@ -55,3 +55,8 @@ export interface MoveCardPayload {
     drop: LocationAwareSolitaireCard;
     drag: LocationAwareSolitaireCard;
 }
+
+export interface MoveCardToEmptyColumnPayload {
+    drag: LocationAwareSolitaireCard;
+    column: string;
+}

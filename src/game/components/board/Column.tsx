@@ -67,7 +67,7 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
         canDrop: (drop) => {
             return canCardBeDroppedOnToColumn(drop, card);
         }
-    }), []);
+    }), [card]);
 
     const classes = [];
 
