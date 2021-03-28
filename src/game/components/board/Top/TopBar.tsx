@@ -1,4 +1,4 @@
-import { Solitaire } from "../../../../store/game/suitTypes";
+import { Solitaire } from "../../../../store/game/types/game";
 import { Draw } from "./Draw/Draw";
 import { Final } from "./Final/Final";
 

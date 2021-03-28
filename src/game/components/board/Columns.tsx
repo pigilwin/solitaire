@@ -1,4 +1,4 @@
-import { Solitaire, SolitaireCard } from "../../../store/game/suitTypes";
+import { Solitaire, SolitaireCard } from "../../../store/game/types/game";
 import { Column } from "./Column";
 import { EmptyCardSpace } from "./EmptyCardSpace";
 

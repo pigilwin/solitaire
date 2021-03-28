@@ -1,5 +1,5 @@
 import { useDrag } from "react-dnd";
-import { SolitaireCard } from "../../../../../store/game/suitTypes";
+import { SolitaireCard } from "../../../../../store/game/types/game";
 import { Face } from "../../../card/Face";
 
 interface DrawCardProps {

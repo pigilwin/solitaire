@@ -1,4 +1,4 @@
-import { Solitaire, SolitaireCard } from "./suitTypes";
+import { Solitaire, SolitaireCard } from "./types/game";
 
 export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};

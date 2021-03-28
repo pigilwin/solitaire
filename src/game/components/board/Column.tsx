@@ -1,9 +1,11 @@
 import { PropsWithChildren } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { SolitaireCard } from "../../../store/game/suitTypes";
+import { SolitaireCard } from "../../../store/game/types/game";
 import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/cardDropper";
+import { useDispatch } from "react-redux";
+import { moveCardToColumn } from "../../../store/game/gameSlice";
 
 
 interface ColumnProps {
@@ -40,6 +42,8 @@ interface CardProps {
 }
 const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardProps>): JSX.Element | null => {
     
+    const dispatch = useDispatch();
+
     const [{isDragging}, drag] = useDrag(() => ({
         type: 'card',
         item: card,
@@ -52,11 +56,15 @@ const Card = ({card, column, children, index, maxDepth}: PropsWithChildren<CardP
 
     const [, drop] = useDrop<SolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (i, monitor) => {
-            console.log(i, card);
+        drop: (dropCard) => {
+            dispatch(moveCardToColumn({
+                column: column,
+                drag: card,
+                drop: dropCard
+            }));
         },
-        canDrop: (i, monitor) => {
-            return canCardBeDroppedOnToColumn(i, card);
+        canDrop: (drop) => {
+            return canCardBeDroppedOnToColumn(drop, card);
         }
     }), []);
 

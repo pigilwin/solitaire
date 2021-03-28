@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { drawCardFromDeck } from "../../../../../store/game/gameSlice";
-import { SolitaireCard } from "../../../../../store/game/suitTypes";
+import { SolitaireCard } from "../../../../../store/game/types/game";
 import { Back } from "../../../card/Back";
 import { RefreshCard } from "./RefreshCard";
 

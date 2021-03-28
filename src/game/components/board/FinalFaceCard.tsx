@@ -1,5 +1,6 @@
 import { useDrop } from "react-dnd";
-import { SolitaireCard, SUIT } from "../../../store/game/suitTypes";
+import { SolitaireCard } from "../../../store/game/types/game";
+import { SUIT } from "../../../store/game/types/suit";
 import { Face } from "../card/Face";
 
 interface FinalFaceCardProps {

@@ -1,4 +1,4 @@
-import { SolitaireCard, SolitaireDraw } from "../../../../../store/game/suitTypes";
+import { SolitaireCard, SolitaireDraw } from "../../../../../store/game/types/game";
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
 

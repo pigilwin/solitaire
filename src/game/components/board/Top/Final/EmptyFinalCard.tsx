@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 import { canCardBeDroppedOnToFinal } from "../../../../../store/game/cardDropper";
-import { SolitaireCard } from "../../../../../store/game/suitTypes";
+import { SolitaireCard } from "../../../../../store/game/types/game";
 import { resolveLargeSuitIcon } from "../../../card/SuitBuilder";
 
 interface EmptyFinalCardProps {

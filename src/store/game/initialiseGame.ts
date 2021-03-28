@@ -1,12 +1,11 @@
 import { v4 } from "uuid";
-import { 
-    Solitaire, 
-    SolitaireCard, 
+import { Solitaire, SolitaireCard } from "./types/game";
+import {
     SUIT_TYPE_CLUB, 
     SUIT_TYPE_DIAMOND, 
     SUIT_TYPE_HEART, 
     SUIT_TYPE_SPADE 
-} from "./suitTypes";
+} from "./types/suit";
 
 /**
  * Generate the solitaire game
