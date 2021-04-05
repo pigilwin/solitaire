@@ -4,6 +4,7 @@ import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn
 export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};
     const latestCard = (newGame.draw.remaining.pop() as SolitaireCard);
+    latestCard.showing = true;
     newGame.draw.draw.push(latestCard);
     return newGame;
 }
@@ -11,14 +12,21 @@ export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
 export const moveCard = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
     const newGame: Solitaire = {...game};
 
-    if (payload.drag.location.namespace === 'draw' || payload.drag.location.namespace === 'final') {
-        console.log('not implemented just yet');
-        return newGame;
+    const dragNamespace = payload.drag.location.namespace;
+    const dropNamespace = payload.drop.location.namespace;
+
+    /**
+     * If the drag and drop namespace is both related to columns
+     */
+    if (dragNamespace === 'columns' && dropNamespace === 'columns'){
+        return moveCardBetweenColumns(newGame, payload);
     }
 
-    if (payload.drag.location.namespace === 'columns' && payload.drop.location.namespace === 'columns'){
-
-        return moveCardBetweenColumns(newGame, payload);
+    /**
+     * Move the card from the draw to the columns
+     */
+    if (dragNamespace === 'draw' && dropNamespace === 'columns') {
+        return moveCardFromDrawToColumn(newGame, payload);
     }
     
     return newGame;
@@ -63,3 +71,35 @@ const moveCardBetweenColumns = (game: Solitaire, payload: MoveCardPayload): Soli
 
     return game;
 };
+
+const moveCardFromDrawToColumn = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
+    /**
+     * If the draw length is zero then this current action is not possible
+     */
+    if (game.draw.draw.length === 0) {
+        return game;
+    }
+
+    /**
+     * Find the latest card on the draw
+     */
+    const latestCardOnDraw = game.draw.draw.pop();
+
+    /**
+     * If the latest card on the draw is undefined then exit out
+     */
+    if (latestCardOnDraw === undefined){
+        return game;
+    }
+
+
+    /**
+     * Find the column from the location and attach
+     * the card being moved from the draw
+     */
+     columnFromLocation(game, payload.drop.location.namespace, payload.drop.location.area).push(latestCardOnDraw);
+
+
+    return game;
+
+}
