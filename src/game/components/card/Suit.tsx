@@ -27,7 +27,7 @@ export const Spade = ({width, height}: SuitIconProps): JSX.Element => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
             <defs>
-                <mask id="stem-mask">
+                <mask>
                     <rect width="100%" height="100%" fill="#fff"/>
                     <circle cx="180" cy="490" r="100" fill="#000"/>
                     <circle cx="420" cy="490" r="100" fill="#000"/>
