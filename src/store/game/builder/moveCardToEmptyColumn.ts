@@ -1,5 +1,5 @@
 import { MoveCardToEmptyColumnPayload, Solitaire } from "../types/game";
-import { columnFromLocation, findIndexOfCardWithinColumn } from "./util";
+import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "./util";
 
 export const moveCardToEmptyColumn = (game: Solitaire, payload: MoveCardToEmptyColumnPayload): Solitaire => {
 
@@ -33,6 +33,11 @@ export const moveCardToEmptyColumn = (game: Solitaire, payload: MoveCardToEmptyC
      * Add the removed cards
      */
     emptyColumn.push(...removedCards);
+
+    /**
+     * Flip the latest card in the drag column
+     */
+    flipLatestCardInColumn(dragColumn);
 
     return game;
 }
