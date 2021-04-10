@@ -15,7 +15,7 @@ export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
                 isDragging: m.isDragging() 
             };
         }
-    }), []);
+    }), [card]);
 
     const classes = [];
 
