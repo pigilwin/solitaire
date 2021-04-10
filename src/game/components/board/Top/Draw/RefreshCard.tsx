@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { refreshRemaningFromDrawAction } from "../../../../../store/game/gameSlice";
+import { refreshRemaningFromDrawAsync } from "../../../../../store/game/thunk";
 
 const Refresh = (): JSX.Element => {
     return (
@@ -17,7 +17,7 @@ export const RefreshCard = (): JSX.Element => {
 
     const dispatch = useDispatch();
     const onClickRefeshHandler = () => {
-        dispatch(refreshRemaningFromDrawAction());
+        dispatch(refreshRemaningFromDrawAsync());
     };
 
     return (

@@ -5,8 +5,8 @@ import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/builder/cardDropper";
 import { useDispatch } from "react-redux";
-import { moveCardToColumnAction } from "../../../store/game/gameSlice";
 import { makeCardColumnAware } from "../../../store/game/columnHelper";
+import { moveCardToColumnAsync } from "../../../store/game/thunk";
 
 
 interface ColumnProps {
@@ -59,7 +59,7 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (dragCard) => {
-            dispatch(moveCardToColumnAction({
+            dispatch(moveCardToColumnAsync({
                 drag: dragCard,
                 drop: card
             }));

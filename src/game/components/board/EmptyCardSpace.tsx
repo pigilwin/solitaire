@@ -1,7 +1,7 @@
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedToEmptyColumn } from "../../../store/game/builder/cardDropper";
-import { moveCardToEmptyColumnAction } from "../../../store/game/gameSlice";
+import { moveCardToEmptyColumnAsync } from "../../../store/game/thunk";
 import { LocationAwareSolitaireCard } from "../../../store/game/types/game";
 
 interface EmptyCardSpaceProps {
@@ -14,7 +14,7 @@ export const EmptyCardSpace = ({column}: EmptyCardSpaceProps): JSX.Element => {
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (card) => {
-            dispatch(moveCardToEmptyColumnAction({
+            dispatch(moveCardToEmptyColumnAsync({
                 drag: card,
                 column: column
             }));

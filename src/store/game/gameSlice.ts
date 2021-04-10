@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../rootReducer';
+import { RootState, RootStateHook } from '../rootReducer';
 import { deepCopy } from '../util';
 import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } from './builder/gameBuilder';
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
@@ -81,5 +81,10 @@ export const {
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction
 } = gameSlice.actions;
+
+export const fetchGame = (getStateHook: RootStateHook): Game => {
+    const currentGame = getStateHook().gameReducer;
+    return {...currentGame};
+}
 
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;

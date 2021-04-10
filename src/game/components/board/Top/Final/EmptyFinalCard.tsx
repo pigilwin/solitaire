@@ -1,7 +1,7 @@
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "../../../../../store/game/builder/cardDropper";
-import { moveCardToFinalColumnAction } from "../../../../../store/game/gameSlice";
+import { moveCardToFinalColumnAsync } from "../../../../../store/game/thunk";
 import { LocationAwareSolitaireCard } from "../../../../../store/game/types/game";
 import { resolveLargeSuitIcon } from "../../../card/SuitBuilder";
 
@@ -17,7 +17,7 @@ export const EmptyFinalCard = ({type}: EmptyFinalCardProps): JSX.Element => {
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
         drop: (drag) => {
-            dispatch(moveCardToFinalColumnAction({
+            dispatch(moveCardToFinalColumnAsync({
                 drag: drag,
                 column: type.toLowerCase()
             }));
