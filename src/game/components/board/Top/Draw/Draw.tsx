@@ -28,7 +28,7 @@ const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
         return (<div className="playing-card-container"></div>);
     }
     const card = cards[cards.length - 1];
-    const cardWithLocation = makeCardColumnAware(card, 'draw', 'draw');
+    const cardWithLocation = makeCardColumnAware(card, 'draw', 'current');
 
     return <DrawCard card={cardWithLocation}/>;
 }
