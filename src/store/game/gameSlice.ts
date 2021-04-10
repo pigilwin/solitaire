@@ -65,6 +65,9 @@ const gameSlice = createSlice({
             const newState = deepCopy<Game>(state);
             newState.game = moveCardToFinalColumn(newState.game, action.payload);
             return newState;
+        },
+        replaceGameAction(_, action: PayloadAction<Game>) {
+            return action.payload;
         }
     }
 });
@@ -76,7 +79,8 @@ export const {
     refreshRemaningFromDrawAction,
     moveCardToColumnAction,
     moveCardToEmptyColumnAction,
-    moveCardToFinalColumnAction
+    moveCardToFinalColumnAction,
+    replaceGameAction
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {
