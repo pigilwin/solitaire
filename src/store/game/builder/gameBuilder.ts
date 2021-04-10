@@ -18,7 +18,7 @@ export const refreshRemaningFromDraw = (game: Solitaire): Solitaire => {
     const remaining = newGame.draw.current.map((card) => {
         card.showing = false;
         return card;
-    });
+    }).reverse();
 
     newGame.draw.current = [];
     newGame.draw.remaining = remaining;
