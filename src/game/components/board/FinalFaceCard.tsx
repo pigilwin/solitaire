@@ -23,7 +23,7 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
             }));
         },
         canDrop: (drag) => {
-            return canCardBeDroppedOnToFinal(drag, type, []);
+            return canCardBeDroppedOnToFinal(drag, type, cards);
         }
     }), []);
 
