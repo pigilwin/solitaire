@@ -58,14 +58,14 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
 
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
-        drop: (dropCard) => {
+        drop: (dragCard) => {
             dispatch(moveCardToColumnAction({
-                drag: dropCard,
+                drag: dragCard,
                 drop: card
             }));
         },
-        canDrop: (drop) => {
-            return canCardBeDroppedOnToColumn(drop, card);
+        canDrop: (dragCard) => {
+            return canCardBeDroppedOnToColumn(dragCard, card);
         }
     }), [card]);
 
