@@ -11,17 +11,16 @@ import {
     moveCardToFinalColumnAction,
     initialiseGameAction
 } from "./gameSlice";
-import { addHistoryItemAction } from "../history/historySlice";
+import { addHistoryItemAction, clearHistoryAction } from "../history/historySlice";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
     dispatch: AppDispatch,
     getState: RootStateHook
 ) => {
+    dispatch(clearHistoryAction());
     dispatch(initialiseGameAction());
 }
-
-
 
 export const refreshRemaningFromDrawAsync = (
 ): AppThunk => async (

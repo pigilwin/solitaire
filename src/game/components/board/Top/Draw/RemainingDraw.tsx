@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { drawCardFromDeckAction } from "../../../../../store/game/gameSlice";
+import { drawCardFromDeckAsync } from "../../../../../store/game/thunk";
 import { SolitaireCard } from "../../../../../store/game/types/game";
 import { Back } from "../../../card/Back";
 import { RefreshCard } from "./RefreshCard";
@@ -12,7 +12,7 @@ export const RemainingDraw = ({remaining}: RemainingDrawProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const drawClickHandler = (): void => {
-        dispatch(drawCardFromDeckAction());
+        dispatch(drawCardFromDeckAsync());
     };
 
     if (remaining.length === 0) {
