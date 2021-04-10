@@ -11,6 +11,7 @@ import {
     moveCardToFinalColumnAction,
     initialiseGameAction
 } from "./gameSlice";
+import { addHistoryItemAction } from "../history/historySlice";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
@@ -28,6 +29,7 @@ export const refreshRemaningFromDrawAsync = (
     getState: RootStateHook
 ) => {
     const game = deepCopy<Game>(fetchGame(getState));
+    dispatch(addHistoryItemAction(game));
     dispatch(refreshRemaningFromDrawAction());
 }
 
@@ -37,6 +39,7 @@ export const drawCardFromDeckAsync = (
     getState: RootStateHook
 ) => {
     const game = deepCopy<Game>(fetchGame(getState));
+    dispatch(addHistoryItemAction(game));
     dispatch(drawCardFromDeckAction());
 }
 
@@ -47,6 +50,7 @@ export const moveCardToColumnAsync = (
     getState: RootStateHook
 ) => {
     const game = deepCopy<Game>(fetchGame(getState));
+    dispatch(addHistoryItemAction(game));
     dispatch(moveCardToColumnAction(payload));
 }
 
@@ -57,6 +61,7 @@ export const moveCardToEmptyColumnAsync = (
     getState: RootStateHook
 ) => {
     const game = deepCopy<Game>(fetchGame(getState));
+    dispatch(addHistoryItemAction(game));
     dispatch(moveCardToEmptyColumnAction(payload));
 }
 
@@ -67,5 +72,6 @@ export const moveCardToFinalColumnAsync = (
     getState: RootStateHook
 ) => {
     const game = deepCopy<Game>(fetchGame(getState));
+    dispatch(addHistoryItemAction(game));
     dispatch(moveCardToFinalColumnAction(payload));
 }
