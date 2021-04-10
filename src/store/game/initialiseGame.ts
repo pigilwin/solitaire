@@ -30,9 +30,6 @@ export const generateGame = (): Solitaire => {
      */
     const solitaireDeck: Solitaire = {
         id: v4(),
-        start: 0,
-        end: 0,
-        score: 0,
         final: {
             diamond: [],
             heart: [],

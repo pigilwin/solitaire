@@ -10,9 +10,6 @@ import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalCol
 export const initialState: Game =  {
     game: {
         id: '',
-        score: 0,
-        start: 0,
-        end: 0,
         final: {
             heart: [],
             diamond: [],

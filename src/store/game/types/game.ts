@@ -2,9 +2,6 @@ import { COLOR, SUIT } from "./suit";
 
 export interface Solitaire {
     id: string;
-    score: number;
-    start: number;
-    end: number;
     columns: SolitaireColumn;
     final: SolitaireFinal;
     draw: SolitaireDraw;
