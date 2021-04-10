@@ -13,7 +13,7 @@ export const Draw = ({draw}: DrawProps): JSX.Element => {
                 <RemainingDraw remaining={draw.remaining}/>
             </div>
             <div className="px-2">
-                {getDrawCard(draw.draw)}
+                {getDrawCard(draw.current)}
             </div>
         </div>
     );

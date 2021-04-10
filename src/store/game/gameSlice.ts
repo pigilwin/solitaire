@@ -30,7 +30,7 @@ export const initialState: Game =  {
         },
         draw: {
             remaining: [],
-            draw: []
+            current: []
         }
     }
 };

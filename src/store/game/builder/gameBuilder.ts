@@ -5,7 +5,7 @@ export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};
     const latestCard = (newGame.draw.remaining.pop() as SolitaireCard);
     latestCard.showing = true;
-    newGame.draw.draw.push(latestCard);
+    newGame.draw.current.push(latestCard);
     return newGame;
 }
 
@@ -15,12 +15,12 @@ export const refreshRemaningFromDraw = (game: Solitaire): Solitaire => {
     /**
      * Take all existing remaining cards and hide them
      */
-    const remaining = newGame.draw.draw.map((card) => {
+    const remaining = newGame.draw.current.map((card) => {
         card.showing = false;
         return card;
     });
 
-    newGame.draw.draw = [];
+    newGame.draw.current = [];
     newGame.draw.remaining = remaining;
 
     return newGame;
@@ -93,14 +93,14 @@ const moveCardFromDrawToColumn = (game: Solitaire, payload: MoveCardPayload): So
     /**
      * If the draw length is zero then this current action is not possible
      */
-    if (game.draw.draw.length === 0) {
+    if (game.draw.current.length === 0) {
         return game;
     }
 
     /**
      * Find the latest card on the draw
      */
-    const latestCardOnDraw = game.draw.draw.pop();
+    const latestCardOnDraw = game.draw.current.pop();
 
     /**
      * If the latest card on the draw is undefined then exit out

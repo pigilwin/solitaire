@@ -50,7 +50,7 @@ export const generateGame = (): Solitaire => {
         },
         draw: {
             remaining: deck,
-            draw: []
+            current: []
         }
     };
     

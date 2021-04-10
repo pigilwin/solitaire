@@ -33,7 +33,7 @@ export interface SolitaireFinal {
 }
 
 export interface SolitaireDraw {
-    draw: SolitaireCard[];
+    current: SolitaireCard[];
     remaining: SolitaireCard[];
 }
 
