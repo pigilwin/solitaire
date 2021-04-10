@@ -25,7 +25,7 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
         canDrop: (drag) => {
             return canCardBeDroppedOnToFinal(drag, type, cards);
         }
-    }), []);
+    }), [cards]);
 
     const cardNumber = cards[cards.length -1].cardNumber;
     
