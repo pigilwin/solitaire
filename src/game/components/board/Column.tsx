@@ -54,7 +54,7 @@ const Card = ({card, children, index, maxDepth}: PropsWithChildren<CardProps>): 
                 isDragging: m.isDragging() 
             };
         }
-    }), []);
+    }), [card]);
 
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',
