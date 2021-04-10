@@ -45,6 +45,13 @@ export const moveCard = (game: Solitaire, payload: MoveCardPayload): Solitaire =
     if (dragNamespace === 'draw' && dropNamespace === 'columns') {
         return moveCardFromDrawToColumn(newGame, payload);
     }
+
+    /**
+     * Move the card from the draw to the columns
+     */
+     if (dragNamespace === 'final' && dropNamespace === 'columns') {
+        return moveCardFromFinalToColumn(newGame, payload);
+    }
     
     return newGame;
 }
@@ -127,6 +134,40 @@ const moveCardFromDrawToColumn = (game: Solitaire, payload: MoveCardPayload): So
      * Draw the card from the remaining add to the draw
      */
     game = drawCardFromRemainingAddToDraw(game);
+
+    return game;
+}
+
+export const moveCardFromFinalToColumn = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
+    /**
+     * Find the column from the current location
+     */
+    const dragColumn = columnFromLocation(game, payload.drag.location.namespace, payload.drag.location.area);
+
+    /**
+     * Find the index of the card being dragged
+    */
+    const dragIndex = findIndexOfCardWithinColumn(dragColumn, payload.drag);
+
+     /**
+     * If its not found then something odd is 
+     * happening just return the unmodiffied game
+     * unmodified
+     */
+    if (dragIndex === -1) {
+        return game;
+    }
+
+    /**
+     * Remove the cards from the index and above
+     */
+    const removedCards = dragColumn.splice(dragIndex);
+
+    /**
+     * Find the column from the location and attach
+     * the cards being moved
+     */
+    columnFromLocation(game, payload.drop.location.namespace, payload.drop.location.area).push(...removedCards);
 
     return game;
 }

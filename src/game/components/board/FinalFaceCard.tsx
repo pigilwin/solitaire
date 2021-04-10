@@ -1,6 +1,7 @@
-import { useDrop } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "../../../store/game/builder/cardDropper";
+import { makeCardColumnAware } from "../../../store/game/columnHelper";
 import { moveCardToFinalColumnAsync } from "../../../store/game/thunk";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";
@@ -27,11 +28,31 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
         }
     }), [cards]);
 
-    const cardNumber = cards[cards.length -1].cardNumber;
+    const card = makeCardColumnAware(cards[cards.length -1], 'final', type.toLowerCase());
+
+    const [{isDragging}, drag] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
+        type: 'card',
+        item: card,
+        collect: (m) => {
+            return {
+                isDragging: m.isDragging() 
+            };
+        }
+    }), [card]);
+
+    const classes = ['draggable'];
+
+    if (isDragging) {
+        classes.push('invisible');
+    }
+
+    const cardNumber = card.cardNumber;
     
     return (
-        <div className="droppable" ref={drop}>
-            <Face index={cardNumber} type={type}/>
+        <div className={classes.join(' ')} ref={drag}>
+            <div className="droppable" ref={drop}>
+                <Face index={cardNumber} type={type}/>
+            </div>
         </div>
     );
 }
