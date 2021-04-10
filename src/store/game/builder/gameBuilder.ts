@@ -9,6 +9,23 @@ export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     return newGame;
 }
 
+export const refreshRemaningFromDraw = (game: Solitaire): Solitaire => {
+    const newGame: Solitaire = {...game};
+    
+    /**
+     * Take all existing remaining cards and hide them
+     */
+    const remaining = newGame.draw.draw.map((card) => {
+        card.showing = false;
+        return card;
+    });
+
+    newGame.draw.draw = [];
+    newGame.draw.remaining = remaining;
+
+    return newGame;
+}
+
 export const moveCard = (game: Solitaire, payload: MoveCardPayload): Solitaire => {
     const newGame: Solitaire = {...game};
 

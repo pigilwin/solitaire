@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { refreshRemaningFromDrawAction } from "../../../../../store/game/gameSlice";
+
 const Refresh = (): JSX.Element => {
     return (
         <svg height="50" viewBox="0 0 21 21" width="50" xmlns="http://www.w3.org/2000/svg">
@@ -11,8 +14,14 @@ const Refresh = (): JSX.Element => {
 }
 
 export const RefreshCard = (): JSX.Element => {
+
+    const dispatch = useDispatch();
+    const onClickRefeshHandler = () => {
+        dispatch(refreshRemaningFromDrawAction());
+    };
+
     return (
-        <div className="playing-card flex flex-col justify-center p-1">
+        <div className="playing-card flex flex-col justify-center p-1" onClick={onClickRefeshHandler}>
             <div className="flex justify-center">
                 <Refresh/>
             </div>
