@@ -21,7 +21,7 @@ export const RefreshCard = (): JSX.Element => {
     };
 
     return (
-        <div className="playing-card flex flex-col justify-center p-1" onClick={onClickRefeshHandler}>
+        <div className="playing-card flex flex-col justify-center p-1 cursor-pointer" onClick={onClickRefeshHandler}>
             <div className="flex justify-center">
                 <Refresh/>
             </div>
