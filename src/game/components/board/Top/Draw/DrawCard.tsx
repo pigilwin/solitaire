@@ -7,7 +7,7 @@ interface DrawCardProps {
 }
 export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
     
-    const [collection, drag, ] = useDrag(() => ({
+    const [collection, drag, ] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
         type: 'card',
         item: card,
         collect: (m) => {
