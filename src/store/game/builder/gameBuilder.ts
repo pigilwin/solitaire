@@ -123,18 +123,6 @@ const moveCardFromDrawToColumn = (game: Solitaire, payload: MoveCardPayload): So
     */
     columnFromLocation(game, payload.drop.location.namespace, payload.drop.location.area).push(latestCardOnDraw);
 
-    /**
-     * If we have no draw remaining then exit out
-     */
-    if (game.draw.remaining.length === 0) {
-        return game;
-    }
-
-    /**
-     * Draw the card from the remaining add to the draw
-     */
-    game = drawCardFromRemainingAddToDraw(game);
-
     return game;
 }
 
