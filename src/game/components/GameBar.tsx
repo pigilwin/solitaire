@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { replaceGameAction } from "../../store/game/gameSlice";
 import { initialiseGameAsync } from "../../store/game/thunk";
 import { doWeHaveAnyHistorySelector, latestHistoryItemSelector, removeLatestHistoryItemAction } from "../../store/history/historySlice";
+import { currentMovesSelector } from "../../store/tracker/trackerSlice";
 import { GameButton, IconGameButton } from "./Button";
 import { Undo } from "./Icons";
 
@@ -9,16 +10,23 @@ export const GameBar = (): JSX.Element => {
     
     let undoButton: JSX.Element | null = null;
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
-    
     if (weHaveHistory) {
         undoButton = <UndoGameButton/>;
     }
+
+    let movesCounter: JSX.Element | null = null;
+    const movesCount = useSelector(currentMovesSelector);
+    if (movesCount > 0) {
+        movesCounter = <MovesCount count={movesCount}/>;
+    }
+
 
     return (
         <nav className="w-full bg-white shadow-lg border-b border-green-500 h-16">
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                 <GameLogo/>
                 {undoButton}
+                {movesCounter}
                 <GameButtons/>
             </div>
         </nav>
@@ -50,6 +58,17 @@ const UndoGameButton = (): JSX.Element => {
                 icon={<Undo/>}
                 onClick={undoHistoryClickHandler}
             />
+        </div>
+    );
+}
+
+interface MovesCountProps {
+    count: number;
+}
+const MovesCount = ({count}: MovesCountProps): JSX.Element => {
+    return (
+        <div className="flex flex-row">    
+            <p>Moves: {count}</p>
         </div>
     );
 }
