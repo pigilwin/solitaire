@@ -33,6 +33,9 @@ const historySlice = createSlice({
             const newState = deepCopy<TrackerState>(state);
             newState.moves += 1;
             return newState;
+        },
+        clearTrackerAction(state: TrackerState) {
+            return initialState;
         }
     }
 });
@@ -42,8 +45,10 @@ export const {
     incrementScoreAction,
     startAction,
     endAction,
-    addMoveAction
+    addMoveAction,
+    clearTrackerAction
 } = historySlice.actions;
 
 export const currentMovesSelector = (state: RootState): number => state.trackerReducer.moves;
 export const currentScoreSelector = (state: RootState): number => state.trackerReducer.score;
+export const isTheTimerActiveSelector = (state: RootState): boolean => state.trackerReducer.start > 0;
