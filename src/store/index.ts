@@ -2,7 +2,8 @@ import { configureStore, Action, ThunkAction } from '@reduxjs/toolkit';
 import { rootReducer, RootState } from './rootReducer';
 
 export const store = configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV === 'development'
 });
 
 export type AppDispatch = typeof store.dispatch;
