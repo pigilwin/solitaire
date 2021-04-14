@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
+    "comlink": "^4.3.0",
     "idb": "^5.0.8",
     "react": "^17.0.2",
     "react-dnd": "^14.0.2",
