@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { replaceGameAction } from "../../store/game/gameSlice";
 import { initialiseGameAsync } from "../../store/game/thunk";
 import { doWeHaveAnyHistorySelector, latestHistoryItemSelector, removeLatestHistoryItemAction } from "../../store/history/historySlice";
-import { currentMovesSelector } from "../../store/tracker/trackerSlice";
+import { addMoveAction, currentMovesSelector } from "../../store/tracker/trackerSlice";
 import { GameButton, IconGameButton } from "./Button";
 import { Undo } from "./Icons";
 
@@ -47,7 +47,19 @@ const UndoGameButton = (): JSX.Element => {
     const dispatch = useDispatch();
     const game = useSelector(latestHistoryItemSelector);
     const undoHistoryClickHandler = () => {
+        /**
+         * Add the move action to the page
+         */
+        dispatch(addMoveAction());
+
+        /**
+         * Remove the latest history item action
+         */
         dispatch(removeLatestHistoryItemAction());
+
+        /**
+         * Replace the action by the game
+         */
         dispatch(replaceGameAction(game));
     };
     
