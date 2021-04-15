@@ -68,4 +68,5 @@ export const fetchTracker = (state: RootStateHook): TrackerState => {
 
 export const currentMovesSelector = (state: RootState): number => state.trackerReducer.moves;
 export const currentScoreSelector = (state: RootState): number => state.trackerReducer.score;
-export const isTheTimerActiveSelector = (state: RootState): boolean => state.trackerReducer.start > 0;
+export const currentStartTimeSelector = (state: RootState): number => state.trackerReducer.start;
+export const currentEndTimeSelector = (state: RootState): number => state.trackerReducer.end;
