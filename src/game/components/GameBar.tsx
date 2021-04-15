@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { replaceGameAction } from "../../store/game/gameSlice";
-import { initialiseGameAsync } from "../../store/game/thunk";
-import { doWeHaveAnyHistorySelector, latestHistoryItemSelector, removeLatestHistoryItemAction } from "../../store/history/historySlice";
-import { addMoveAction, currentMovesSelector } from "../../store/tracker/trackerSlice";
-import { GameButton, IconGameButton } from "./Button";
-import { Undo } from "./Icons";
+import { useSelector } from "react-redux";
+import { doWeHaveAnyHistorySelector } from "../../store/history/historySlice";
+import { currentMovesSelector } from "../../store/tracker/trackerSlice";
+import { GameLogo } from './bar/GameLogo';
+import { MovesCount } from './bar/MovesCount';
+import { UndoGameButton } from './bar/UndoButton';
+import { GameButtons } from "./bar/GameButtons";
 
 export const GameBar = (): JSX.Element => {
     
@@ -32,81 +32,3 @@ export const GameBar = (): JSX.Element => {
         </nav>
     );
 };
-
-const GameLogo = (): JSX.Element => {
-    return (
-        <div className="flex flex-row">
-            <div className="flex justify-between items-center">
-                <h1 className="text-gray-800 font-bold text-2xl hover:text-gray-700 cursor-pointer">Solitaire</h1>
-            </div>      
-        </div>
-    );
-}
-
-const UndoGameButton = (): JSX.Element => {
-    const dispatch = useDispatch();
-    const game = useSelector(latestHistoryItemSelector);
-    const undoHistoryClickHandler = () => {
-        /**
-         * Add the move action to the page
-         */
-        dispatch(addMoveAction());
-
-        /**
-         * Remove the latest history item action
-         */
-        dispatch(removeLatestHistoryItemAction());
-
-        /**
-         * Replace the action by the game
-         */
-        dispatch(replaceGameAction(game));
-    };
-    
-    return (
-        <div className="flex flex-row">    
-            <IconGameButton
-                buttonText="Undo"
-                icon={<Undo/>}
-                onClick={undoHistoryClickHandler}
-            />
-        </div>
-    );
-}
-
-interface MovesCountProps {
-    count: number;
-}
-const MovesCount = ({count}: MovesCountProps): JSX.Element => {
-    return (
-        <div className="flex flex-row">    
-            <p>Moves: {count}</p>
-        </div>
-    );
-}
-
-const GameButtons = (): JSX.Element => {
-
-    const dispatch = useDispatch();
-
-    const newGameClickHandler = () => {
-        dispatch(initialiseGameAsync());
-    };
-
-    const leaderboardClickHandler = () => {};
-    const settingsClickHandler = () => {};
-
-    return (
-        <div className="flex flex-row">
-            <div className="px-1">
-                <GameButton buttonText="New Game" onClick={newGameClickHandler}/>
-            </div>
-            <div className="px-1">
-                <GameButton buttonText="Leaderboard" onClick={leaderboardClickHandler}/>
-            </div>
-            <div className="px-1">
-                <GameButton buttonText="Settings" onClick={settingsClickHandler}/>
-            </div>
-        </div>
-    );
-}
