@@ -15,13 +15,8 @@ export const GameBar = (): JSX.Element => {
         undoButton = <UndoGameButton/>;
     }
 
-    let movesCounter: JSX.Element | null = null;
     const movesCount = useSelector(currentMovesSelector);
-    if (movesCount > 0) {
-        movesCounter = <MovesCount count={movesCount}/>;
-    }
     const scoreCount = useSelector(currentScoreSelector);
-    const scoreCounter: JSX.Element = <ScoreCount count={scoreCount}/>;
 
 
     return (
@@ -29,8 +24,8 @@ export const GameBar = (): JSX.Element => {
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                 <GameLogo/>
                 {undoButton}
-                {movesCounter}
-                {scoreCounter}
+                <MovesCount count={movesCount}/>
+                <ScoreCount count={scoreCount}/>
                 <GameButtons/>
             </div>
         </nav>
