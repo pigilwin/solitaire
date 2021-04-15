@@ -1,7 +1,7 @@
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "../../../store/game/builder/cardDropper";
-import { makeCardColumnAware } from "../../../store/game/columnHelper";
+import { makeCardLocationAware } from "../../../store/game/columnHelper";
 import { moveCardToFinalColumnAsync } from "../../../store/game/thunk";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";
@@ -28,7 +28,7 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
         }
     }), [cards]);
 
-    const card = makeCardColumnAware(cards[cards.length -1], 'final', type.toLowerCase());
+    const card = makeCardLocationAware(cards[cards.length -1], 'final', type.toLowerCase());
 
     const [{isDragging}, drag] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
         type: 'card',

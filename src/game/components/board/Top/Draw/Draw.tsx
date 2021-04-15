@@ -1,4 +1,4 @@
-import { makeCardColumnAware } from "../../../../../store/game/columnHelper";
+import { makeCardLocationAware } from "../../../../../store/game/columnHelper";
 import { SolitaireCard, SolitaireDraw } from "../../../../../store/game/types/game";
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
@@ -28,7 +28,7 @@ const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
         return (<div className="playing-card-container"></div>);
     }
     const card = cards[cards.length - 1];
-    const cardWithLocation = makeCardColumnAware(card, 'draw', 'current');
+    const cardWithLocation = makeCardLocationAware(card, 'draw', 'current');
 
     return <DrawCard card={cardWithLocation}/>;
 }

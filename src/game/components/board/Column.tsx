@@ -5,7 +5,7 @@ import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/builder/cardDropper";
 import { useDispatch } from "react-redux";
-import { makeCardColumnAware } from "../../../store/game/columnHelper";
+import { makeCardLocationAware } from "../../../store/game/columnHelper";
 import { moveCardToColumnAsync } from "../../../store/game/thunk";
 
 
@@ -24,7 +24,7 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
      */
     for (let i = depth - 1; i >= 0; i--) {
 
-        const columnAwareCard = makeCardColumnAware(cards[i], 'columns', column);
+        const columnAwareCard = makeCardLocationAware(cards[i], 'columns', column);
 
         child = (<Card 
             card={columnAwareCard} 

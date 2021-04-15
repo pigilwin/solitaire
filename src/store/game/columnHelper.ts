@@ -1,6 +1,6 @@
 import { SolitaireCard, LocationAwareSolitaireCard } from "./types/game";
 
-export const makeCardColumnAware = (card: SolitaireCard, namespace: string, area: string): LocationAwareSolitaireCard => {
+export const makeCardLocationAware = (card: SolitaireCard, namespace: string, area: string): LocationAwareSolitaireCard => {
     return {
         location: {
             namespace,
@@ -9,3 +9,7 @@ export const makeCardColumnAware = (card: SolitaireCard, namespace: string, area
         ...card
     }
 }
+
+export const isOnColumn = () => {
+
+};
