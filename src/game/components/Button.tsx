@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, forwardRef } from "react";
 
 interface GameButtonProps {
     buttonText: string;
@@ -6,15 +6,16 @@ interface GameButtonProps {
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const GameButton = ({buttonText, disabled, onClick}: GameButtonProps): JSX.Element => {
+export const GameButton = forwardRef<HTMLButtonElement, GameButtonProps>(({buttonText, disabled, onClick}, ref): JSX.Element => {
     return (
         <button
+            ref={ref}
             disabled={disabled}
             className="bg-blue-600 text-gray-200 p-2 rounded hover:bg-blue-500 hover:text-gray-100"
             onClick={onClick}
         >{buttonText}</button>
     );
-};
+});
 
 interface IconGameButtonProps extends GameButtonProps {
     icon: JSX.Element;
