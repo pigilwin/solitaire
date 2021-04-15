@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import { doWeHaveAnyHistorySelector } from "../../store/history/historySlice";
-import { currentMovesSelector } from "../../store/tracker/trackerSlice";
+import { currentMovesSelector, currentScoreSelector } from "../../store/tracker/trackerSlice";
 import { GameLogo } from './bar/GameLogo';
 import { MovesCount } from './bar/MovesCount';
 import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
+import { ScoreCount } from "./bar/ScoreCount";
 
 export const GameBar = (): JSX.Element => {
     
@@ -20,6 +21,13 @@ export const GameBar = (): JSX.Element => {
         movesCounter = <MovesCount count={movesCount}/>;
     }
 
+    let scoreCounter: JSX.Element | null = null;
+    const scoreCount = useSelector(currentScoreSelector);
+    console.log(scoreCount);
+    if (scoreCount > 0) {
+        scoreCounter = <ScoreCount count={scoreCount}/>
+    }
+
 
     return (
         <nav className="w-full bg-white shadow-lg border-b border-green-500 h-16">
@@ -27,6 +35,7 @@ export const GameBar = (): JSX.Element => {
                 <GameLogo/>
                 {undoButton}
                 {movesCounter}
+                {scoreCounter}
                 <GameButtons/>
             </div>
         </nav>
