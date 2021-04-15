@@ -23,7 +23,6 @@ export const GameBar = (): JSX.Element => {
 
     let scoreCounter: JSX.Element | null = null;
     const scoreCount = useSelector(currentScoreSelector);
-    console.log(scoreCount);
     if (scoreCount > 0) {
         scoreCounter = <ScoreCount count={scoreCount}/>
     }

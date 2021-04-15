@@ -13,7 +13,8 @@ import {
 } from "./gameSlice";
 import { addHistoryItemAction, clearHistoryAction } from "../history/historySlice";
 import { addMoveAction, clearTrackerAction, decrementScoreAction, incrementScoreAction } from "../tracker/trackerSlice";
-import { LOSS_FOR_DRAW_RESET } from "../tracker/scoreConstants";
+import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
+import { isOnColumns, isOnDraw, isOnFinal } from "./locationHelper";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
@@ -107,6 +108,34 @@ export const moveCardToColumnAsync = (
      * Move a card from the columns
      */
     dispatch(moveCardToColumnAction(payload));
+
+    /**
+     * If the cards are being dragged between the two 
+     * columns the incrementing the score is not required
+     */
+    if (isOnColumns(payload.drag) && isOnColumns(payload.drop)) {
+        return;
+    }
+
+    /**
+     * If the cards are being dragged from the draw 
+     * to the board then increment the score
+     */
+    if (isOnDraw(payload.drag) && isOnColumns(payload.drop)) {
+        dispatch(incrementScoreAction(FROM_DRAW));
+        return;
+    }
+
+    /**
+     * If the card is being moved back from the final location
+     * to the columns then the score will need to be decremented
+     */
+    if (isOnFinal(payload.drag) && isOnColumns(payload.drop)) {
+        dispatch(decrementScoreAction(REMOVE_FROM_FINAL));
+        return;
+    }
+
+    console.log(payload);
 }
 
 export const moveCardToEmptyColumnAsync = (
@@ -115,7 +144,6 @@ export const moveCardToEmptyColumnAsync = (
     dispatch: AppDispatch,
     getState: RootStateHook
 ) => {
-    console.log(payload);
     /**
      * Add the current game to the history
      */
@@ -131,6 +159,15 @@ export const moveCardToEmptyColumnAsync = (
      * Move a card to a empty column
      */
     dispatch(moveCardToEmptyColumnAction(payload));
+
+    /**
+     * If the king is being added from the 
+     * drag then increment the score
+     */
+    if (isOnDraw(payload.drag)) {
+        dispatch(incrementScoreAction(FROM_DRAW_WITH_EMPTY_KING));
+        return;
+    }
 }
 
 export const moveCardToFinalColumnAsync = (
@@ -153,7 +190,7 @@ export const moveCardToFinalColumnAsync = (
     /**
      * Increment the score
     */
-    dispatch(incrementScoreAction(20));
+    dispatch(incrementScoreAction(ADD_TO_FINAL));
 
     /**
      * Move the card up to the final column
