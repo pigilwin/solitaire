@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../rootReducer";
+import { RootState, RootStateHook } from "../rootReducer";
 import { deepCopy } from "../util";
 import { TrackerState } from "./types";
 
@@ -54,6 +54,11 @@ export const {
     addMoveAction,
     clearTrackerAction
 } = historySlice.actions;
+
+export const fetchTracker = (state: RootStateHook): TrackerState => {
+    const tracker = state().trackerReducer;
+    return {...tracker};
+}
 
 export const currentMovesSelector = (state: RootState): number => state.trackerReducer.moves;
 export const currentScoreSelector = (state: RootState): number => state.trackerReducer.score;

@@ -11,10 +11,11 @@ import {
     moveCardToFinalColumnAction,
     initialiseGameAction
 } from "./gameSlice";
-import { addGameToHistoryAction, clearHistoryAction } from "../history/historySlice";
-import { addMoveAction, clearTrackerAction, decrementScoreAction, incrementScoreAction } from "../tracker/trackerSlice";
+import { addGameToHistoryAction, clearHistoryAction, addScoreToHistoryAction } from "../history/historySlice";
+import { addMoveAction, clearTrackerAction, decrementScoreAction, fetchTracker, incrementScoreAction } from "../tracker/trackerSlice";
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { isOnColumns, isOnDraw, isOnFinal } from "./locationHelper";
+import { TrackerState } from "../tracker/types";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
@@ -48,6 +49,12 @@ export const refreshRemaningFromDrawAsync = (
      */
     const game = deepCopy<Game>(fetchGame(getState));
     dispatch(addGameToHistoryAction(game));
+
+    /**
+     * Add the current score to the history
+     */
+    const tracker = deepCopy<TrackerState>(fetchTracker(getState));
+    dispatch(addScoreToHistoryAction(tracker.score));
 
     /**
      * Add a move to the tracker
@@ -100,6 +107,12 @@ export const moveCardToColumnAsync = (
     dispatch(addGameToHistoryAction(game));
 
     /**
+     * Add the current score to the history
+     */
+    const tracker = deepCopy<TrackerState>(fetchTracker(getState));
+    dispatch(addScoreToHistoryAction(tracker.score));
+
+    /**
      * Add a move to the tracker
      */
      dispatch(addMoveAction());
@@ -134,8 +147,6 @@ export const moveCardToColumnAsync = (
         dispatch(decrementScoreAction(REMOVE_FROM_FINAL));
         return;
     }
-
-    console.log(payload);
 }
 
 export const moveCardToEmptyColumnAsync = (
@@ -149,6 +160,12 @@ export const moveCardToEmptyColumnAsync = (
      */
     const game = deepCopy<Game>(fetchGame(getState));
     dispatch(addGameToHistoryAction(game));
+
+    /**
+     * Add the current score to the history
+     */
+    const tracker = deepCopy<TrackerState>(fetchTracker(getState));
+    dispatch(addScoreToHistoryAction(tracker.score));
 
     /**
      * Add a move to the tracker
@@ -181,6 +198,12 @@ export const moveCardToFinalColumnAsync = (
      */
     const game = deepCopy<Game>(fetchGame(getState));
     dispatch(addGameToHistoryAction(game));
+
+    /**
+     * Add the current score to the history
+     */
+    const tracker = deepCopy<TrackerState>(fetchTracker(getState));
+    dispatch(addScoreToHistoryAction(tracker.score));
 
     /**
      * Add a move to the tracker

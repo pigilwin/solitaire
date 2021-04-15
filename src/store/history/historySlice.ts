@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Game } from "../game/types/game";
-import { RootState } from "../rootReducer";
+import { RootState, RootStateHook } from "../rootReducer";
 import { deepCopy } from "../util";
 import { HistoryState } from "./type";
 
@@ -24,6 +24,11 @@ const historySlice = createSlice({
             newState.games.push(action.payload);
             return newState;
         },
+        addScoreToHistoryAction(state: HistoryState, action: PayloadAction<number>) {
+            const newState = deepCopy<HistoryState>(state);
+            newState.score.push(action.payload);
+            return newState;
+        },
         removeLatestHistoryItemAction(state: HistoryState) {
             const newState = deepCopy<HistoryState>(state);
             newState.games.splice(newState.games.length - 1);
@@ -36,6 +41,7 @@ export const reducer = historySlice.reducer;
 export const {
     clearHistoryAction,
     addGameToHistoryAction,
+    addScoreToHistoryAction,
     removeLatestHistoryItemAction
 } = historySlice.actions;
 
