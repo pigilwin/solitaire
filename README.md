@@ -4,8 +4,7 @@ A simple solitaire implementation for now
 
 ## What needs to be done
 
-- Keep the score/time to be tracked using a different slice
-- Increment the score when a new card is revealed or when the card is added to the final pile
+- Keep the time to be tracked using a different slice
 - Add double click feature for moving cards to final position
 - Add fancy animation for card switching
 - Add fancy animation for winning

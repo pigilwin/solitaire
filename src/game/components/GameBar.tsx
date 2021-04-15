@@ -20,12 +20,8 @@ export const GameBar = (): JSX.Element => {
     if (movesCount > 0) {
         movesCounter = <MovesCount count={movesCount}/>;
     }
-
-    let scoreCounter: JSX.Element | null = null;
     const scoreCount = useSelector(currentScoreSelector);
-    if (scoreCount > 0) {
-        scoreCounter = <ScoreCount count={scoreCount}/>
-    }
+    const scoreCounter: JSX.Element = <ScoreCount count={scoreCount}/>;
 
 
     return (
