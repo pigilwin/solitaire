@@ -5,15 +5,19 @@ import { TrackerState } from "./types";
 
 export const initialState: TrackerState =  {
     score: 0,
-    moves: 0,
-    start: 0,
-    end: 0
+    moves: 0
 };
 
 const historySlice = createSlice({
     name: 'tracker',
     initialState,
     reducers: {
+        initialiseTrackerAction(state: TrackerState) {
+            return {
+                score: 0,
+                moves: 0
+            };
+        },
         incrementScoreAction(state: TrackerState, action: PayloadAction<number>) {
             const newState = deepCopy<TrackerState>(state);
             newState.score += action.payload;
@@ -22,16 +26,6 @@ const historySlice = createSlice({
         decrementScoreAction(state: TrackerState, action: PayloadAction<number>) {
             const newState = deepCopy<TrackerState>(state);
             newState.score -= action.payload;
-            return newState;
-        },
-        startAction(state: TrackerState) {
-            const newState = deepCopy<TrackerState>(state);
-            newState.start = Date.now();
-            return newState;
-        },
-        endAction(state: TrackerState) {
-            const newState = deepCopy<TrackerState>(state);
-            newState.end = Date.now();
             return newState;
         },
         addMoveAction(state: TrackerState) {
@@ -52,10 +46,9 @@ const historySlice = createSlice({
 
 export const reducer = historySlice.reducer;
 export const {
+    initialiseTrackerAction,
     incrementScoreAction,
     decrementScoreAction,
-    startAction,
-    endAction,
     addMoveAction,
     clearTrackerAction,
     replaceScoreAction
@@ -68,5 +61,3 @@ export const fetchTracker = (state: RootStateHook): TrackerState => {
 
 export const currentMovesSelector = (state: RootState): number => state.trackerReducer.moves;
 export const currentScoreSelector = (state: RootState): number => state.trackerReducer.score;
-export const currentStartTimeSelector = (state: RootState): number => state.trackerReducer.start;
-export const currentEndTimeSelector = (state: RootState): number => state.trackerReducer.end;

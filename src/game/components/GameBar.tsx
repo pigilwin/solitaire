@@ -6,12 +6,7 @@ import { MovesCount } from './bar/MovesCount';
 import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
 import { ScoreCount } from "./bar/ScoreCount";
-import { Timer } from "./bar/Timer";
-interface GameBarProps {
-    start: number;
-    end: number;
-}
-export const GameBar = ({start, end}: GameBarProps): JSX.Element => {
+export const GameBar = (): JSX.Element => {
     
     let undoButton: JSX.Element | null = null;
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
@@ -21,7 +16,6 @@ export const GameBar = ({start, end}: GameBarProps): JSX.Element => {
 
     const movesCount = useSelector(currentMovesSelector);
     const scoreCount = useSelector(currentScoreSelector);
-    const timer = 0;
 
 
     return (
@@ -30,7 +24,6 @@ export const GameBar = ({start, end}: GameBarProps): JSX.Element => {
                 <GameLogo/>
                 {undoButton}
                 <MovesCount count={movesCount}/>
-                <Timer timer={timer}/>
                 <ScoreCount count={scoreCount}/>
                 <GameButtons/>
             </div>
