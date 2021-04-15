@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { replaceGameAction } from "../../../store/game/gameSlice";
-import { latestHistoryItemSelector, removeLatestHistoryItemAction } from "../../../store/history/historySlice";
-import { addMoveAction } from "../../../store/tracker/trackerSlice";
+import { latestHistoryGameSelector, latestHistoryScoreSelector, removeLatestHistoryItemAction } from "../../../store/history/historySlice";
+import { addMoveAction, replaceScoreAction } from "../../../store/tracker/trackerSlice";
 import { Undo } from "./../Icons";
 import { IconGameButton } from './../Button';
 
 export const UndoGameButton = (): JSX.Element => {
     const dispatch = useDispatch();
-    const game = useSelector(latestHistoryItemSelector);
+    const latestGame = useSelector(latestHistoryGameSelector);
+    const latestScore = useSelector(latestHistoryScoreSelector);
     const undoHistoryClickHandler = () => {
         /**
          * Add the move action to the page
@@ -22,7 +23,12 @@ export const UndoGameButton = (): JSX.Element => {
         /**
          * Replace the action by the game
          */
-        dispatch(replaceGameAction(game));
+        dispatch(replaceGameAction(latestGame));
+
+        /**
+         * Replace the latest score
+         */
+        dispatch(replaceScoreAction(latestScore));
     };
     
     return (
