@@ -5,7 +5,7 @@ import { Face } from "../card/Face";
 import { Back } from "../card/Back";
 import { canCardBeDroppedOnToColumn } from "../../../store/game/builder/cardDropper";
 import { useDispatch } from "react-redux";
-import { makeCardLocationAware } from "../../../store/game/columnHelper";
+import { makeCardLocationAware } from "../../../store/game/locationHelper";
 import { moveCardToColumnAsync } from "../../../store/game/thunk";
 
 

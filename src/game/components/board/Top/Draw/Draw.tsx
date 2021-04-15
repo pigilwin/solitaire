@@ -1,4 +1,4 @@
-import { makeCardLocationAware } from "../../../../../store/game/columnHelper";
+import { makeCardLocationAware } from "../../../../../store/game/locationHelper";
 import { SolitaireCard, SolitaireDraw } from "../../../../../store/game/types/game";
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
