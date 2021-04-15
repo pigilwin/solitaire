@@ -47,11 +47,6 @@ export interface SolitaireColumn {
 export interface Game {
     game: Solitaire;
 }
-
-export interface Games {
-    games: Game[];
-}
-
 export interface MoveCardPayload {
     drop: LocationAwareSolitaireCard;
     drag: LocationAwareSolitaireCard;

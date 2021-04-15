@@ -11,7 +11,7 @@ import {
     moveCardToFinalColumnAction,
     initialiseGameAction
 } from "./gameSlice";
-import { addHistoryItemAction, clearHistoryAction } from "../history/historySlice";
+import { addGameToHistoryAction, clearHistoryAction } from "../history/historySlice";
 import { addMoveAction, clearTrackerAction, decrementScoreAction, incrementScoreAction } from "../tracker/trackerSlice";
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { isOnColumns, isOnDraw, isOnFinal } from "./locationHelper";
@@ -47,7 +47,7 @@ export const refreshRemaningFromDrawAsync = (
      * Add the current game to the history
      */
     const game = deepCopy<Game>(fetchGame(getState));
-    dispatch(addHistoryItemAction(game));
+    dispatch(addGameToHistoryAction(game));
 
     /**
      * Add a move to the tracker
@@ -74,7 +74,7 @@ export const drawCardFromDeckAsync = (
      * Add the current game to the history
      */
     const game = deepCopy<Game>(fetchGame(getState));
-    dispatch(addHistoryItemAction(game));
+    dispatch(addGameToHistoryAction(game));
 
     /**
      * Add a move to the tracker
@@ -97,7 +97,7 @@ export const moveCardToColumnAsync = (
      * Add the current game to the history
      */
     const game = deepCopy<Game>(fetchGame(getState));
-    dispatch(addHistoryItemAction(game));
+    dispatch(addGameToHistoryAction(game));
 
     /**
      * Add a move to the tracker
@@ -148,7 +148,7 @@ export const moveCardToEmptyColumnAsync = (
      * Add the current game to the history
      */
     const game = deepCopy<Game>(fetchGame(getState));
-    dispatch(addHistoryItemAction(game));
+    dispatch(addGameToHistoryAction(game));
 
     /**
      * Add a move to the tracker
@@ -180,7 +180,7 @@ export const moveCardToFinalColumnAsync = (
      * Add the current game to the history
      */
     const game = deepCopy<Game>(fetchGame(getState));
-    dispatch(addHistoryItemAction(game));
+    dispatch(addGameToHistoryAction(game));
 
     /**
      * Add a move to the tracker
