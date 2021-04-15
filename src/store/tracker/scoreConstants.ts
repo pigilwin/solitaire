@@ -1,0 +1,1 @@
+export const LOSS_FOR_DRAW_RESET: number = 100;

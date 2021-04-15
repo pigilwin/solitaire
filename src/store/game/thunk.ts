@@ -12,7 +12,8 @@ import {
     initialiseGameAction
 } from "./gameSlice";
 import { addHistoryItemAction, clearHistoryAction } from "../history/historySlice";
-import { addMoveAction, clearTrackerAction } from "../tracker/trackerSlice";
+import { addMoveAction, clearTrackerAction, decrementScoreAction, incrementScoreAction } from "../tracker/trackerSlice";
+import { LOSS_FOR_DRAW_RESET } from "../tracker/scoreConstants";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
@@ -51,6 +52,11 @@ export const refreshRemaningFromDrawAsync = (
      * Add a move to the tracker
      */
     dispatch(addMoveAction());
+
+    /**
+     * Decrement the score
+     */
+    dispatch(decrementScoreAction(LOSS_FOR_DRAW_RESET));
 
     /**
      * Refresh the remaining draw cards within the deck
@@ -109,6 +115,7 @@ export const moveCardToEmptyColumnAsync = (
     dispatch: AppDispatch,
     getState: RootStateHook
 ) => {
+    console.log(payload);
     /**
      * Add the current game to the history
      */
@@ -142,6 +149,11 @@ export const moveCardToFinalColumnAsync = (
      * Add a move to the tracker
      */
      dispatch(addMoveAction());
+
+    /**
+     * Increment the score
+    */
+    dispatch(incrementScoreAction(20));
 
     /**
      * Move the card up to the final column

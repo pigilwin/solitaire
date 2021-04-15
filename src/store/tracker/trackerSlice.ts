@@ -19,6 +19,11 @@ const historySlice = createSlice({
             newState.score += action.payload;
             return newState;
         },
+        decrementScoreAction(state: TrackerState, action: PayloadAction<number>) {
+            const newState = deepCopy<TrackerState>(state);
+            newState.score -= action.payload;
+            return newState;
+        },
         startAction(state: TrackerState) {
             const newState = deepCopy<TrackerState>(state);
             newState.start = Date.now();
@@ -43,6 +48,7 @@ const historySlice = createSlice({
 export const reducer = historySlice.reducer;
 export const {
     incrementScoreAction,
+    decrementScoreAction,
     startAction,
     endAction,
     addMoveAction,
