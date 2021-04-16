@@ -1,0 +1,1 @@
+export const countToRevealTestingRoute: number = 7;
