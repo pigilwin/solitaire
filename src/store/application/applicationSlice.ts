@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
+import { localStorageKey } from "./constants";
 import { ApplicationState } from "./type";
 
 export const initialState: ApplicationState =  {
@@ -14,6 +15,15 @@ const applicationSlice = createSlice({
         allowedToSeeTestingRouteAction(state: ApplicationState, action: PayloadAction<boolean>) {
             const newState = deepCopy<ApplicationState>(state);
             newState.allowedToSeeTestingRoute = action.payload;
+
+            /**
+             * Load the local storage item
+             */
+            localStorage.removeItem(localStorageKey);
+            if (action.payload) {
+                localStorage.setItem(localStorageKey, 'YES');
+            }
+
             return newState;
         }
     }
