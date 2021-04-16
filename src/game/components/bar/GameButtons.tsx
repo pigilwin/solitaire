@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { areWeAllowedToSeeTestingRouteSelector } from "../../../store/application/applicationSlice";
 import { initialiseGameAsync } from "../../../store/game/thunk";
 import { GameButton } from '../Button';
 
@@ -6,13 +7,20 @@ export const GameButtons = (): JSX.Element => {
 
     const dispatch = useDispatch();
 
-
     const newGameClickHandler = () => {
         dispatch(initialiseGameAsync());
     };
 
     const leaderboardClickHandler = () => {};
     const settingsClickHandler = () => {};
+    const testingClickHandler = () => {};
+
+    let testing: JSX.Element | null = null;
+    if(useSelector(areWeAllowedToSeeTestingRouteSelector)) {
+        testing = (<div className="px-1">
+            <GameButton buttonText="Testing Routes" onClick={testingClickHandler}/>
+        </div>);
+    }
 
     return (
         <div className="flex flex-row">
@@ -25,6 +33,7 @@ export const GameButtons = (): JSX.Element => {
             <div className="px-1">
                 <GameButton buttonText="Settings" onClick={settingsClickHandler}/>
             </div>
+            {testing}
         </div>
     );
 }

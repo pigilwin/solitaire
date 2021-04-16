@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
 import { ApplicationState } from "./type";
 
@@ -22,3 +23,5 @@ export const reducer = applicationSlice.reducer;
 export const {
     allowedToSeeTestingRouteAction
 } = applicationSlice.actions;
+
+export const areWeAllowedToSeeTestingRouteSelector = (state: RootState): boolean => state.applicationReducer.allowedToSeeTestingRoute;
