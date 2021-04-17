@@ -12,7 +12,7 @@ import {
     initialiseGameAction
 } from "./gameSlice";
 import { addGameToHistoryAction, clearHistoryAction, addScoreToHistoryAction } from "../history/historySlice";
-import { addMoveAction, clearTrackerAction, decrementScoreAction, fetchTracker, incrementScoreAction, initialiseTrackerAction } from "../tracker/trackerSlice";
+import { addMoveAction, decrementScoreAction, fetchTracker, incrementScoreAction, clearTrackerAction } from "../tracker/trackerSlice";
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { isOnColumns, isOnDraw, isOnFinal } from "./locationHelper";
 import { TrackerState } from "../tracker/types";
@@ -40,7 +40,7 @@ export const initialiseGameAsync = (
     /**
      * Initialise the current tracker
      */
-    dispatch(initialiseTrackerAction());
+    dispatch(clearTrackerAction());
 }
 
 export const refreshRemaningFromDrawAsync = (

@@ -29,7 +29,8 @@ export const initialState: Game =  {
             remaining: [],
             current: []
         }
-    }
+    },
+    generatedByTesting: false
 };
 
 const gameSlice = createSlice({

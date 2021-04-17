@@ -12,11 +12,8 @@ const historySlice = createSlice({
     name: 'tracker',
     initialState,
     reducers: {
-        initialiseTrackerAction(state: TrackerState) {
-            return {
-                score: 0,
-                moves: 0
-            };
+        clearTrackerAction() {
+            return initialState;
         },
         incrementScoreAction(state: TrackerState, action: PayloadAction<number>) {
             const newState = deepCopy<TrackerState>(state);
@@ -33,12 +30,14 @@ const historySlice = createSlice({
             newState.moves += 1;
             return newState;
         },
-        clearTrackerAction(state: TrackerState) {
-            return initialState;
-        },
         replaceScoreAction(state: TrackerState, action: PayloadAction<number>) {
             const newState = deepCopy<TrackerState>(state);
             newState.score = action.payload;
+            return newState;
+        },
+        replaceMovesAction(state: TrackerState, action: PayloadAction<number>) {
+            const newState = deepCopy<TrackerState>(state);
+            newState.moves = action.payload;
             return newState;
         }
     }
@@ -46,12 +45,12 @@ const historySlice = createSlice({
 
 export const reducer = historySlice.reducer;
 export const {
-    initialiseTrackerAction,
     incrementScoreAction,
     decrementScoreAction,
     addMoveAction,
     clearTrackerAction,
-    replaceScoreAction
+    replaceScoreAction,
+    replaceMovesAction
 } = historySlice.actions;
 
 export const fetchTracker = (state: RootStateHook): TrackerState => {

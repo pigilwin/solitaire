@@ -7,8 +7,8 @@ import {
     SUIT_TYPE_SPADE 
 } from "./types/suit";
 
-const standardSuitOrder: string[] = [SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE];
-const standardCardOrder: string[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+export const standardSuitOrder: string[] = [SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE];
+export const standardCardOrder: string[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
 /**
  * Generate the solitaire game
@@ -73,7 +73,7 @@ const generateColumn = (deck: SolitaireCard[], amount: number): SolitaireCard[] 
  * Generate the deck in standard order
  * @returns {SolitaireCard[]}
  */
-const generateDeck = (): SolitaireCard[] => {
+export const generateDeck = (): SolitaireCard[] => {
 
     const deck: SolitaireCard[] = [];
 
