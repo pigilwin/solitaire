@@ -13,11 +13,8 @@ const historySlice = createSlice({
     name: 'history',
     initialState,
     reducers: {
-        clearHistoryAction(state: HistoryState) {
-            const newState = deepCopy<HistoryState>(state);
-            newState.games = [];
-            newState.scores = [];
-            return newState;
+        clearHistoryAction() {
+            return initialState;
         },
         addGameToHistoryAction(state: HistoryState, action: PayloadAction<Game>) {
             const newState = deepCopy<HistoryState>(state);

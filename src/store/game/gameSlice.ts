@@ -68,6 +68,9 @@ const gameSlice = createSlice({
         },
         replaceGameAction(_, action: PayloadAction<Game>) {
             return action.payload;
+        },
+        clearGameAction() {
+            return initialState;
         }
     }
 });
@@ -80,7 +83,8 @@ export const {
     moveCardToColumnAction,
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction,
-    replaceGameAction
+    replaceGameAction,
+    clearGameAction
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {
