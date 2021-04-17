@@ -10,7 +10,7 @@ export const Draw = ({draw}: DrawProps): JSX.Element => {
     return (
         <div className="w-1/2 overflow-hidden flex flex-row justify-center">
             <div className="px-2">
-                <RemainingDraw remaining={draw.remaining}/>
+                {getRemainingCard(draw.remaining, draw.current)}
             </div>
             <div className="px-2">
                 {getDrawCard(draw.current)}
@@ -18,6 +18,15 @@ export const Draw = ({draw}: DrawProps): JSX.Element => {
         </div>
     );
 };
+
+const getRemainingCard = (remaining: SolitaireCard[], draw: SolitaireCard[]): JSX.Element => {
+
+    if (draw.length === 0) {
+        return (<div className="playing-card-container"></div>);
+    }
+
+    return <RemainingDraw remaining={remaining}/>;
+}
 
 const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
 
