@@ -19,7 +19,7 @@ export const Game = (): JSX.Element => {
      * If the game is complete
      */
     if (isGameComplete(solitaire)) {
-        return <GameComplete/>;
+        return <GameComplete solitaire={solitaire}/>;
     }
 
     return (
