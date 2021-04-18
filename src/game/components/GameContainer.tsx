@@ -1,8 +1,17 @@
 import { PropsWithChildren } from "react";
 
-export const GameContainer = ({children}: PropsWithChildren<{}>): JSX.Element => {
+interface GameContainerProps {
+    usingFlex?: boolean;
+}
+export const GameContainer = ({children, usingFlex}: PropsWithChildren<GameContainerProps>): JSX.Element => {
+    
+    const classes = ["min-h-screen", "bg-green-300", "pt-2"];
+    if (usingFlex) {
+        classes.push('flex');
+    }
+
     return (
-        <div className="min-h-screen bg-green-300">
+        <div className={classes.join(" ")}>
             {children}
         </div>
     );
