@@ -21,7 +21,7 @@ export const Draw = ({draw}: DrawProps): JSX.Element => {
 
 const getRemainingCard = (remaining: SolitaireCard[], draw: SolitaireCard[]): JSX.Element => {
 
-    if (draw.length === 0) {
+    if (draw.length === 0 && remaining.length === 0) {
         return (<div className="playing-card-container"></div>);
     }
 
