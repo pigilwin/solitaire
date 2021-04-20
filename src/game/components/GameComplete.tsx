@@ -1,5 +1,3 @@
-import anime from "animejs";
-import { useAnimeSelector } from "../../hooks/useAnime";
 import { generateDeck } from "../../store/game/initialiseGame";
 import { Solitaire } from "../../store/game/types/game";
 import { Face } from "./card/Face";
@@ -10,12 +8,6 @@ interface GameCompleteProps {
 }
 export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
     
-    useAnimeSelector('.each-card', {
-        'opacity': 1,
-        delay: anime.stagger(100)
-    }, solitaire.id);
-
-
     const items: JSX.Element[] = generateDeck().map((card, index) => {
         return (
             <div key={index} className="each-card opacity-0">
