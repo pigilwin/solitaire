@@ -23,18 +23,16 @@ export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
         {name: 'seven', cards: solitaire.columns.seven}
     ];
 
-    const [trail] = useTrail(Object.keys(solitaire.columns).length, () => {
-        return {
-            config: {
-                ...config.default
-            },
-            from: {
-                opacity: 0
-            },
-            to: {
-                opacity: 1
-            }
-        };
+    const [trail] = useTrail(Object.keys(solitaire.columns).length,{
+        config: {
+            ...config.default
+        },
+        from: {
+            opacity: 0
+        },
+        to: {
+            opacity: 1
+        }
     }, [solitaire.id]);
     
     return (
