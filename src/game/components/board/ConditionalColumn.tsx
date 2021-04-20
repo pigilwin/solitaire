@@ -14,9 +14,5 @@ export const ConditionalColumn = ({cards, columnName}: ConditionalColumnProps): 
         content = <EmptyCardSpace column={columnName}/>;
     }
 
-    return (
-        <div className="animated-column opacity-0">
-            {content}
-        </div>
-    );
+    return content;
 };
