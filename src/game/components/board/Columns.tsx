@@ -1,27 +1,52 @@
-import anime from "animejs";
-import { useAnimeSelector } from "../../../hooks/useAnime";
-import { Solitaire } from "../../../store/game/types/game";
+import { useTrail } from "@react-spring/core";
+import { a, config } from "@react-spring/web";
+import { Solitaire, SolitaireCard } from "../../../store/game/types/game";
 import { ConditionalColumn } from "./ConditionalColumn";
+
+interface ConditionalColumnProps {
+    name: string;
+    cards: SolitaireCard[];
+}
+
 interface ColumnsProps {
     solitaire: Solitaire;
 }
 export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
 
-    useAnimeSelector('#columns .animated-column', {
-        'opacity': 1,
-        delay: anime.stagger(100)
-    }, solitaire.id);
+    const map: ConditionalColumnProps[] = [
+        {name: 'one', cards: solitaire.columns.one},
+        {name: 'two', cards: solitaire.columns.two},
+        {name: 'three', cards: solitaire.columns.three},
+        {name: 'four', cards: solitaire.columns.four},
+        {name: 'five', cards: solitaire.columns.five},
+        {name: 'six', cards: solitaire.columns.six},
+        {name: 'seven', cards: solitaire.columns.seven}
+    ];
+
+    const [trail] = useTrail(Object.keys(solitaire.columns).length, () => {
+        return {
+            config: {
+                ...config.default
+            },
+            from: {
+                opacity: 0
+            },
+            to: {
+                opacity: 1
+            }
+        };
+    }, [solitaire.id]);
     
     return (
         <div id="columns" className="mt-10">
             <div className="flex flex-row space-x-5 justify-around">
-                <ConditionalColumn columnName='one' cards={solitaire.columns.one}/>
-                <ConditionalColumn columnName='two' cards={solitaire.columns.two}/>
-                <ConditionalColumn columnName='three' cards={solitaire.columns.three}/>
-                <ConditionalColumn columnName='four' cards={solitaire.columns.four}/>
-                <ConditionalColumn columnName='five' cards={solitaire.columns.five}/>
-                <ConditionalColumn columnName='six' cards={solitaire.columns.six}/>
-                <ConditionalColumn columnName='seven' cards={solitaire.columns.seven}/>
+                {trail.map((style, index) => {
+                    return (
+                        <a.div key={index} style={style}>
+                            <ConditionalColumn columnName={map[index].name} cards={map[index].cards}/>
+                        </a.div>
+                    );
+                })}
             </div>
         </div>
     );
