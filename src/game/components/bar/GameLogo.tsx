@@ -9,13 +9,24 @@ export const GameLogo = (): JSX.Element => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
+
+        if (count === countToRevealTestingRoute - 1) {
+
+        }
+
         if (count === countToRevealTestingRoute) {
             dispatch(allowedToSeeTestingRouteAction(true));
-            setCount(0);
         }
+
     }, [dispatch, count]);
 
     const onClickHandler = () => {
+        /**
+         * If the count has been revealed then don't allow the clicks to happen again
+         */
+        if (count === countToRevealTestingRoute) {
+            return;
+        }
         setCount(count + 1);
     };
 
