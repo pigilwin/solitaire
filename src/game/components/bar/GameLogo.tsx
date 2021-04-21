@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { allowedToSeeTestingRouteAction } from "../../../store/application/applicationSlice";
 import { countToRevealTestingRoute } from "../../../store/application/constants";
 
@@ -10,10 +11,18 @@ export const GameLogo = (): JSX.Element => {
 
     useEffect(() => {
 
+        /**
+         * Show a helpful toast showing the user 
+         * is one click away from testing routes
+         */
         if (count === countToRevealTestingRoute - 1) {
-
+            toast.info('One more click to go!');
         }
 
+        /**
+         * Once the click has reached the required amount,
+         * enable the testing routes
+         */
         if (count === countToRevealTestingRoute) {
             dispatch(allowedToSeeTestingRouteAction(true));
         }

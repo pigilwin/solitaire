@@ -5,12 +5,15 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { Game } from './game/index';
 import { Testing } from './game/testing';
 import { GameBar } from "./game/components/GameBar";
 import { allowedToSeeTestingRouteAction } from './store/application/applicationSlice';
 import { localStorageKey } from './store/application/constants';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = (): JSX.Element => {
   
@@ -38,6 +41,7 @@ export const App = (): JSX.Element => {
           </Route>
         </Switch>
       </BrowserRouter>
+      <ToastContainer/>
     </main>
   );
 }
