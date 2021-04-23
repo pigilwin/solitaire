@@ -8,6 +8,7 @@ import { clearGameAction } from "../../store/game/gameSlice";
 import { clearHistoryAction } from "../../store/history/historySlice";
 import { clearTrackerAction } from "../../store/tracker/trackerSlice";
 import { Input } from "./Input";
+import { GameBar } from "./GameBar";
 
 interface GameCompleteProps {
     solitaire: Solitaire;
@@ -36,6 +37,7 @@ export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
 
     return (
         <GameContainer>
+            <GameBar solitaire={solitaire}/>
             <a.div style={styles} className="flex justify-center items-center flex-col p-10">
                 <h1 className="text-center text-6xl">Game Completed</h1>
                 <h1 className="text-center text-6xl">Well Done</h1>

@@ -5,7 +5,7 @@ interface GameContainerProps {
 }
 export const GameContainer = ({children, usingFlex}: PropsWithChildren<GameContainerProps>): JSX.Element => {
     
-    const classes = ["min-h-screen", "bg-green-300", "pt-2"];
+    const classes = ["min-h-screen", "bg-green-300"];
     if (usingFlex) {
         classes.push('flex');
     }

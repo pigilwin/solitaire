@@ -6,13 +6,18 @@ import { currentGameSelector } from "../store/game/gameSlice";
 import { GameContainer } from "./components/GameContainer";
 import { GameComplete } from "./components/GameComplete";
 import { isGameComplete } from "../store/game/isGameComplete";
+import { GameBar } from "./components/GameBar";
 
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
 
     if (solitaire.id.length === 0) {
-        return <GameContainer/>;
+        return (
+            <GameContainer>
+                <GameBar solitaire={solitaire}/>
+            </GameContainer>
+        );
     }
 
     /**
@@ -24,6 +29,7 @@ export const Game = (): JSX.Element => {
 
     return (
         <GameContainer>
+            <GameBar solitaire={solitaire}/>
             <DndProvider backend={HTML5Backend}>
                 <Board solitaire={solitaire}/>
             </DndProvider>
