@@ -1,11 +1,11 @@
-import { Board } from "./board";
-import { useSelector } from "react-redux";
-import { currentGameSelector } from "../store/game/gameSlice";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Solitaire, SolitaireCard } from "../store/game/types/game";
+import { useSelector } from "react-redux";
+import { Board } from "./board";
+import { currentGameSelector } from "../store/game/gameSlice";
 import { GameContainer } from "./components/GameContainer";
 import { GameComplete } from "./components/GameComplete";
+import { isGameComplete } from "../store/game/isGameComplete";
 
 export const Game = (): JSX.Element => {
 
@@ -29,26 +29,4 @@ export const Game = (): JSX.Element => {
             </DndProvider>
         </GameContainer>
     );
-};
-
-const isGameComplete = (solitaire: Solitaire): boolean => {
-
-    const cardIndexFromLocation = (cards: SolitaireCard[]): string => {
-
-        if (cards.length === 0) {
-            return '';
-        }
-        return cards[cards.length - 1].cardNumber;
-    }
-
-    const lastCardInFinalLocation = [
-        cardIndexFromLocation(solitaire.final.club),
-        cardIndexFromLocation(solitaire.final.spade),
-        cardIndexFromLocation(solitaire.final.diamond),
-        cardIndexFromLocation(solitaire.final.heart)
-    ];
-
-    const lastCardInFinalLocationAsKing = lastCardInFinalLocation.filter(type => type === 'K');
-
-    return lastCardInFinalLocation.length === lastCardInFinalLocationAsKing.length;
 };
