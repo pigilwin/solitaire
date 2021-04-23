@@ -25,11 +25,11 @@ export const IconGameButton = ({buttonText, disabled, onClick, icon}: IconGameBu
     return (
         <button
             disabled={disabled}
-            className="bg-blue-600 text-gray-200 p-2 rounded hover:bg-blue-500 hover:text-gray-100 inline-flex items-center justify-around"
+            className="bg-blue-600 text-gray-200 p-2 rounded hover:bg-blue-500 hover:text-gray-100 inline-flex items-center"
             onClick={onClick}
         >
             {icon}
-            <span>{buttonText}</span>
+            <span className="ml-1">{buttonText}</span>
         </button>
     );
 }
