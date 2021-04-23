@@ -5,7 +5,10 @@ import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } f
 
 export const generateOneMoveAwayGame = (): Game => {
 
-    const game = generateDeck();
+    const game = generateDeck().map((card) => {
+        card.showing = true;
+        return card;
+    });
     const diamonds = game.filter(card => card.suit === SUIT_TYPE_DIAMOND);
     const hearts = game.filter(card => card.suit === SUIT_TYPE_HEART);
     const spades = game.filter(card => card.suit === SUIT_TYPE_SPADE);
