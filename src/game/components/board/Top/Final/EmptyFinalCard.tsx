@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "../../../../../store/game/builder/cardDropper";
 import { moveCardToFinalColumnAsync } from "../../../../../store/game/thunk";
 import { LocationAwareSolitaireCard } from "../../../../../store/game/types/game";
-import { resolveLargeSuitIcon } from "../../../card/SuitBuilder";
+import { resolveLargeSuitIcon } from "../../card/SuitBuilder";
 
 interface EmptyFinalCardProps {
     type: string;

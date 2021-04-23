@@ -5,7 +5,7 @@ import { makeCardLocationAware } from "../../../store/game/locationHelper";
 import { moveCardToFinalColumnAsync } from "../../../store/game/thunk";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";
-import { Face } from "../card/Face";
+import { Face } from "./card/Face";
 
 interface FinalFaceCardProps {
     cards: SolitaireCard[];
