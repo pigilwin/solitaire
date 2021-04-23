@@ -1,4 +1,4 @@
-import { Card } from './Card';
+import { CardGroup } from './CardGroup';
 import { SolitaireCard } from "../../../store/game/types/game";
 import { makeCardLocationAware } from "../../../store/game/locationHelper";
 interface ColumnProps {
@@ -18,11 +18,11 @@ export const Column = ({cards, column}: ColumnProps): JSX.Element | null => {
 
         const columnAwareCard = makeCardLocationAware(cards[i], 'columns', column);
 
-        child = (<Card 
+        child = (<CardGroup 
             card={columnAwareCard} 
             index={i}
             maxDepth={depth}
-            >{child}</Card>
+            >{child}</CardGroup>
         );
     }
 
