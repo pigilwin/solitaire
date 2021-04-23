@@ -16,16 +16,22 @@ export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
 
     const [styles] = useSpring({
         config: {
-            ...config.default
+            ...config.stiff
         },
         from: {
             opacity: 0,
-            transform: 'scale(0) rotate(0deg)'
+            transform: 'scale(1.0)'
         },
-        to: {
-            opacity: 1,
-            transform: `scale(1.0) rotate(360deg)`
-        }
+        to: async (next, cancel) => {
+            await next({
+                opacity: 1,
+                transform: `scale(1.1)`
+            });
+            await next({
+                opacity: 1,
+                transform: `scale(1.0)`
+            });
+        },
     }, [solitaire.id]);
 
     return (
