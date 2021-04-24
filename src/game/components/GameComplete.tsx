@@ -10,6 +10,7 @@ import { clearTrackerAction } from "../../store/tracker/trackerSlice";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
 import { toast } from "react-toastify";
+import { completeGameAsync } from "../../store/leaderboard/thunk";
 
 interface GameCompleteProps {
     solitaire: Solitaire;
@@ -74,7 +75,8 @@ const SaveContainer = (): JSX.Element => {
             });
             return;
         }
-        //dispatch();
+        
+        dispatch(completeGameAsync(name));
     };
 
     /**
