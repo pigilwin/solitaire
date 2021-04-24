@@ -13,11 +13,15 @@ import { allowedToSeeTestingRouteAction } from './store/application/applicationS
 import { localStorageKey } from './store/application/constants';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { loadLeaderboardAsync } from './store/leaderboard/thunk';
 
 export const App = (): JSX.Element => {
   
   const dispatch = useDispatch();
   useEffect(() => {
+    
+    dispatch(loadLeaderboardAsync());
+
     /**
      * If we are using dispatch routes then allow them in
      */
