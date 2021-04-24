@@ -5,7 +5,7 @@ import { makeCardLocationAware } from "../../../store/game/locationHelper";
 import { moveCardToFinalColumnAsync } from "../../../store/game/thunk";
 import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
 import { SUIT } from "../../../store/game/types/suit";
-import { Face } from "./card/Face";
+import { Card } from "./Card";
 
 interface FinalFaceCardProps {
     cards: SolitaireCard[];
@@ -45,13 +45,11 @@ export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element =>
     if (isDragging) {
         classes.push('invisible');
     }
-
-    const cardNumber = card.cardNumber;
     
     return (
         <div className={classes.join(' ')} ref={drag}>
             <div className="droppable" ref={drop}>
-                <Face index={cardNumber} type={type}/>
+                <Card card={card}/>
             </div>
         </div>
     );
