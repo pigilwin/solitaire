@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { a, config, useSpring } from "@react-spring/web";
 import { Solitaire } from "../../store/game/types/game";
 import { GameButton } from "./Button";
@@ -9,6 +9,7 @@ import { clearHistoryAction } from "../../store/history/historySlice";
 import { clearTrackerAction } from "../../store/tracker/trackerSlice";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
+import { toast } from "react-toastify";
 
 interface GameCompleteProps {
     solitaire: Solitaire;
@@ -50,17 +51,30 @@ export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
 const SaveContainer = (): JSX.Element => {
     const dispatch = useDispatch();
     const [showSavePage, setShowSavePage] = useState(false);
+    const [name, setName] = useState('');
 
     const saveClickHandler = () => {
         setShowSavePage(true);
     };
+    
     const doneClickHandler = () => {
         dispatch(clearGameAction());
         dispatch(clearHistoryAction());
         dispatch(clearTrackerAction());
     };
-    const saveNameClickHandler = () => {
 
+    const onNameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value);
+    };
+
+    const saveNameClickHandler = () => {
+        if (name.length === 0) {
+            toast('A name must be supplied', {
+                type: 'error'
+            });
+            return;
+        }
+        //dispatch();
     };
 
     /**
@@ -71,7 +85,7 @@ const SaveContainer = (): JSX.Element => {
         return (
             <div className='mt-5 p-10 w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md'>
                 <p>Please enter your name to save the score</p>
-                <Input placeholder="Name"/>
+                <Input onChangeHandler={onNameChangeHandler} placeholder="Name"/>
                 <GameButton onClick={saveNameClickHandler} buttonText="Save"/>
             </div>
         );
