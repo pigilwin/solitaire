@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
 import { CompletedGame, LeaderboardState } from "./types";
 
@@ -28,3 +29,5 @@ export const {
     loadGamesAction,
     addGameAction
 } = leaderboardSlice.actions;
+
+export const leaderboardSelector = (state: RootState): CompletedGame[] => state.leaderboardReducer.games;
