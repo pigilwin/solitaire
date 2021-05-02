@@ -8,7 +8,9 @@ import {
 import { ToastContainer } from 'react-toastify';
 
 import { Game } from './game/index';
+import { Leaderboard } from './game/leaderboard';
 import { Testing } from './game/testing';
+
 import { allowedToSeeTestingRouteAction } from './store/application/applicationSlice';
 import { localStorageKey } from './store/application/constants';
 
@@ -37,6 +39,9 @@ export const App = (): JSX.Element => {
         <Switch>
           <Route path="/testing">
             <Testing/>
+          </Route>
+          <Route path="/leaderboard">
+            <Leaderboard/>
           </Route>
           <Route path="/">
             <Game/>

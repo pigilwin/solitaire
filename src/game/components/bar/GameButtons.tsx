@@ -14,7 +14,9 @@ export const GameButtons = (): JSX.Element => {
         dispatch(initialiseGameAsync());
     };
 
-    const leaderboardClickHandler = () => {};
+    const leaderboardClickHandler = () => {
+        history.push('/leaderboard');
+    };
     const settingsClickHandler = () => {};
     const testingClickHandler = () => {
         history.replace('/testing');
