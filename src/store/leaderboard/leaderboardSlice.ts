@@ -30,4 +30,16 @@ export const {
     addGameAction
 } = leaderboardSlice.actions;
 
-export const leaderboardSelector = (state: RootState): CompletedGame[] => state.leaderboardReducer.games;
+export const leaderboardSelector = (state: RootState): CompletedGame[] => {
+    const games = [...state.leaderboardReducer.games];
+    return games.sort((a, b) => {
+        
+        if (a.score > b.score) {
+            return -1;
+        }
+        if (a.score < b.score) {
+            return 1;
+        }
+        return 0;
+    });
+};
