@@ -5,7 +5,7 @@ import { clearHistoryAction } from "../history/historySlice";
 import { RootStateHook } from "../rootReducer";
 import { clearTrackerAction } from "../tracker/trackerSlice";
 import { LeaderboardDatabase } from "./leaderboardDatabase";
-import { addGameAction, loadGamesAction } from "./leaderboardSlice";
+import { addGameAction, loadGamesAction, removeGameAction } from "./leaderboardSlice";
 import { CompletedGame } from "./types";
 
 export const loadLeaderboardAsync = (): AppThunk => async (
@@ -39,3 +39,14 @@ export const completeGameAsync = (
     dispatch(clearHistoryAction());
     dispatch(clearTrackerAction());
 }
+
+export const deleteCompletedGameAsync = (
+    id: string
+): AppThunk => async (
+    dispatch: AppDispatch,
+    getState: RootStateHook
+) => {
+    await LeaderboardDatabase.delete(id);
+
+    dispatch(removeGameAction(id));
+};

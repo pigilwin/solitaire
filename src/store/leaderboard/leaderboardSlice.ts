@@ -20,6 +20,13 @@ const leaderboardSlice = createSlice({
             const newState = deepCopy<LeaderboardState>(state);
             newState.games.push(action.payload);
             return newState;
+        },
+        removeGameAction(state: LeaderboardState, action: PayloadAction<string>) {
+            const newState = deepCopy<LeaderboardState>(state);
+            newState.games = newState.games.filter((completedGame) => {
+                return completedGame.id !== action.payload;
+            });
+            return newState;
         }
     }
 });
@@ -27,7 +34,8 @@ const leaderboardSlice = createSlice({
 export const reducer = leaderboardSlice.reducer;
 export const {
     loadGamesAction,
-    addGameAction
+    addGameAction,
+    removeGameAction
 } = leaderboardSlice.actions;
 
 export const leaderboardSelector = (state: RootState): CompletedGame[] => {
