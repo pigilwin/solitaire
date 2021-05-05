@@ -1,4 +1,4 @@
-import { SolitaireCard } from 'store/game/types/game';
+import { SolitaireCard } from 'types/game';
 import { Back } from './card/Back';
 import { Face } from './card/Face';
 

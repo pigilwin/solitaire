@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ApplicationState } from "types/application";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
 import { localStorageKey } from "./constants";
-import { ApplicationState } from "./type";
 
 export const initialState: ApplicationState =  {
     allowedToSeeTestingRoute: false

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Game } from "../game/types/game";
+import { Game } from "../../types/game";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
 import { HistoryState } from "./type";

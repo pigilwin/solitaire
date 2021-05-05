@@ -1,4 +1,4 @@
-import { Solitaire, SolitaireCard } from "./types/game";
+import { Solitaire, SolitaireCard } from "../../types/game";
 
 export const isGameComplete = (solitaire: Solitaire): boolean => {
     const cardIndexFromLocation = (cards: SolitaireCard[]): string => {

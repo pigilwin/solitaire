@@ -12,7 +12,7 @@ import { clearGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
 import { completeGameAsync } from "store/leaderboard/thunk";
-import { Solitaire } from "store/game/types/game";
+import { Solitaire } from "types/game";
 
 interface GameCompleteProps {
     solitaire: Solitaire;

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { canCardBeDroppedToEmptyColumn } from "store/game/builder/cardDropper";
 import { moveCardToEmptyColumnAsync } from "store/game/thunk";
-import { LocationAwareSolitaireCard } from "store/game/types/game";
+import { LocationAwareSolitaireCard } from "types/game";
 
 interface EmptyCardSpaceProps {
     column: string;

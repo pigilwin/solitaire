@@ -1,4 +1,4 @@
-import { SolitaireCard, LocationAwareSolitaireCard } from "./types/game";
+import { SolitaireCard, LocationAwareSolitaireCard } from "../../types/game";
 
 export const makeCardLocationAware = (card: SolitaireCard, namespace: string, area: string): LocationAwareSolitaireCard => {
     return {

@@ -1,6 +1,6 @@
 import { TopBar } from "./components/board/Top/TopBar";
 import { Columns } from "./components/board/Columns";
-import { Solitaire } from "store/game/types/game";
+import { Solitaire } from "types/game";
 
 interface BoardProps {
     solitaire: Solitaire;

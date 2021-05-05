@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import { generateDeck } from "../initialiseGame";
-import { Game, SolitaireCard } from "../types/game";
-import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../types/suit";
+import { Game, SolitaireCard } from "../../../types/game";
+import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../types/suit";
 
 export const generateOneMoveAwayGame = (): Game => {
 

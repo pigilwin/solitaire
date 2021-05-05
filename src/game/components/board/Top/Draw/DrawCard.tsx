@@ -1,5 +1,5 @@
 import { useDrag } from "react-dnd";
-import { LocationAwareSolitaireCard } from "store/game/types/game";
+import { LocationAwareSolitaireCard } from "types/game";
 import { Face } from "../../card/Face";
 
 interface DrawCardProps {

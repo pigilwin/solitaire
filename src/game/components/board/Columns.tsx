@@ -1,6 +1,6 @@
 import { useTrail } from "@react-spring/core";
 import { a, config } from "@react-spring/web";
-import { Solitaire, SolitaireCard } from "store/game/types/game";
+import { Solitaire, SolitaireCard } from "types/game";
 import { ConditionalColumn } from "./ConditionalColumn";
 
 interface ConditionalColumnProps {
