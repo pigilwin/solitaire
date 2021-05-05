@@ -1,4 +1,4 @@
-import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../../store/game/types/suit";
+import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "store/game/types/suit";
 import { Club, Diamond, Spade, Heart } from "./Suit";
 
 const smallWidth: number = 20;

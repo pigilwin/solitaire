@@ -2,10 +2,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
 import { Board } from "./board";
-import { currentGameSelector } from "../store/game/gameSlice";
+
+import { currentGameSelector } from "store/game/gameSlice";
+import { isGameComplete } from "store/game/isGameComplete";
+
 import { GameContainer } from "./components/GameContainer";
 import { GameComplete } from "./components/GameComplete";
-import { isGameComplete } from "../store/game/isGameComplete";
 import { GameBar } from "./components/GameBar";
 
 export const Game = (): JSX.Element => {

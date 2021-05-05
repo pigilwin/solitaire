@@ -1,8 +1,9 @@
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { canCardBeDroppedToEmptyColumn } from "../../../store/game/builder/cardDropper";
-import { moveCardToEmptyColumnAsync } from "../../../store/game/thunk";
-import { LocationAwareSolitaireCard } from "../../../store/game/types/game";
+
+import { canCardBeDroppedToEmptyColumn } from "store/game/builder/cardDropper";
+import { moveCardToEmptyColumnAsync } from "store/game/thunk";
+import { LocationAwareSolitaireCard } from "store/game/types/game";
 
 interface EmptyCardSpaceProps {
     column: string;

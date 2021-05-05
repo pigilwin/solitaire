@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { replaceGameAction } from "../../../store/game/gameSlice";
-import { latestHistoryGameSelector, latestHistoryScoreSelector, removeLatestHistoryItemAction } from "../../../store/history/historySlice";
-import { addMoveAction, replaceScoreAction } from "../../../store/tracker/trackerSlice";
+import { replaceGameAction } from "store/game/gameSlice";
+import { latestHistoryGameSelector, latestHistoryScoreSelector, removeLatestHistoryItemAction } from "store/history/historySlice";
+import { addMoveAction, replaceScoreAction } from "store/tracker/trackerSlice";
 import { IconGameButton } from './../Button';
 
 export const UndoGameButton = (): JSX.Element => {

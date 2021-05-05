@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { refreshRemaningFromDrawAsync } from "../../../../../store/game/thunk";
+import { refreshRemaningFromDrawAsync } from "store/game/thunk";
 
 export const RefreshCard = (): JSX.Element => {
 

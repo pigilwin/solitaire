@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { allowedToSeeTestingRouteAction } from "../../../store/application/applicationSlice";
-import { countToRevealTestingRoute } from "../../../store/application/constants";
+import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
+import { countToRevealTestingRoute } from "store/application/constants";
 
 export const GameLogo = (): JSX.Element => {
 

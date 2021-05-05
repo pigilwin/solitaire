@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
-import { doWeHaveAnyHistorySelector } from "../../store/history/historySlice";
-import { currentMovesSelector, currentScoreSelector } from "../../store/tracker/trackerSlice";
+
+import { doWeHaveAnyHistorySelector } from "store/history/historySlice";
+import { currentMovesSelector, currentScoreSelector } from "store/tracker/trackerSlice";
+import { isGameComplete } from "store/game/isGameComplete";
+import { Solitaire } from "store/game/types/game";
+
 import { GameLogo } from './bar/GameLogo';
 import { MovesCount } from './bar/MovesCount';
 import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
 import { ScoreCount } from "./bar/ScoreCount";
-import { isGameComplete } from "../../store/game/isGameComplete";
-import { Solitaire } from "../../store/game/types/game";
 
 interface GameBarProps {
     solitaire: Solitaire;

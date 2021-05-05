@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { deleteCompletedGameAsync } from "../../../store/leaderboard/thunk";
-import { CompletedGame } from "../../../store/leaderboard/types";
+import { deleteCompletedGameAsync } from "store/leaderboard/thunk";
+import { CompletedGame } from "store/leaderboard/types";
 
 interface TileProps {
     record: CompletedGame;

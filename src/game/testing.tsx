@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { allowedToSeeTestingRouteAction } from "../store/application/applicationSlice";
-import { generateOneMoveAwayGame } from "../store/game/builder/testingBuilder";
-import { AMOUNT_OF_CARDS_IN_DECK } from "../store/game/constants";
-import { clearGameAction, replaceGameAction } from "../store/game/gameSlice";
-import { clearHistoryAction } from "../store/history/historySlice";
-import { ADD_TO_FINAL } from "../store/tracker/scoreConstants";
-import { clearTrackerAction, replaceMovesAction, replaceScoreAction } from "../store/tracker/trackerSlice";
+import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
+import { generateOneMoveAwayGame } from "store/game/builder/testingBuilder";
+import { AMOUNT_OF_CARDS_IN_DECK } from "store/game/constants";
+import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
+import { clearHistoryAction } from "store/history/historySlice";
+import { ADD_TO_FINAL } from "store/tracker/scoreConstants";
+import { clearTrackerAction, replaceMovesAction, replaceScoreAction } from "store/tracker/trackerSlice";
 import { GameButton } from "./components/Button"
 
 export const Testing = (): JSX.Element => {

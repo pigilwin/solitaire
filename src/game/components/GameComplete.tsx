@@ -1,16 +1,18 @@
 import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { a, config, useSpring } from "@react-spring/web";
-import { Solitaire } from "../../store/game/types/game";
+import { toast } from "react-toastify";
+
 import { GameButton } from "./Button";
 import { GameContainer } from "./GameContainer";
-import { useDispatch } from "react-redux";
-import { clearGameAction } from "../../store/game/gameSlice";
-import { clearHistoryAction } from "../../store/history/historySlice";
-import { clearTrackerAction } from "../../store/tracker/trackerSlice";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
-import { toast } from "react-toastify";
-import { completeGameAsync } from "../../store/leaderboard/thunk";
+
+import { clearGameAction } from "store/game/gameSlice";
+import { clearHistoryAction } from "store/history/historySlice";
+import { clearTrackerAction } from "store/tracker/trackerSlice";
+import { completeGameAsync } from "store/leaderboard/thunk";
+import { Solitaire } from "store/game/types/game";
 
 interface GameCompleteProps {
     solitaire: Solitaire;

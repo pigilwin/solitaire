@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { leaderboardSelector } from "../store/leaderboard/leaderboardSlice";
+import { leaderboardSelector } from "store/leaderboard/leaderboardSlice";
 import { GameButton } from "./components/Button";
 import { Tile } from "./components/leaderboard/Tile";
 

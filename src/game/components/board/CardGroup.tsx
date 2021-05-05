@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { canCardBeDroppedOnToColumn } from "../../../store/game/builder/cardDropper";
-import { moveCardToColumnAsync } from "../../../store/game/thunk";
-import { LocationAwareSolitaireCard } from "../../../store/game/types/game";
+import { canCardBeDroppedOnToColumn } from "store/game/builder/cardDropper";
+import { moveCardToColumnAsync } from "store/game/thunk";
+import { LocationAwareSolitaireCard } from "store/game/types/game";
 import { Card } from "./Card";
 
 interface CardGroupProps {
