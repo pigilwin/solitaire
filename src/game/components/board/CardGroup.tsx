@@ -1,10 +1,8 @@
 import { PropsWithChildren } from "react";
-import { useDrag, useDrop } from "react-dnd";
-import { useDispatch } from "react-redux";
-import { canCardBeDroppedOnToColumn } from "store/game/builder/cardDropper";
-import { moveCardToColumnAsync } from "store/game/thunk";
+import { useDrag } from "react-dnd";
 import { LocationAwareSolitaireCard } from "types/game";
 import { Card } from "./Card";
+import { DroppableCardAwareContext } from "./DroppableCardAwareContext";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
@@ -13,9 +11,6 @@ interface CardGroupProps {
 }
 
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
-    
-    const dispatch = useDispatch();
-
     const [{isDragging}, drag] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
         type: 'card',
         item: card,
@@ -23,19 +18,6 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
             return {
                 isDragging: m.isDragging() 
             };
-        }
-    }), [card]);
-
-    const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
-        accept: 'card',
-        drop: (dragCard) => {
-            dispatch(moveCardToColumnAsync({
-                drag: dragCard,
-                drop: card
-            }));
-        },
-        canDrop: (dragCard) => {
-            return canCardBeDroppedOnToColumn(dragCard, card);
         }
     }), [card]);
 
@@ -96,10 +78,10 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
     return (
         <div className={className}>
             <div className='draggable' ref={drag}>
-                <div className="droppable" ref={drop}>
+                <DroppableCardAwareContext card={card}>
                     <Card card={card}/>
                     {children}
-                </div>
+                </DroppableCardAwareContext>
             </div>
         </div>
     );
