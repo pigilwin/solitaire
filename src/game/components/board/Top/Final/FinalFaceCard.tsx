@@ -1,11 +1,11 @@
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { canCardBeDroppedOnToFinal } from "../../../store/game/builder/cardDropper";
-import { makeCardLocationAware } from "../../../store/game/locationHelper";
-import { moveCardToFinalColumnAsync } from "../../../store/game/thunk";
-import { LocationAwareSolitaireCard, SolitaireCard } from "../../../store/game/types/game";
-import { SUIT } from "../../../store/game/types/suit";
-import { Card } from "./Card";
+import { Card } from '../../Card';
+import { canCardBeDroppedOnToFinal } from "../../../../../store/game/builder/cardDropper";
+import { makeCardLocationAware } from "../../../../../store/game/locationHelper";
+import { moveCardToFinalColumnAsync } from "../../../../../store/game/thunk";
+import { LocationAwareSolitaireCard, SolitaireCard } from "../../../../../store/game/types/game";
+import { SUIT } from "../../../../../store/game/types/suit";
 
 interface FinalFaceCardProps {
     cards: SolitaireCard[];

@@ -1,6 +1,6 @@
 import { SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "../../../../../store/game/types/suit";
 import { EmptyFinalCard } from "./EmptyFinalCard";
-import { FinalFaceCard } from "../../FinalFaceCard";
+import { FinalFaceCard } from "./FinalFaceCard";
 import { SolitaireCard, SolitaireFinal } from "../../../../../store/game/types/game";
 
 interface FinalProps {
