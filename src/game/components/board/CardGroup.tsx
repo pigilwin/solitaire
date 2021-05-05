@@ -79,9 +79,11 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
     if (index !== maxDepth - 1){
 
         return (
-            <div className={className} ref={drag}>
-                <Card card={card}/>
-                {children}
+            <div className={className}>
+                <div className='draggable' ref={drag}>
+                    <Card card={card}/>
+                    {children}
+                </div>
             </div>
         );
     }
@@ -92,10 +94,12 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
      * dropped onto
      */
     return (
-        <div className={className} ref={drag}>
-            <div className="droppable" ref={drop}>
-                <Card card={card}/>
-                {children}
+        <div className={className}>
+            <div className='draggable' ref={drag}>
+                <div className="droppable" ref={drop}>
+                    <Card card={card}/>
+                    {children}
+                </div>
             </div>
         </div>
     );
