@@ -1,6 +1,6 @@
 import { SolitaireCard } from "../../../store/game/types/game";
 import { Column } from "./Column";
-import { EmptyCardSpace } from "./EmptyCardSpace";
+import { DroppableEmptyCardSpace } from "./DroppableEmptyCardSpace";
 
 interface ConditionalColumnProps {
     cards: SolitaireCard[];
@@ -11,7 +11,7 @@ export const ConditionalColumn = ({cards, columnName}: ConditionalColumnProps): 
     let content: JSX.Element = <Column cards={cards} column={columnName}/>;
 
     if (cards.length === 0) {
-        content = <EmptyCardSpace column={columnName}/>;
+        content = <DroppableEmptyCardSpace column={columnName}/>;
     }
 
     return content;

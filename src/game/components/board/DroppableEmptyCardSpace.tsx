@@ -7,7 +7,7 @@ import { LocationAwareSolitaireCard } from "../../../store/game/types/game";
 interface EmptyCardSpaceProps {
     column: string;
 }
-export const EmptyCardSpace = ({column}: EmptyCardSpaceProps): JSX.Element => {
+export const DroppableEmptyCardSpace = ({column}: EmptyCardSpaceProps): JSX.Element => {
     
     const dispatch = useDispatch();
 
