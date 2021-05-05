@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
-import { useDrag } from "react-dnd";
 import { LocationAwareSolitaireCard } from "types/game";
 import { Card } from "./Card";
+import { DraggableCardAwareContext } from "./DraggableCardAwareContext";
 import { DroppableCardAwareContext } from "./DroppableCardAwareContext";
 
 interface CardGroupProps {
@@ -11,26 +11,8 @@ interface CardGroupProps {
 }
 
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
-    const [{isDragging}, drag] = useDrag<LocationAwareSolitaireCard, void, {isDragging: boolean}>(() => ({
-        type: 'card',
-        item: card,
-        collect: (m) => {
-            return {
-                isDragging: m.isDragging() 
-            };
-        }
-    }), [card]);
-
+    
     const classes = [];
-
-    /**
-     * If the card is being being dragged 
-     * then hide the card stack
-     */
-    if (isDragging) {
-        classes.push('invisible');
-    }
-
     /**
      * If its not the initial card then 
      * assign the container class to apply
@@ -62,10 +44,10 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
 
         return (
             <div className={className}>
-                <div className='draggable' ref={drag}>
+                <DraggableCardAwareContext card={card}>
                     <Card card={card}/>
                     {children}
-                </div>
+                </DraggableCardAwareContext>
             </div>
         );
     }
@@ -77,12 +59,12 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
      */
     return (
         <div className={className}>
-            <div className='draggable' ref={drag}>
+            <DraggableCardAwareContext card={card}>
                 <DroppableCardAwareContext card={card}>
                     <Card card={card}/>
                     {children}
                 </DroppableCardAwareContext>
-            </div>
+            </DraggableCardAwareContext>
         </div>
     );
 };
