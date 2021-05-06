@@ -7,4 +7,16 @@ module.exports = {
             ],
         },
     },
+    webpack: {
+        module: {
+            rules: [
+                {
+                    test: /\.worker\.ts$/,
+                    use: { 
+                        loader: "worker-loader" 
+                    },
+                },
+            ],
+        },
+    }
 }
