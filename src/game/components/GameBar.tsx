@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 import { doWeHaveAnyHistorySelector } from "store/history/historySlice";
 import { currentMovesSelector, currentScoreSelector } from "store/tracker/trackerSlice";
-import { isGameComplete } from "store/game/isGameComplete";
 import { Solitaire } from "types/game";
 
 import { GameLogo } from './bar/GameLogo';
@@ -19,7 +18,7 @@ export const GameBar = ({solitaire}: GameBarProps): JSX.Element => {
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
 
     let undoButton: JSX.Element | null = null;
-    if (weHaveHistory && !isGameComplete(solitaire)) {
+    if (weHaveHistory && false) {
         undoButton = <UndoGameButton/>;
     }
 

@@ -1,6 +1,7 @@
-import { Solitaire, SolitaireCard } from "../../types/game";
+import { expose } from 'comlink';
+import { Solitaire, SolitaireCard } from "types/game";
 
-export const isGameComplete = (solitaire: Solitaire): boolean => {
+const isGameComplete = (solitaire: Solitaire): boolean => {
     const cardIndexFromLocation = (cards: SolitaireCard[]): string => {
 
         if (cards.length === 0) {
@@ -20,3 +21,10 @@ export const isGameComplete = (solitaire: Solitaire): boolean => {
 
     return lastCardInFinalLocation.length === lastCardInFinalLocationAsKing.length;
 };
+
+const exports = {
+    isGameComplete
+};
+export type WorkerType = typeof exports;
+
+expose(exports);
