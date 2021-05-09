@@ -1,6 +1,6 @@
 # Solitaire
 
-![image of game screen][./images/screenshot.png "What the game looks like"]
+![image of game screen](./images/screenshot.png "What the game looks like")
 
 A simple solitaire implementation in [React](https://reactjs.org/) for UI, [Redux](https://redux-toolkit.js.org/) for the state management, [Tailwindcss](https://tailwindcss.com/) for easy UI development and [Typescript](https://www.typescriptlang.org/) for sanity when working with the web.
 
@@ -26,4 +26,4 @@ The project can be developed locally by running one command
 npm start
 ```
 
-This command will spin up your local dev server and allow you to access the application on the url provided
+This command will spin up your local dev server and allow you to access the application on the url provided.
