@@ -1,3 +1,5 @@
+const WorkerPlugin = require('worker-plugin');
+
 module.exports = {
     style: {
         postcss: {
@@ -8,15 +10,8 @@ module.exports = {
         },
     },
     webpack: {
-        module: {
-            rules: [
-                {
-                    test: /\.worker\.ts$/,
-                    use: { 
-                        loader: "worker-loader" 
-                    },
-                },
-            ],
-        },
+        plugins: [
+            new WorkerPlugin()
+        ]
     }
 }
