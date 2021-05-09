@@ -7,6 +7,18 @@ import { store } from './store';
 
 import './assets/index.css';
 
+import { wrap } from 'comlink';
+
+function takeALongTimeToDoSomething() {
+  const worker = new Worker('./worker', { name: 'my-first-worker', type: 'module' });
+  const workerApi = wrap<import('./worker').MyFirstWorker>(worker);
+  workerApi.callMe().then((v) => {
+    console.log(v);
+  });    
+}
+
+takeALongTimeToDoSomething();
+
 render(
   <StrictMode>
     <Provider store={store}>
