@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
@@ -11,19 +11,17 @@ import { GameContainer } from "./components/GameContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { isTheGameComplete } from "invokeWorkers";
+import { useEffectAsync } from "hooks/useEffectAsync";
 
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
     const [gameComplete, setGameComplete] = useState(false);
 
-    useEffect(() => {
-        const call = async () => {
-            const state = await isTheGameComplete(solitaire);
-            setGameComplete(state);
-        };
-        call();
-    });
+    useEffectAsync(async () => {
+        const state = await isTheGameComplete(solitaire);
+        setGameComplete(state);
+    }, []);
 
     if (solitaire.id.length === 0) {
         return (
