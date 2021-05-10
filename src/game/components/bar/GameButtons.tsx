@@ -25,7 +25,7 @@ export const GameButtons = (): JSX.Element => {
                 <GameButton buttonText="New Game" onClick={newGameClickHandler}/>
             </div>
             <RouteButton buttonText="Leaderboard" route="/leaderboard"/>
-            <RouteButton buttonText="Settings" route="/route"/>
+            <RouteButton buttonText="Settings" route="/settings"/>
             {testing}
         </div>
     );
