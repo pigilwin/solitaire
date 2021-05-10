@@ -7,7 +7,7 @@ import { Board } from "./board";
 
 import { currentGameSelector } from "store/game/gameSlice";
 
-import { GameContainer } from "./layout/FullPageContainer";
+import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { isTheGameComplete } from "invokeWorkers";
@@ -25,9 +25,9 @@ export const Game = (): JSX.Element => {
 
     if (solitaire.id.length === 0) {
         return (
-            <GameContainer>
+            <FullPageContainer>
                 <GameBar solitaire={solitaire}/>
-            </GameContainer>
+            </FullPageContainer>
         );
     }
 
@@ -39,11 +39,11 @@ export const Game = (): JSX.Element => {
     }
 
     return (
-        <GameContainer>
+        <FullPageContainer>
             <GameBar solitaire={solitaire}/>
             <DndProvider backend={HTML5Backend}>
                 <Board solitaire={solitaire}/>
             </DndProvider>
-        </GameContainer>
+        </FullPageContainer>
     );
 };
