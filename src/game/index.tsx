@@ -7,7 +7,7 @@ import { Board } from "./board";
 
 import { currentGameSelector } from "store/game/gameSlice";
 
-import { GameContainer } from "./layout/GameContainer";
+import { GameContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { isTheGameComplete } from "invokeWorkers";

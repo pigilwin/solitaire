@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
 
-interface GameContainerProps {
+interface FullPageContainerProps {
     usingFlex?: boolean;
 }
-export const GameContainer = ({children, usingFlex}: PropsWithChildren<GameContainerProps>): JSX.Element => {
+export const FullPageContainer = ({children, usingFlex}: PropsWithChildren<FullPageContainerProps>): JSX.Element => {
     
     const classes = ["min-h-screen", "bg-green-300"];
     if (usingFlex) {
