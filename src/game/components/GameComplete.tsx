@@ -4,7 +4,7 @@ import { a, config, useSpring } from "@react-spring/web";
 import { toast } from "react-toastify";
 
 import { GameButton } from "./Button";
-import { GameContainer } from "./GameContainer";
+import { GameContainer } from "../layout/GameContainer";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
 
