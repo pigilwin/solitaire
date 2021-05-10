@@ -10,7 +10,7 @@ export const Settings = (): JSX.Element => {
     };
 
     return (
-        <FullPageContainer>
+        <FullPageContainer usingFlex={true}>
             <div className="m-auto w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md">
                 <h1 className="text-center text-4xl mt-4">Settings</h1>
                 <div className="my-2 text-center">
