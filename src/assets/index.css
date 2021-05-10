@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.playing-card {
+.playing-card-dimensions {
     @apply w-32;
     @apply h-44;
+}
+
+.playing-card {
+    @apply playing-card-dimensions;
     @apply border-2;
     @apply border-black;
     @apply rounded-md;
@@ -13,12 +17,16 @@
 }
 
 .playing-card-container {
-    @apply w-32;
-    @apply h-44;
+    @apply playing-card-dimensions;
     @apply border-2;
     @apply border-black;
     @apply rounded-md;
     @apply shadow-md;
+}
+
+.playing-card-back-inner {
+    @apply w-28;
+    @apply h-40;
 }
 
 .card-container {
