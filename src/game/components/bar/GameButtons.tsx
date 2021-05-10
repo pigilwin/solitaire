@@ -14,19 +14,9 @@ export const GameButtons = (): JSX.Element => {
         dispatch(initialiseGameAsync());
     };
 
-    const leaderboardClickHandler = () => {
-        history.push('/leaderboard');
-    };
-    const settingsClickHandler = () => {};
-    const testingClickHandler = () => {
-        history.replace('/testing');
-    };
-
     let testing: JSX.Element | null = null;
     if(useSelector(areWeAllowedToSeeTestingRouteSelector)) {
-        testing = (<div className="px-1">
-            <GameButton buttonText="Testing Routes" onClick={testingClickHandler}/>
-        </div>);
+        testing = <RouteButton buttonText="Testing" route="/testing"/>;
     }
 
     return (
@@ -34,13 +24,27 @@ export const GameButtons = (): JSX.Element => {
             <div className="px-1">
                 <GameButton buttonText="New Game" onClick={newGameClickHandler}/>
             </div>
-            <div className="px-1">
-                <GameButton buttonText="Leaderboard" onClick={leaderboardClickHandler}/>
-            </div>
-            <div className="px-1">
-                <GameButton buttonText="Settings" onClick={settingsClickHandler}/>
-            </div>
+            <RouteButton buttonText="Leaderboard" route="/leaderboard"/>
+            <RouteButton buttonText="Settings" route="/route"/>
             {testing}
+        </div>
+    );
+}
+
+interface RouteButtonProps {
+    route: string;
+    buttonText: string;
+}
+const RouteButton = ({route, buttonText}: RouteButtonProps): JSX.Element => {
+    
+    const history = useHistory();
+    const clickHandler = () => {
+        history.push(route);
+    };
+
+    return (
+        <div className="px-1">
+            <GameButton buttonText={buttonText} onClick={clickHandler}/>
         </div>
     );
 }
