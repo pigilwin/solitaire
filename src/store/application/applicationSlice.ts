@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ApplicationState } from "types/application";
+import { BACK_GREEN } from "types/back";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "../util";
 import { localStorageKey } from "./constants";
 
 export const initialState: ApplicationState =  {
-    allowedToSeeTestingRoute: false
+    allowedToSeeTestingRoute: false,
+    cardBack: BACK_GREEN
 };
 
 const applicationSlice = createSlice({
@@ -25,13 +27,20 @@ const applicationSlice = createSlice({
             }
 
             return newState;
+        },
+        applyNewCardBackAction(state: ApplicationState, action: PayloadAction<string>) {
+            const newState = deepCopy<ApplicationState>(state);
+            newState.cardBack = action.payload;
+            return newState;
         }
     }
 });
 
 export const reducer = applicationSlice.reducer;
 export const {
-    allowedToSeeTestingRouteAction
+    allowedToSeeTestingRouteAction,
+    applyNewCardBackAction
 } = applicationSlice.actions;
 
 export const areWeAllowedToSeeTestingRouteSelector = (state: RootState): boolean => state.applicationReducer.allowedToSeeTestingRoute;
+export const currentlySelectedCardBackSelector = (state: RootState): string => state.applicationReducer.cardBack;

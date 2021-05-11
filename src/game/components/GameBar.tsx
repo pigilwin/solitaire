@@ -9,6 +9,9 @@ import { MovesCount } from './bar/MovesCount';
 import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
 import { ScoreCount } from "./bar/ScoreCount";
+import { isTheGameComplete } from "invokeWorkers";
+import { useState } from "react";
+import { useEffectAsync } from "hooks/useEffectAsync";
 
 interface GameBarProps {
     solitaire: Solitaire;
@@ -17,8 +20,15 @@ export const GameBar = ({solitaire}: GameBarProps): JSX.Element => {
     
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
 
+    const [gameComplete, setGameComplete] = useState(false);
+
+    useEffectAsync(async () => {
+        const state = await isTheGameComplete(solitaire);
+        setGameComplete(state);
+    }, []);
+
     let undoButton: JSX.Element | null = null;
-    if (weHaveHistory && false) {
+    if (weHaveHistory && !gameComplete) {
         undoButton = <UndoGameButton/>;
     }
 

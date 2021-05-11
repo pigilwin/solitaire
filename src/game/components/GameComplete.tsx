@@ -4,7 +4,7 @@ import { a, config, useSpring } from "@react-spring/web";
 import { toast } from "react-toastify";
 
 import { GameButton } from "./Button";
-import { GameContainer } from "./GameContainer";
+import { FullPageContainer } from "../layout/FullPageContainer";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
 
@@ -40,14 +40,14 @@ export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
     }, [solitaire.id]);
 
     return (
-        <GameContainer>
+        <FullPageContainer>
             <GameBar solitaire={solitaire}/>
             <a.div style={styles} className="flex justify-center items-center flex-col p-10">
                 <h1 className="text-center text-6xl">Game Completed</h1>
                 <h1 className="text-center text-6xl">Well Done</h1>
                 <SaveContainer/>
             </a.div>
-        </GameContainer>
+        </FullPageContainer>
     );
 }
 
