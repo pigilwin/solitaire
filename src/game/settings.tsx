@@ -43,7 +43,7 @@ export const Settings = (): JSX.Element => {
                 <div className="my-2 text-center">
                     <GameButton buttonText="Go Home" onClick={onClickHandler}/>
                 </div>
-                <div className="mx-1">
+                <div className="m-1 p-1">
                     <Accordion title="Choose a new card back">
                         <div className="grid grid-cols-3 gap-4">
                             {Object.keys(cardBacks).map((id) => {
