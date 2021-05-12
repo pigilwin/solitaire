@@ -26,7 +26,7 @@ export const Game = (): JSX.Element => {
     if (solitaire.id.length === 0) {
         return (
             <FullPageContainer>
-                <GameBar solitaire={solitaire}/>
+                <GameBar/>
             </FullPageContainer>
         );
     }
@@ -35,14 +35,14 @@ export const Game = (): JSX.Element => {
      * If the game is complete
      */
     if (gameComplete) {
-        return <GameComplete solitaire={solitaire}/>;
+        return <GameComplete/>;
     }
 
     return (
         <FullPageContainer>
-            <GameBar solitaire={solitaire}/>
+            <GameBar/>
             <DndProvider backend={HTML5Backend}>
-                <Board solitaire={solitaire}/>
+                <Board/>
             </DndProvider>
         </FullPageContainer>
     );

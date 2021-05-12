@@ -1,23 +1,22 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { doWeHaveAnyHistorySelector } from "store/history/historySlice";
 import { currentMovesSelector, currentScoreSelector } from "store/tracker/trackerSlice";
-import { Solitaire } from "types/game";
+import { currentGameSelector } from "store/game/gameSlice";
 
 import { GameLogo } from './bar/GameLogo';
 import { MovesCount } from './bar/MovesCount';
 import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
 import { ScoreCount } from "./bar/ScoreCount";
+
 import { isTheGameComplete } from "invokeWorkers";
-import { useState } from "react";
 import { useEffectAsync } from "hooks/useEffectAsync";
 
-interface GameBarProps {
-    solitaire: Solitaire;
-}
-export const GameBar = ({solitaire}: GameBarProps): JSX.Element => {
+export const GameBar = (): JSX.Element => {
     
+    const solitaire = useSelector(currentGameSelector);
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
 
     const [gameComplete, setGameComplete] = useState(false);

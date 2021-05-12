@@ -1,12 +1,16 @@
+import { useSelector } from "react-redux";
+import { currentGameSelector } from "store/game/gameSlice";
 import { makeCardLocationAware } from "store/game/locationHelper";
-import { SolitaireCard, SolitaireDraw } from "types/game";
+import { SolitaireCard } from "types/game";
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
 
-interface DrawProps {
-    draw: SolitaireDraw;
-}
-export const Draw = ({draw}: DrawProps): JSX.Element => {
+
+export const Draw = (): JSX.Element => {
+    
+    const solitaire = useSelector(currentGameSelector);
+    const draw = solitaire.draw;
+    
     return (
         <div className="w-1/2 overflow-hidden flex flex-row justify-center">
             <div className="px-2">

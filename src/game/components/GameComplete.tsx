@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { a, config, useSpring } from "@react-spring/web";
 import { toast } from "react-toastify";
 
@@ -8,17 +8,14 @@ import { FullPageContainer } from "../layout/FullPageContainer";
 import { Input } from "./Input";
 import { GameBar } from "./GameBar";
 
-import { clearGameAction } from "store/game/gameSlice";
+import { clearGameAction, currentGameSelector } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
 import { completeGameAsync } from "store/leaderboard/thunk";
-import { Solitaire } from "types/game";
 
-interface GameCompleteProps {
-    solitaire: Solitaire;
-}
-export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
+export const GameComplete = (): JSX.Element => {
 
+    const solitaire = useSelector(currentGameSelector);
     const [styles] = useSpring({
         config: {
             ...config.stiff
@@ -41,7 +38,7 @@ export const GameComplete = ({solitaire}: GameCompleteProps): JSX.Element => {
 
     return (
         <FullPageContainer>
-            <GameBar solitaire={solitaire}/>
+            <GameBar/>
             <a.div style={styles} className="flex justify-center items-center flex-col p-10">
                 <h1 className="text-center text-6xl">Game Completed</h1>
                 <h1 className="text-center text-6xl">Well Done</h1>

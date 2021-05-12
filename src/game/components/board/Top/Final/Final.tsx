@@ -1,12 +1,18 @@
+import { useSelector } from "react-redux";
+
+import { SolitaireCard } from "types/game";
 import { SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "types/suit";
+
 import { EmptyFinalCard } from "./EmptyFinalCard";
 import { FinalFaceCard } from "./FinalFaceCard";
-import { SolitaireCard, SolitaireFinal } from "types/game";
 
-interface FinalProps {
-    final: SolitaireFinal;
-}
-export const Final = ({final}: FinalProps): JSX.Element => {
+import { currentGameSelector } from "store/game/gameSlice";
+
+export const Final = (): JSX.Element => {
+    
+    const solitaire = useSelector(currentGameSelector);
+    const final = solitaire.final;
+
     return ( 
         <div className="w-1/2 overflow-hidden flex flex-row justify-center">
             <div className="px-2">
@@ -31,6 +37,5 @@ const generateFinalContainer = (cards: SolitaireCard[], type: SUIT): JSX.Element
         return <EmptyFinalCard type={type}/>;
     }
 
-    return <FinalFaceCard type={type} cards={cards}/>
-
+    return <FinalFaceCard type={type} cards={cards}/>;
 }

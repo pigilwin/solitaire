@@ -1,6 +1,11 @@
 import { useTrail } from "@react-spring/core";
 import { a, config } from "@react-spring/web";
-import { Solitaire, SolitaireCard } from "types/game";
+import { useSelector } from "react-redux";
+
+import { currentGameSelector } from "store/game/gameSlice";
+
+import { SolitaireCard } from "types/game";
+
 import { ConditionalColumn } from "./ConditionalColumn";
 
 interface ConditionalColumnProps {
@@ -8,10 +13,9 @@ interface ConditionalColumnProps {
     cards: SolitaireCard[];
 }
 
-interface ColumnsProps {
-    solitaire: Solitaire;
-}
-export const Columns = ({solitaire}: ColumnsProps): JSX.Element => {
+export const Columns = (): JSX.Element => {
+
+    const solitaire = useSelector(currentGameSelector);
 
     const map: ConditionalColumnProps[] = [
         {name: 'one', cards: solitaire.columns.one},
