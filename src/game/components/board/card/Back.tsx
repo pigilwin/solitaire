@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { currentlySelectedCardBackSelector } from "store/application/applicationSlice";
 import { 
     BACK_BLUE, 
@@ -9,7 +9,7 @@ import {
 } from "types/back";
 
 export const Back = (): JSX.Element => {    
-    const color = useSelector(currentlySelectedCardBackSelector);
+    const color = useSelector(currentlySelectedCardBackSelector, shallowEqual);
 
     switch (color) {
         case BACK_GREEN:
