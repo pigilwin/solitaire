@@ -38,7 +38,7 @@ export const GameComplete = (): JSX.Element => {
 
     return (
         <FullPageContainer>
-            <GameBar/>
+            <GameBar isGameComplete={true}/>
             <a.div style={styles} className="flex justify-center items-center flex-col p-10">
                 <h1 className="text-center text-6xl">Game Completed</h1>
                 <h1 className="text-center text-6xl">Well Done</h1>

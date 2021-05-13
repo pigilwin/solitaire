@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
@@ -10,23 +9,17 @@ import { currentGameSelector } from "store/game/gameSlice";
 import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
-import { isTheGameComplete } from "invokeWorkers";
-import { useEffectAsync } from "hooks/useEffectAsync";
+import { useIsTheGameComplete } from "hooks/useIsTheGameComplete";
 
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
-    const [gameComplete, setGameComplete] = useState(false);
-
-    useEffectAsync(async () => {
-        const state = await isTheGameComplete(solitaire);
-        setGameComplete(state);
-    }, [solitaire]);
+    const [isGameComplete, isCalculating] = useIsTheGameComplete(solitaire);
 
     if (solitaire.id.length === 0) {
         return (
             <FullPageContainer>
-                <GameBar/>
+                <GameBar isGameComplete={isGameComplete}/>
             </FullPageContainer>
         );
     }
@@ -34,13 +27,13 @@ export const Game = (): JSX.Element => {
     /**
      * If the game is complete
      */
-    if (gameComplete) {
+    if (isGameComplete) {
         return <GameComplete/>;
     }
 
     return (
         <FullPageContainer>
-            <GameBar/>
+            <GameBar isGameComplete={isGameComplete}/>
             <DndProvider backend={HTML5Backend}>
                 <Board/>
             </DndProvider>
