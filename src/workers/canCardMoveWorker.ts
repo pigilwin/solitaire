@@ -1,9 +1,11 @@
 import { expose } from "comlink";
 import { canCardBeDroppedOnToColumn, canCardBeDroppedToEmptyColumn } from "store/game/builder/cardDropper";
+import { columnFromLocation } from "store/game/builder/util";
 import { makeCardLocationAware } from "store/game/locationHelper";
 import { LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
 
-const fetchTopLocationAwareCardFromList = (cards: SolitaireCard[], namespace: string, area: string): LocationAwareSolitaireCard => {
+const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: string, area: string): LocationAwareSolitaireCard => {
+    const cards = columnFromLocation(solitaire, namespace, area);
     const card = cards[cards.length - 1];
     return makeCardLocationAware(card, namespace, area);
 };
@@ -15,14 +17,13 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): bo
     }
 
     const potentialCardLocations = [
-        fetchTopLocationAwareCardFromList(solitaire.draw.current, 'draw', 'current'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.one, 'columns', 'one'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.two, 'columns', 'two'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.three, 'columns', 'three'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.four, 'columns', 'four'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.five, 'columns', 'five'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.six, 'columns', 'six'),
-        fetchTopLocationAwareCardFromList(solitaire.columns.seven, 'columns', 'seven')
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'one'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'two'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'three'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'four'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'five'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'six'),
+        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'seven')
     ];
 
     console.log('card being checked', card.cardNumber, card.suit);

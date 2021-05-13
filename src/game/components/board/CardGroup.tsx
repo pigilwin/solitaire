@@ -1,4 +1,7 @@
+import { useIsTheCardClickable } from "hooks/useIsTheCardClickable";
 import { PropsWithChildren } from "react";
+import { useSelector } from "react-redux";
+import { currentGameSelector } from "store/game/gameSlice";
 import { LocationAwareSolitaireCard } from "types/game";
 
 import { Card } from "./Card";
@@ -14,6 +17,9 @@ interface CardGroupProps {
 
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
     
+    const [isClickable] = useIsTheCardClickable(useSelector(currentGameSelector), card);
+    console.log(isClickable);
+
     const classes = [];
     /**
      * If its not the initial card then 
