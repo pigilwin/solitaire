@@ -2,11 +2,6 @@ import { SUIT } from "../../../types/suit";
 import { SolitaireCard  } from "../../../types/game";
 
 export const canCardBeDroppedOnToColumn = (target: SolitaireCard, drag: SolitaireCard): boolean => {    
-    
-    if (drag.cardNumber === 'K') {
-        return false;
-    }
-    
     /**
      * If the color of the current card
      * is the same then its not allowed 
