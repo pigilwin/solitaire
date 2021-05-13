@@ -14,12 +14,15 @@ import { useIsTheGameComplete } from "hooks/useIsTheGameComplete";
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
-    const [isGameComplete, isCalculating] = useIsTheGameComplete(solitaire);
+    const [isGameComplete] = useIsTheGameComplete(solitaire);
 
+    /**
+     * Show the empty game screen if no game exists
+     */
     if (solitaire.id.length === 0) {
         return (
             <FullPageContainer>
-                <GameBar isGameComplete={isGameComplete}/>
+                <GameBar isGameComplete={true}/>
             </FullPageContainer>
         );
     }

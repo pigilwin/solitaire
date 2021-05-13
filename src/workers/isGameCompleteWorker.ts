@@ -2,6 +2,7 @@ import { expose } from 'comlink';
 import { Solitaire, SolitaireCard } from "types/game";
 
 const isGameComplete = (solitaire: Solitaire): boolean => {
+    console.log('worker called');
     const cardIndexFromLocation = (cards: SolitaireCard[]): string => {
 
         if (cards.length === 0) {
