@@ -3,8 +3,8 @@ import { LocationAwareSolitaireCard } from "types/game";
 
 import { Card } from "./Card";
 
-import { DraggableCardAwareContext } from "./DraggableCardAwareContext";
-import { DroppableCardAwareContext } from "./DroppableCardAwareContext";
+import { DraggableCardAwareContext } from "./AwareContext/DraggableCardAwareContext";
+import { DroppableCardAwareContext } from "./AwareContext/DroppableCardAwareContext";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
