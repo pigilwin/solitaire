@@ -10,12 +10,7 @@ const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: stri
     return makeCardLocationAware(card, namespace, area);
 };
 
-const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): boolean => {
-
-    if (!card.showing) {
-        return false;
-    }
-
+const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): LocationAwareSolitaireCard[] => {
     const potentialCardLocations = [
         fetchTopLocationAwareCardFromList(solitaire, 'columns', 'one'),
         fetchTopLocationAwareCardFromList(solitaire, 'columns', 'two'),
@@ -36,7 +31,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): bo
         console.log(card.cardNumber, card.suit, card.location);
     });
 
-    return cards.length > 0;
+    return cards;
 };
 
 const exports = {
