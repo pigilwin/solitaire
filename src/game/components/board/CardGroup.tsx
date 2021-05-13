@@ -5,6 +5,7 @@ import { Card } from "./Card";
 
 import { DraggableCardAwareContext } from "./AwareContext/DraggableCardAwareContext";
 import { DroppableCardAwareContext } from "./AwareContext/DroppableCardAwareContext";
+import { DoubleClickCardAwareContext } from "./AwareContext/DoubleClickCardAwareContext";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
@@ -62,12 +63,14 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
      */
     const draggableDroppableCard = (
         <div className={className}>
-            <DraggableCardAwareContext card={card}>
-                <DroppableCardAwareContext card={card}>
-                    <Card card={card}/>
-                    {children}
-                </DroppableCardAwareContext>
-            </DraggableCardAwareContext>
+            <DoubleClickCardAwareContext card={card}>
+                <DraggableCardAwareContext card={card}>
+                    <DroppableCardAwareContext card={card}>
+                        <Card card={card}/>
+                        {children}
+                    </DroppableCardAwareContext>
+                </DraggableCardAwareContext>
+            </DoubleClickCardAwareContext>
         </div>
     );
     return draggableDroppableCard;
