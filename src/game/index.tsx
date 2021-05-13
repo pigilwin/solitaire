@@ -21,7 +21,7 @@ export const Game = (): JSX.Element => {
     useEffectAsync(async () => {
         const state = await isTheGameComplete(solitaire);
         setGameComplete(state);
-    }, []);
+    }, [solitaire]);
 
     if (solitaire.id.length === 0) {
         return (

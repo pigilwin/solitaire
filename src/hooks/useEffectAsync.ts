@@ -9,5 +9,5 @@ export const useEffectAsync = (callback: AsyncEffectCallback, deps: DependencyLi
         };
         call();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, ...deps);
+    }, deps);
 };
