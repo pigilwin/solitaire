@@ -1,16 +1,10 @@
-import { PropsWithChildren, useState } from "react";
-import { useSelector } from "react-redux";
-
-import { useEffectAsync } from "hooks/useEffectAsync";
-
-import { currentGameSelector } from "store/game/gameSlice";
+import { PropsWithChildren } from "react";
 import { LocationAwareSolitaireCard } from "types/game";
 
 import { Card } from "./Card";
 
 import { DraggableCardAwareContext } from "./DraggableCardAwareContext";
 import { DroppableCardAwareContext } from "./DroppableCardAwareContext";
-import { canCardMove } from "invokeWorkers";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
@@ -20,14 +14,6 @@ interface CardGroupProps {
 
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
     
-    const solitaire = useSelector(currentGameSelector);
-
-    const [clickable, setClickable] = useState(false);
-    useEffectAsync(async () => {
-        const state = await canCardMove(solitaire, card);
-        setClickable(state);
-    }, [card]);
-
     const classes = [];
     /**
      * If its not the initial card then 
@@ -66,15 +52,6 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
                 </DraggableCardAwareContext>
             </div>
         );
-
-        if (clickable) {
-            return (
-                <div className="clickable">
-                    {draggableCard}
-                </div>
-            );
-        }
-
         return draggableCard;
     }
 
@@ -93,14 +70,5 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
             </DraggableCardAwareContext>
         </div>
     );
-
-    if (clickable) {
-        return (
-            <div className="clickable">
-                {draggableDroppableCard}
-            </div>
-        );
-    }
-
     return draggableDroppableCard;
 };

@@ -1,0 +1,1 @@
+export type ReturnValueFromWorker<T> = [T, boolean];
