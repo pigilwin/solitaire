@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
+import { generateAllOneTheBoardGame } from "store/game/builder/testing/generateAllOnTheBoardGame";
 import { generateOneMoveAwayGame } from "store/game/builder/testing/generateOneMoveAwayGame";
 import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
@@ -23,7 +24,17 @@ export const Testing = (): JSX.Element => {
          */
         history.replace('/');
     };
-    const allOnTheBoardClickHandler = () => {};
+    const allOnTheBoardClickHandler = () => {
+        /**
+         * Generate a one move away game and set the game
+         */
+         dispatch(replaceGameAction(generateAllOneTheBoardGame()));
+
+         /**
+          * Navigate to the game page
+          */
+         history.replace('/');
+    };
     const hideTestingPageClickHandler = () => {
         /**
          * Hide the test route
