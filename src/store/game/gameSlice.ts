@@ -41,6 +41,8 @@ const gameSlice = createSlice({
         initialiseGameAction(state: Game) {
             const newState = state;
             newState.game = generateGame();
+            newState.generatedByTesting = false;
+            newState.potentialMoveLocations = [];
             return newState;
         },
         refreshRemaningFromDrawAction(state: Game) {
