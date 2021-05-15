@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
 import { generateAllOneTheBoardGame } from "store/game/builder/testing/generateAllOnTheBoardGame";
 import { generateOneMoveAwayGame } from "store/game/builder/testing/generateOneMoveAwayGame";
+import { generateOnTheBoardWithMultipleOptions } from "store/game/builder/testing/generateOnTheBoardWithMultipleOptions";
 import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
@@ -24,6 +25,7 @@ export const Testing = (): JSX.Element => {
          */
         history.replace('/');
     };
+
     const allOnTheBoardClickHandler = () => {
         /**
          * Generate a one move away game and set the game
@@ -35,6 +37,19 @@ export const Testing = (): JSX.Element => {
           */
          history.replace('/');
     };
+
+    const cardWithMultipleOptionsClickHandler = () => {
+        /**
+         * Generate a one move away game and set the game
+         */
+         dispatch(replaceGameAction(generateOnTheBoardWithMultipleOptions()));
+
+         /**
+          * Navigate to the game page
+          */
+         history.replace('/');
+    };
+
     const hideTestingPageClickHandler = () => {
         /**
          * Hide the test route
@@ -68,6 +83,7 @@ export const Testing = (): JSX.Element => {
                 <h1 className="text-center text-4xl">Testing Helpers</h1>
                 <GameButton buttonText="One move away from victory" onClick={oneMoveAwayClickHandler}/>
                 <GameButton buttonText="All on the board" onClick={allOnTheBoardClickHandler}/>
+                <GameButton buttonText="Card with multiple options" onClick={cardWithMultipleOptionsClickHandler}/>
                 <GameButton buttonText="Hide testing page" onClick={hideTestingPageClickHandler}/>
             </div>
         </div>
