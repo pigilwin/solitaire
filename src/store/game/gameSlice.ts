@@ -103,3 +103,4 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
 export const potentialMoveLocationsSelector = (state: RootState): LocationAwareSolitaireCard[] => state.gameReducer.potentialMoveLocations;
+export const isGameGeneratedByTestingSelector = (state: RootState): boolean => state.gameReducer.generatedByTesting;
