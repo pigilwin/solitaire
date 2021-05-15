@@ -34,11 +34,6 @@ const historySlice = createSlice({
             const newState = deepCopy<TrackerState>(state);
             newState.score = action.payload;
             return newState;
-        },
-        replaceMovesAction(state: TrackerState, action: PayloadAction<number>) {
-            const newState = deepCopy<TrackerState>(state);
-            newState.moves = action.payload;
-            return newState;
         }
     }
 });
@@ -49,8 +44,7 @@ export const {
     decrementScoreAction,
     addMoveAction,
     clearTrackerAction,
-    replaceScoreAction,
-    replaceMovesAction
+    replaceScoreAction
 } = historySlice.actions;
 
 export const fetchTracker = (state: RootStateHook): TrackerState => {

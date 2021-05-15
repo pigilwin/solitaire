@@ -2,11 +2,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
 import { generateOneMoveAwayGame } from "store/game/builder/testingBuilder";
-import { AMOUNT_OF_CARDS_IN_DECK } from "store/game/constants";
 import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
-import { ADD_TO_FINAL } from "store/tracker/scoreConstants";
-import { clearTrackerAction, replaceMovesAction, replaceScoreAction } from "store/tracker/trackerSlice";
+import { clearTrackerAction } from "store/tracker/trackerSlice";
 import { GameButton } from "./components/Button"
 
 export const Testing = (): JSX.Element => {
@@ -15,24 +13,10 @@ export const Testing = (): JSX.Element => {
     const history = useHistory();
 
     const oneMoveAwayClickHandler = () => {
-
-        const moves = AMOUNT_OF_CARDS_IN_DECK - 1;
-        const score = moves * ADD_TO_FINAL;
-
         /**
          * Generate a one move away game and set the game
          */
         dispatch(replaceGameAction(generateOneMoveAwayGame()));
-
-        /**
-         * Dispatch and set the score
-         */
-        dispatch(replaceScoreAction(score));
-
-        /**
-         * Dispatch and set the moves
-         */
-        dispatch(replaceMovesAction(moves));
 
         /**
          * Navigate to the game page
