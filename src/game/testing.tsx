@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
-import { generateOneMoveAwayGame } from "store/game/builder/testingBuilder";
+import { generateOneMoveAwayGame } from "store/game/builder/testing/generateOneMoveAwayGame";
 import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
