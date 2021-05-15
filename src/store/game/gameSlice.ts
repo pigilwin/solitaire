@@ -30,7 +30,8 @@ export const initialState: Game =  {
             current: []
         }
     },
-    generatedByTesting: false
+    generatedByTesting: false,
+    potentialMoveLocations: []
 };
 
 const gameSlice = createSlice({
