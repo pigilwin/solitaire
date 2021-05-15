@@ -5,7 +5,7 @@ import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } fr
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
-import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from '../../types/game';
+import { Game, LocationAwareSolitaireCard, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from '../../types/game';
 
 export const initialState: Game =  {
     game: {
@@ -73,6 +73,11 @@ const gameSlice = createSlice({
         },
         clearGameAction() {
             return initialState;
+        },
+        updatePossibleMovesAction(state: Game, action: PayloadAction<LocationAwareSolitaireCard[]>) {
+            const newState = deepCopy<Game>(state);
+            newState.potentialMoveLocations = action.payload;
+            return newState;
         }
     }
 });
@@ -86,7 +91,8 @@ export const {
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction,
     replaceGameAction,
-    clearGameAction
+    clearGameAction,
+    updatePossibleMovesAction
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {
@@ -94,3 +100,4 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
+export const potentialMoveLocationsSelector = (state: RootState): LocationAwareSolitaireCard[] => state.gameReducer.potentialMoveLocations;

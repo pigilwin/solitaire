@@ -1,7 +1,8 @@
 import { invokeIsCardClickable } from "invokers/invokeIsCardClickable";
 import { PropsWithChildren } from "react";
-import { useSelector } from "react-redux";
-import { currentGameSelector } from "store/game/gameSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { currentGameSelector, updatePossibleMovesAction } from "store/game/gameSlice";
+import { moveCardToColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
 
 interface DoubleClickCardAwareContextProps {
@@ -9,10 +10,21 @@ interface DoubleClickCardAwareContextProps {
 }
 export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<DoubleClickCardAwareContextProps>) => {
     
+    const dispatch = useDispatch();
     const solitare = useSelector(currentGameSelector);
     const doubleClickEventListener = async () => {
         const potentialMoves = await invokeIsCardClickable(solitare, card);
-        console.log(potentialMoves);
+        /**
+         * If the potential moves are only one then execute the move
+         */
+        if (potentialMoves.length === 1) {
+            dispatch(moveCardToColumnAsync({
+                drag: card,
+                drop: potentialMoves[0]
+            }));
+            return;
+        }
+        dispatch(updatePossibleMovesAction(potentialMoves));
     };
     
     return (
