@@ -1,13 +1,23 @@
 import { expose } from "comlink";
-import { canCardBeDroppedOnToColumn, canCardBeDroppedToEmptyColumn } from "store/game/builder/cardDropper";
 import { columnFromLocation } from "store/game/builder/util";
 import { makeCardLocationAware } from "store/game/locationHelper";
-import { LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
+import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 
-const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: string, area: string): LocationAwareSolitaireCard => {
+type PotentiallyUndefinedLocationAwareSolitaireCard = LocationAwareSolitaireCard | undefined;
+
+const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: string, area: string): PotentiallyUndefinedLocationAwareSolitaireCard => {
     const cards = columnFromLocation(solitaire, namespace, area);
     const card = cards[cards.length - 1];
+    
+    if (card === undefined) {
+        return undefined;
+    }
+
     return makeCardLocationAware(card, namespace, area);
+};
+
+const areCardsIdentical = (first: LocationAwareSolitaireCard, second: LocationAwareSolitaireCard) => {
+    return first.cardNumber === second.cardNumber && first.suit === second.suit && first.index === second.index;
 };
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): LocationAwareSolitaireCard[] => {
@@ -21,14 +31,44 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Lo
         fetchTopLocationAwareCardFromList(solitaire, 'columns', 'seven')
     ];
 
-    console.log('card being checked', card.cardNumber, card.suit);
-
-    const cards = potentialCardLocations.filter((inner: SolitaireCard) => {
-        return canCardBeDroppedOnToColumn(inner, card) || canCardBeDroppedToEmptyColumn(card);
+    /**
+     * Filter out the undefined from the list of cards
+     */
+    const potentialCardLocationsWithUndefinedRemoved = potentialCardLocations.filter((inner: PotentiallyUndefinedLocationAwareSolitaireCard): inner is LocationAwareSolitaireCard => {
+        return inner !== undefined;
     });
 
-    cards.forEach((card) => {
-        console.log(card.cardNumber, card.suit, card.location);
+    /**
+     * Filter out the cards that are not needed
+     */
+    const cards = potentialCardLocationsWithUndefinedRemoved.filter((inner: LocationAwareSolitaireCard) => {
+        
+        /**
+         * If the cards are indentical then it 
+         * can't be dropped on the 
+         */
+        if (areCardsIdentical(inner, card)) {
+            return false;
+        }
+
+        /**
+         * If the cards are of the same
+         * color then these can't be
+         * transferred
+         */
+        if (inner.color === card.color) {
+            return false;
+        }
+
+        /**
+         * If the cards are compatible then
+         * allow the cards to be selected
+         */
+        if (inner.index === card.index + 1) {
+            return true;
+        }
+
+        return false;
     });
 
     return cards;
