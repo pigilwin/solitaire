@@ -19,7 +19,6 @@ export const generateAllOneTheBoardGame = (): Game => {
     const {first: three, second: four} = generateCardLists(hearts, clubs);
 
     return {
-        potentialMoveLocations: [],
         generatedByTesting: true,
         game: {
             id: v4(),

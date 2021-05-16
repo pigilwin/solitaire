@@ -1,7 +1,8 @@
 import { invokeIsCardClickable } from "invokers/invokeIsCardClickable";
 import { PropsWithChildren } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currentGameSelector, updatePossibleMovesAction } from "store/game/gameSlice";
+import { updatePossibleMovesAction } from "store/game/gameMoveSlice";
+import { currentGameSelector } from "store/game/gameSlice";
 import { moveCardToColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
 
@@ -24,7 +25,10 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
             }));
             return;
         }
-        dispatch(updatePossibleMovesAction(potentialMoves));
+        dispatch(updatePossibleMovesAction({
+            cardWantingToBeMoved: card,
+            potentialMoves: potentialMoves
+        }));
     };
     
     return (

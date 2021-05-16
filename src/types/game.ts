@@ -47,7 +47,6 @@ export interface SolitaireColumn {
 export interface Game {
     game: Solitaire;
     generatedByTesting: boolean;
-    potentialMoveLocations: LocationAwareSolitaireCard[];
 }
 export interface MoveCardPayload {
     drop: LocationAwareSolitaireCard;

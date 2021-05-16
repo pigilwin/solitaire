@@ -5,7 +5,7 @@ import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } fr
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
-import { Game, LocationAwareSolitaireCard, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from '../../types/game';
+import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from 'types/game';
 
 export const initialState: Game =  {
     game: {
@@ -30,8 +30,7 @@ export const initialState: Game =  {
             current: []
         }
     },
-    generatedByTesting: false,
-    potentialMoveLocations: []
+    generatedByTesting: false
 };
 
 const gameSlice = createSlice({
@@ -42,7 +41,6 @@ const gameSlice = createSlice({
             const newState = state;
             newState.game = generateGame();
             newState.generatedByTesting = false;
-            newState.potentialMoveLocations = [];
             return newState;
         },
         refreshRemaningFromDrawAction(state: Game) {
@@ -75,11 +73,6 @@ const gameSlice = createSlice({
         },
         clearGameAction() {
             return initialState;
-        },
-        updatePossibleMovesAction(state: Game, action: PayloadAction<LocationAwareSolitaireCard[]>) {
-            const newState = deepCopy<Game>(state);
-            newState.potentialMoveLocations = action.payload;
-            return newState;
         }
     }
 });
@@ -93,8 +86,7 @@ export const {
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction,
     replaceGameAction,
-    clearGameAction,
-    updatePossibleMovesAction
+    clearGameAction
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {
@@ -102,5 +94,4 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
-export const potentialMoveLocationsSelector = (state: RootState): LocationAwareSolitaireCard[] => state.gameReducer.potentialMoveLocations;
 export const isGameGeneratedByTestingSelector = (state: RootState): boolean => state.gameReducer.generatedByTesting;

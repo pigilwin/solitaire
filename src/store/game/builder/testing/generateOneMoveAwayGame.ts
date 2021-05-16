@@ -17,7 +17,6 @@ export const generateOneMoveAwayGame = (): Game => {
     remaining.showing = true;
 
     return {
-        potentialMoveLocations: [],
         generatedByTesting: true,
         game: {
             id: v4(),

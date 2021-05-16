@@ -17,7 +17,6 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
     const eightOfSpades = fetchCard(game, '8', SUIT_TYPE_SPADE);
 
     return {
-        potentialMoveLocations: [],
         generatedByTesting: true,
         game: {
             id: v4(),
