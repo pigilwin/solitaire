@@ -69,6 +69,7 @@ const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
                             drag: cardWantingToBeMoved,
                             drop: card
                         }));
+                        dispatch(clearPossibleMovesAction());
                     };
 
                     return (
