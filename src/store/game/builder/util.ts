@@ -2,8 +2,7 @@ import { LocationAwareSolitaireCard, Solitaire, SolitaireCard, SolitaireColumn, 
 
 export const columnFromLocation = (game: Solitaire, namespace: string, area: string): SolitaireCard[] => {
     const columns: SolitaireColumn = (game[namespace as keyof Solitaire] as SolitaireColumn);
-    const column: SolitaireCard[] = columns[area as keyof SolitaireColumn];
-    return column;
+    return columns[area as keyof SolitaireColumn];
 }
 
 export const finalFromLocation = (game: Solitaire, finalColumn: string): SolitaireCard[] => {

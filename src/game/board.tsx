@@ -1,8 +1,11 @@
 import { TopBar } from "./components/board/Top/TopBar";
 import { Columns } from "./components/board/Columns";
 import { useSelector } from "react-redux";
-import { potentialMoveLocationsSelector } from "store/game/gameSlice";
+import { currentGameSelector, potentialMoveLocationsSelector } from "store/game/gameSlice";
 import { LocationAwareSolitaireCard } from "types/game";
+import { columnFromLocation } from "store/game/builder/util";
+import { Column } from "./components/board/Column";
+import { ColumnContainer } from "./layout/ColumnContainer";
 
 export const Board = (): JSX.Element => {
     
@@ -27,10 +30,22 @@ interface ChooseLocationProps {
     moves: LocationAwareSolitaireCard[];
 }
 const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
-    console.log(moves);
+    const solitaire = useSelector(currentGameSelector);
+    const columnsBasedOnLocationsOfMoves = moves.map((card) => {
+        return {
+            location: card.location,
+            cards: columnFromLocation(solitaire, card.location.namespace, card.location.area)
+        };
+    });
     return (
-        <div>
-            
-        </div>
+        <ColumnContainer id='location-of-moves'>
+            {columnsBasedOnLocationsOfMoves.map((column) => {
+                return (
+                    <div>
+                        <Column cards={column.cards} column={column.location.area}/>
+                    </div>
+                );
+            })}
+        </ColumnContainer>
     );
 }

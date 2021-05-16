@@ -1,5 +1,6 @@
 import { useTrail } from "@react-spring/core";
 import { a, config } from "@react-spring/web";
+import { ColumnContainer } from "game/layout/ColumnContainer";
 import { useSelector } from "react-redux";
 
 import { currentGameSelector } from "store/game/gameSlice";
@@ -40,16 +41,14 @@ export const Columns = (): JSX.Element => {
     }, [solitaire.id]);
     
     return (
-        <div id="columns" className="mt-10">
-            <div className="flex flex-row space-x-5 justify-around">
-                {trail.map((style, index) => {
-                    return (
-                        <a.div key={index} style={style}>
-                            <ConditionalColumn columnName={map[index].name} cards={map[index].cards}/>
-                        </a.div>
-                    );
-                })}
-            </div>
-        </div>
+        <ColumnContainer id="columns">
+            {trail.map((style, index) => {
+                return (
+                    <a.div key={index} style={style}>
+                        <ConditionalColumn columnName={map[index].name} cards={map[index].cards}/>
+                    </a.div>
+                );
+            })}
+        </ColumnContainer>
     );
 };
