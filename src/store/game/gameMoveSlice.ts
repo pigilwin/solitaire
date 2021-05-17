@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "store/rootReducer";
-import { deepCopy } from "store/util";
+import { deepCopy } from "lib/util";
 import { LocationAwareSolitaireCard } from "types/game";
 import { GameMove, PossibleMovesPayload } from "types/move";
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../rootReducer";
-import { deepCopy } from "../util";
+import { deepCopy } from "lib/util";
 import { CompletedGame, LeaderboardState } from "./types";
 
 export const initialState: LeaderboardState =  {
