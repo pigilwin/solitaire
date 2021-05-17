@@ -1,6 +1,6 @@
 import { CardGroup } from './CardGroup';
 import { SolitaireCard } from "types/game";
-import { makeCardLocationAware } from "store/game/locationHelper";
+import { makeCardLocationAware } from 'lib/util';
 interface ColumnProps {
     cards: SolitaireCard[];
     column: string;

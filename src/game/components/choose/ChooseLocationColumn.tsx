@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { columnFromLocation } from 'lib/util';
+
+import { columnFromLocation, makeCardLocationAware } from 'lib/util';
+
 import { LocationAwareSolitaireCard } from 'types/game';
-import { Column } from '../board/Column';
+
 import { currentGameSelector } from 'store/game/gameSlice';
-import { makeCardLocationAware } from 'store/game/locationHelper';
 import { moveCardToColumnAsync } from 'store/game/thunk';
 import { clearPossibleMovesAction } from 'store/game/gameMoveSlice';
 
+import { Column } from '../board/Column';
 interface ChooseLocationColumnProps {
     innerCard: LocationAwareSolitaireCard;
     cardWantingToBeMoved: LocationAwareSolitaireCard;

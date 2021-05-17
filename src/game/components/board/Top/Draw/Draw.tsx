@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
-import { currentGameSelector } from "store/game/gameSlice";
-import { makeCardLocationAware } from "store/game/locationHelper";
+
 import { SolitaireCard } from "types/game";
+
+import { makeCardLocationAware } from "lib/util";
+
+import { currentGameSelector } from "store/game/gameSlice";
+
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
 

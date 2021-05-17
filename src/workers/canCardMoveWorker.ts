@@ -1,6 +1,5 @@
 import { expose } from "comlink";
-import { areCardsIdentical, columnFromLocation, isAFullCard, isCardAKing } from "lib/util";
-import { makeCardLocationAware } from "store/game/locationHelper";
+import { areCardsIdentical, columnFromLocation, isAFullCard, isCardAKing, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
 
