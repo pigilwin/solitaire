@@ -12,9 +12,8 @@ import { Column } from '../board/Column';
 interface ChooseLocationColumnProps {
     innerCard: LocationAwareSolitaireCard;
     cardWantingToBeMoved: LocationAwareSolitaireCard;
-    index: number;
 }
-export const ChooseLocationColumn = ({innerCard, cardWantingToBeMoved, index}: ChooseLocationColumnProps): JSX.Element => {
+export const ChooseLocationColumn = ({innerCard, cardWantingToBeMoved}: ChooseLocationColumnProps): JSX.Element => {
     const dispatch = useDispatch();
     const solitaire = useSelector(currentGameSelector);
     const cards = columnFromLocation(solitaire, innerCard.location.namespace, innerCard.location.area);
@@ -33,7 +32,7 @@ export const ChooseLocationColumn = ({innerCard, cardWantingToBeMoved, index}: C
     };
     
     return (
-        <div className="cursor-pointer" key={index} onClick={chooseColumnClickHandler}>
+        <div className="cursor-pointer" onClick={chooseColumnClickHandler}>
             <Column cards={cards} column={innerCard.location.area}/>
         </div>  
     );

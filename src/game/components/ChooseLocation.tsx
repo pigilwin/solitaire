@@ -20,7 +20,8 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
 
     const columnsBasedOnLocationsOfMoves: JSX.Element[] = [];
 
-    Object.keys(moves).forEach((column, index) => {
+    let index = 0;
+    for (const column in moves){
         const innerCard = moves[column];
 
         /**
@@ -28,22 +29,26 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
          */
         if (!isAFullCard(innerCard)) {
             columnsBasedOnLocationsOfMoves.push(
-                <ChooseEmptyColumn
-                    index={index}
-                    cardWantingToBeMoved={cardWantingToBeMoved}
-                    innerCard={innerCard}
-                />
+                <div>
+                    <ChooseEmptyColumn
+                        cardWantingToBeMoved={cardWantingToBeMoved}
+                        innerCard={innerCard}
+                    />
+                </div>
             );
-            return;
+            index++;
+            continue;
         }
         columnsBasedOnLocationsOfMoves.push(
-            <ChooseLocationColumn 
-                index={index} 
-                cardWantingToBeMoved={cardWantingToBeMoved} 
-                innerCard={innerCard as LocationAwareSolitaireCard}
-            />
+           <div key={index}>
+                <ChooseLocationColumn 
+                    cardWantingToBeMoved={cardWantingToBeMoved} 
+                    innerCard={innerCard as LocationAwareSolitaireCard}
+                />
+           </div>
         );
-    });
+        index++;
+    }
 
     const goBackClickHandler = (): void => {
         dispatch(clearPossibleMovesAction());

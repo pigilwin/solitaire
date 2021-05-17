@@ -5,11 +5,10 @@ import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireC
 import { EmptyCard } from "../board/EmptyCard";
 
 interface ChooseEmptyColumnProps {
-    index: number;
     innerCard: LocationAwarePotentiallyUndefinedSolitaireCard;
     cardWantingToBeMoved: LocationAwareSolitaireCard;
 }
-export const ChooseEmptyColumn = ({index, innerCard, cardWantingToBeMoved}: ChooseEmptyColumnProps): JSX.Element => {
+export const ChooseEmptyColumn = ({innerCard, cardWantingToBeMoved}: ChooseEmptyColumnProps): JSX.Element => {
     const dispatch = useDispatch();
     const chooseColumnClickHandler = (): void => {
         dispatch(moveCardToEmptyColumnAsync({
@@ -20,7 +19,7 @@ export const ChooseEmptyColumn = ({index, innerCard, cardWantingToBeMoved}: Choo
     };
     
     return (
-        <div className="cursor-pointer" key={index} onClick={chooseColumnClickHandler}>
+        <div className="cursor-pointer" onClick={chooseColumnClickHandler}>
             <EmptyCard/>
         </div>
     );
