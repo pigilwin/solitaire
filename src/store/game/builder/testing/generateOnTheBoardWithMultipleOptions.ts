@@ -10,24 +10,26 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
         return card;
     });
 
+    const sixOfSpades = fetchCard(game, '6', SUIT_TYPE_SPADE);
     const nineOfDiamonds = fetchCard(game, '9', SUIT_TYPE_DIAMOND);
     const nineOfHearts = fetchCard(game, '9', SUIT_TYPE_HEART);
     const sevenOfHearts = fetchCard(game, '7', SUIT_TYPE_HEART);
     const eightOfClubs = fetchCard(game, '8', SUIT_TYPE_CLUB);
     const eightOfSpades = fetchCard(game, '8', SUIT_TYPE_SPADE);
+    const kingOfClubs = fetchCard(game, 'K', SUIT_TYPE_CLUB);
 
     return {
         generatedByTesting: true,
         game: {
             id: v4(),
             columns: {
-                one: [],
+                one: [sixOfSpades],
                 two: [nineOfDiamonds, eightOfClubs],
                 three: [sevenOfHearts],
                 four: [nineOfHearts, eightOfSpades],
                 five: [],
                 six: [],
-                seven: []
+                seven: [kingOfClubs]
             },
             draw: {
                current: [],
