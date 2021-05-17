@@ -127,6 +127,13 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         const cardToCheck = inner as LocationAwareSolitaireCard;
 
         /**
+         * If both the suits match and the card index is the next one in line
+         */
+        if (cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
+            continue;
+        }
+
+        /**
          * If the cards are indentical then it 
          * can't be moved to this stack
          */
@@ -154,6 +161,8 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
             continue;
         }
     }
+
+    console.log(keysToRemove);
 
     /**
      * Remove the keys that are not required
