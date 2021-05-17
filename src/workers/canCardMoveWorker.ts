@@ -129,7 +129,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         /**
          * If both the suits match and the card index is the next one in line
          */
-        if (cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
+        if (cardToCheck.location.namespace === 'final' && cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
             continue;
         }
 
