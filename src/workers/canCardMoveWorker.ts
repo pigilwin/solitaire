@@ -113,6 +113,14 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
                 continue;
             }
 
+            /**
+             * If the location of the final is not of the same suit then remove
+             */
+            if (inner.location.area !== card.suit.toLowerCase()) {
+                keysToRemove.push(inner.location.area);
+                continue;
+            }
+
             continue;
         }
 

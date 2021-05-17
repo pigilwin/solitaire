@@ -1,10 +1,13 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
-import { PropsWithChildren } from "react";
+import { isCardAKing } from "lib/util";
+import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePossibleMovesAction } from "store/game/gameMoveSlice";
 import { currentGameSelector } from "store/game/gameSlice";
-import { moveCardToColumnAsync } from "store/game/thunk";
+import { moveCardToColumnAsync, moveCardToEmptyColumnAsync, moveCardToFinalColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
+import { CanCardMoveFromWorker } from "types/worker";
 
 interface DoubleClickCardAwareContextProps {
     card: LocationAwareSolitaireCard;
@@ -13,18 +16,16 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     
     const dispatch = useDispatch();
     const solitare = useSelector(currentGameSelector);
-    const doubleClickEventListener = async () => {
+    const doubleClickEventListener = async (e: MouseEvent) => {
+        e.stopPropagation();
         const potentialMoves = await invokeIsCardClickable(solitare, card);
+        console.log(potentialMoves);
         const keys = Object.keys(potentialMoves);
         /**
          * If the potential moves are only one then execute the move
          */
         if (keys.length === 1) {
-            const droppableCard = potentialMoves[keys[keys.length - 1]] as LocationAwareSolitaireCard;
-            dispatch(moveCardToColumnAsync({
-                drag: card,
-                drop: droppableCard
-            }));
+            handleOnlyOneResponse(dispatch, potentialMoves, keys, card);
             return;
         }
         dispatch(updatePossibleMovesAction({
@@ -39,3 +40,32 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
         </div>
     );
 };
+
+const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardMoveFromWorker, keys: string[], card: LocationAwareSolitaireCard): void => {
+    const droppableCard = potentialMoves[keys[keys.length - 1]];
+
+    /**
+     * If the card is a king then use the specific action 
+     * dedicated to moving cards to empty columns
+     */
+    if (isCardAKing(card)) {
+        dispatch(moveCardToEmptyColumnAsync({
+            drag: card,
+            column: droppableCard.location.area
+        }));
+        return;
+    }
+
+    if (droppableCard.location.namespace === 'final') {
+        dispatch(moveCardToFinalColumnAsync({
+            column: droppableCard.location.area,
+            drag: card
+        }));
+    }
+
+    dispatch(moveCardToColumnAsync({
+        drag: card,
+        drop: droppableCard as LocationAwareSolitaireCard
+    }));
+    return;
+}
