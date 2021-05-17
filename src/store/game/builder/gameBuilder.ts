@@ -1,5 +1,5 @@
-import { MoveCardPayload, Solitaire, SolitaireCard } from "../../../types/game";
-import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "./util";
+import { MoveCardPayload, Solitaire, SolitaireCard } from "types/game";
+import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "../../../lib/util";
 
 export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};

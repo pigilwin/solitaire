@@ -1,5 +1,5 @@
 import { expose } from "comlink";
-import { columnFromLocation } from "store/game/builder/util";
+import { areCardsIdentical, columnFromLocation } from "lib/util";
 import { makeCardLocationAware } from "store/game/locationHelper";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 
@@ -14,10 +14,6 @@ const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: stri
     }
 
     return makeCardLocationAware(card, namespace, area);
-};
-
-const areCardsIdentical = (first: LocationAwareSolitaireCard, second: LocationAwareSolitaireCard) => {
-    return first.cardNumber === second.cardNumber && first.suit === second.suit && first.index === second.index;
 };
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): LocationAwareSolitaireCard[] => {

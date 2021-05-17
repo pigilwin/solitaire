@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LocationAwareSolitaireCard } from "types/game";
 
 import { currentGameSelector } from "store/game/gameSlice";
-import { columnFromLocation } from "store/game/builder/util";
+import { columnFromLocation } from "lib/util";
 import { makeCardLocationAware } from "store/game/locationHelper";
 import { moveCardToColumnAsync } from "store/game/thunk";
 import { cardWantingToBeMovedSelector, clearPossibleMovesAction } from "store/game/gameMoveSlice";
