@@ -45,7 +45,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Lo
         
         /**
          * If the cards are indentical then it 
-         * can't be dropped on the 
+         * can't be moved to this stack
          */
         if (areCardsIdentical(inner, card)) {
             return false;

@@ -9,7 +9,7 @@ import { currentGameSelector } from "store/game/gameSlice";
 import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
-import { useIsTheGameComplete } from "hooks/useIsTheGameComplete";
+import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
 
 export const Game = (): JSX.Element => {
 

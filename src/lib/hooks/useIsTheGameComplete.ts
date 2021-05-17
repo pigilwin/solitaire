@@ -18,12 +18,12 @@ export const useIsTheGameComplete = (
     /**
      * Here we create our worker and wrap it with comlink so we can interact with it
      */
-    const worker = new Worker("../workers/isGameCompleteWorker", {
+    const worker = new Worker("../../workers/isGameCompleteWorker", {
       name: "is-game-complete-worker",
       type: "module",
     });
 
-    const workerApi = wrap<import("../workers/isGameCompleteWorker").WorkerType>(worker);
+    const workerApi = wrap<import("../../workers/isGameCompleteWorker").WorkerType>(worker);
 
     workerApi.isGameComplete(solitaire).then((value: boolean) => {
       setData({ isCalculating: false, value });

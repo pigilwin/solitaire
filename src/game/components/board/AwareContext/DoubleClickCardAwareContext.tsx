@@ -15,6 +15,7 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     const solitare = useSelector(currentGameSelector);
     const doubleClickEventListener = async () => {
         const potentialMoves = await invokeIsCardClickable(solitare, card);
+        console.log(potentialMoves);
         /**
          * If the potential moves are only one then execute the move
          */
