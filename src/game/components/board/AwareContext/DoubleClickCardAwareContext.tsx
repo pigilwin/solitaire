@@ -25,10 +25,6 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
                 drag: card,
                 drop: droppableCard
             }));
-            dispatch(updatePossibleMovesAction({
-                cardWantingToBeMoved: null,
-                potentialMoves: {}
-            }));
             return;
         }
         dispatch(updatePossibleMovesAction({
@@ -38,7 +34,7 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     };
     
     return (
-        <div className="double-click-card" onDoubleClick={doubleClickEventListener}>
+        <div className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
             {children}
         </div>
     );

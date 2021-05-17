@@ -23,6 +23,7 @@ const gameMoveSlice = createSlice({
         clearPossibleMovesAction(state: GameMove) {
             const newState = deepCopy<GameMove>(state);
             newState.potentialMoveLocations = {};
+            newState.cardWantingToBeMoved = null;
             return newState;
         }
     }

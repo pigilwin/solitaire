@@ -45,13 +45,18 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         const inner = potentialCardLocations[key];
 
         /**
-         * If the card we have clicked on is of type king and the current
-         * card we are looping over has only a location, then this is a empty
-         * space.
+         * If the card we have clicked on is of type king
          */
-        if (isCardAKing(card) && !isAFullCard(inner)) {
-            keysToRemove.push(inner.location.area);
-            continue; 
+        if (isCardAKing(card)) {
+            /**
+             * The current card we are looping over has only a 
+             * location, then this is a empty space.
+             */
+            if (isAFullCard(inner)){
+                keysToRemove.push(inner.location.area);
+            }
+
+            continue;
         }
 
         const cardToCheck = inner as LocationAwareSolitaireCard;

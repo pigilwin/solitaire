@@ -6,12 +6,13 @@ import { columnFromLocation, isAFullCard } from "lib/util";
 
 import { currentGameSelector } from "store/game/gameSlice";
 import { makeCardLocationAware } from "store/game/locationHelper";
-import { moveCardToColumnAsync } from "store/game/thunk";
+import { moveCardToColumnAsync, moveCardToEmptyColumnAsync } from "store/game/thunk";
 import { cardWantingToBeMovedSelector, clearPossibleMovesAction } from "store/game/gameMoveSlice";
 
 import { Column } from './board/Column';
 import { ColumnContainer } from '../layout/ColumnContainer';
 import { GameButton } from './Button';
+import { EmptyCard } from "./board/EmptyCard";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;
@@ -31,7 +32,18 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
          * If the card
          */
         if (!isAFullCard(innerCard)) {
-            columnsBasedOnLocationsOfMoves.push(<p>Foo</p>);
+            const chooseColumnClickHandler = (): void => {
+                dispatch(moveCardToEmptyColumnAsync({
+                    drag: cardWantingToBeMoved,
+                    column: innerCard.location.area
+                }));
+                dispatch(clearPossibleMovesAction());
+            };
+            columnsBasedOnLocationsOfMoves.push(
+                <div className="cursor-pointer" key={index} onClick={chooseColumnClickHandler}>
+                    <EmptyCard/>
+                </div>
+            );
             return;
         }
 
