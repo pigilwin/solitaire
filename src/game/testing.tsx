@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
-import { generateAllOneTheBoardGame } from "store/game/builder/testing/generateAllOnTheBoardGame";
-import { generateOneMoveAwayGame } from "store/game/builder/testing/generateOneMoveAwayGame";
-import { generateOnTheBoardWithMultipleOptions } from "store/game/builder/testing/generateOnTheBoardWithMultipleOptions";
+import { generateAllOneTheBoardGame } from "lib/testing/generateAllOnTheBoardGame";
+import { generateOneMoveAwayGame } from "lib/testing/generateOneMoveAwayGame";
+import { generateOnTheBoardWithMultipleOptions } from "lib/testing/generateOnTheBoardWithMultipleOptions";
 import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
