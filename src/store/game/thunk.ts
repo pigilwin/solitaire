@@ -1,6 +1,6 @@
 import { AppDispatch, AppThunk } from "..";
 import { RootStateHook } from "../rootReducer";
-import { deepCopy } from "lib/util";
+import { deepCopy } from "lib/deepCopy";
 import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from "types/game";
 import { 
     fetchGame,

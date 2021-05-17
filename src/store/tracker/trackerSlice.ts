@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TrackerState } from "types/tracker";
 import { RootState, RootStateHook } from "../rootReducer";
-import { deepCopy } from "lib/util";
+import { deepCopy } from "lib/deepCopy";
 
 export const initialState: TrackerState =  {
     score: 0,
