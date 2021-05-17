@@ -1,11 +1,11 @@
 import { releaseProxy, wrap } from "comlink";
 import { useState, useEffect } from "react";
 import { Solitaire } from "types/game";
-import { ReturnValueFromWorker } from "types/worker";
+import { IsGameCompleteFromWorker } from "types/worker";
 
 export const useIsTheGameComplete = (
   solitaire: Solitaire
-): ReturnValueFromWorker<boolean> => {
+): IsGameCompleteFromWorker<boolean> => {
   /**
    * We'll want to expose a wrapping object so we know when a calculation is in progress
    */

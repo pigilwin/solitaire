@@ -1,1 +1,1 @@
-export type ReturnValueFromWorker<T> = [T, boolean];
+export type IsGameCompleteFromWorker<T> = [T, boolean];
