@@ -1,26 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { CanCardMoveFromWorker } from "types/worker";
-
-import { columnFromLocation, isAFullCard } from "lib/util";
-
-import { currentGameSelector } from "store/game/gameSlice";
-import { makeCardLocationAware } from "store/game/locationHelper";
-import { moveCardToColumnAsync, moveCardToEmptyColumnAsync } from "store/game/thunk";
 import { cardWantingToBeMovedSelector, clearPossibleMovesAction } from "store/game/gameMoveSlice";
 
-import { Column } from './board/Column';
 import { ColumnContainer } from '../layout/ColumnContainer';
 import { GameButton } from './Button';
 import { EmptyCard } from "./board/EmptyCard";
+import { ChooseLocationColumn } from "./choose/ChooseLocationColumn";
+import { LocationAwareSolitaireCard } from "types/game";
+import { isAFullCard } from "lib/util";
+import { moveCardToEmptyColumnAsync } from "store/game/thunk";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;
 }
 export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
     const dispatch = useDispatch();
-    
-    const solitaire = useSelector(currentGameSelector);
+
     const cardWantingToBeMoved = useSelector(cardWantingToBeMovedSelector);
 
     const columnsBasedOnLocationsOfMoves: JSX.Element[] = [];
@@ -46,26 +42,8 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
             );
             return;
         }
-
-        const cards = columnFromLocation(solitaire, innerCard.location.namespace, innerCard.location.area);
-        
-        const chooseColumnClickHandler = (): void => {
-            const card = makeCardLocationAware(
-                cards[cards.length - 1], 
-                innerCard.location.namespace, 
-                innerCard.location.area
-            );
-            dispatch(moveCardToColumnAsync({
-                drag: cardWantingToBeMoved,
-                drop: card
-            }));
-            dispatch(clearPossibleMovesAction());
-        };
-
         columnsBasedOnLocationsOfMoves.push(
-            <div className="cursor-pointer" key={index} onClick={chooseColumnClickHandler}>
-                <Column cards={cards} column={innerCard.location.area}/>
-            </div>
+            <ChooseLocationColumn index={index} cardWantingToBeMoved={cardWantingToBeMoved} innerCard={innerCard as LocationAwareSolitaireCard}/>
         );
     });
 
