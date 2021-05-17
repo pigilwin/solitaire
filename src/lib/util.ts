@@ -33,6 +33,10 @@ export const isCardAKing = (first: SolitaireCard): boolean => {
     return first.cardNumber === 'K';
 }
 
+export const isCardAAce = (first: SolitaireCard): boolean => {
+    return first.cardNumber === 'A';
+}
+
 export const isAFullCard = (card: LocationAwarePotentiallyUndefinedSolitaireCard): boolean => {
     return card.hasOwnProperty('cardNumber');
 }

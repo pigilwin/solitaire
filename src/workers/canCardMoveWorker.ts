@@ -1,39 +1,63 @@
 import { expose } from "comlink";
-import { areCardsIdentical, columnFromLocation, isAFullCard, isCardAKing, makeCardLocationAware } from "lib/util";
+import { areCardsIdentical, columnFromLocation, finalFromLocation, isAFullCard, isCardAAce, isCardAKing, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
 
-const fetchTopLocationAwareCardFromList = (
+const fetchTopLocationAwareCardFromColumns = (
     build: CanCardMoveFromWorker,  
-    solitaire: Solitaire, 
-    namespace: string, 
+    solitaire: Solitaire,
     area: string
 ): void => {
-    const cards = columnFromLocation(solitaire, namespace, area);
+    const cards = columnFromLocation(solitaire, 'columns', area);
     const card = cards[cards.length - 1];
     
     if (card === undefined) {
         build[area] = {
             location: {
-                namespace,
+                namespace: 'columns',
                 area
             }
         };
     }
 
-    build[area] = makeCardLocationAware(card, namespace, area);
+    build[area] = makeCardLocationAware(card, 'columns', area);
+};
+
+const fetchTopLocationAwareCardFromFinal = (
+    build: CanCardMoveFromWorker,  
+    solitaire: Solitaire,
+    area: string
+): void => {
+    const cards = finalFromLocation(solitaire, area);
+    const card = cards[cards.length - 1];
+    
+    if (card === undefined) {
+        build[area] = {
+            location: {
+                namespace: 'final',
+                area
+            }
+        };
+    }
+
+    build[area] = makeCardLocationAware(card, 'final', area);
 };
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
     let potentialCardLocations: CanCardMoveFromWorker = {};
 
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'one');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'two');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'three');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'four');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'five');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'six');
-    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'seven');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'one');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'two');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'three');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'four');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'five');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'six');
+    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'seven');
+
+    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'diamond');
+    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'heart');
+    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'club');
+    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'spade');
 
     const keysToRemove: string[] = [];
 
@@ -53,6 +77,40 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              */
             if (isAFullCard(inner)){
                 keysToRemove.push(inner.location.area);
+                continue;
+            }
+
+            /**
+             * If the current card we are looping over has only a
+             * location and this is final it needs to be removed
+             */
+            if (inner.location.namespace === 'final') {
+                keysToRemove.push(inner.location.area);
+                continue;
+            }
+
+            continue;
+        }
+        /**
+         * If the card we have clicked on is of type ace
+         */
+        if (isCardAAce(card)) {
+            /**
+             * The current card we are looping over has only a 
+             * location, then this is a empty space.
+             */
+            if (isAFullCard(inner)){
+                keysToRemove.push(inner.location.area);
+                continue;
+            }
+
+            /**
+             * If the current card we are looping over has only a
+             * location and this is columns it needs to be removed
+             */
+            if (inner.location.namespace === 'columns') {
+                keysToRemove.push(inner.location.area);
+                continue;
             }
 
             continue;
