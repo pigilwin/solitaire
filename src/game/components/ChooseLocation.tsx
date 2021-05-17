@@ -27,9 +27,9 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
         /**
          * If the card is not a full card then its most likely a empty card space
          */
-        if (!isAFullCard(innerCard)) {
+        if (!isAFullCard(innerCard) && innerCard.location.namespace === 'columns') {
             columnsBasedOnLocationsOfMoves.push(
-                <div>
+                <div key={index}>
                     <ChooseEmptyColumn
                         cardWantingToBeMoved={cardWantingToBeMoved}
                         innerCard={innerCard}
@@ -39,6 +39,7 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
             index++;
             continue;
         }
+
         columnsBasedOnLocationsOfMoves.push(
            <div key={index}>
                 <ChooseLocationColumn 
