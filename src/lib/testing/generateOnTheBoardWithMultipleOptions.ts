@@ -10,6 +10,7 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
         return card;
     });
 
+    const aceOfHearts = fetchCard(game, 'A', SUIT_TYPE_HEART);
     const sixOfSpades = fetchCard(game, '6', SUIT_TYPE_SPADE);
     const nineOfDiamonds = fetchCard(game, '9', SUIT_TYPE_DIAMOND);
     const nineOfHearts = fetchCard(game, '9', SUIT_TYPE_HEART);
@@ -27,7 +28,7 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
                 two: [nineOfDiamonds, eightOfClubs],
                 three: [sevenOfHearts],
                 four: [nineOfHearts, eightOfSpades],
-                five: [],
+                five: [aceOfHearts],
                 six: [],
                 seven: [kingOfClubs]
             },
