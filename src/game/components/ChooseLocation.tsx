@@ -5,11 +5,10 @@ import { cardWantingToBeMovedSelector, clearPossibleMovesAction } from "store/ga
 
 import { ColumnContainer } from '../layout/ColumnContainer';
 import { GameButton } from './Button';
-import { EmptyCard } from "./board/EmptyCard";
 import { ChooseLocationColumn } from "./choose/ChooseLocationColumn";
 import { LocationAwareSolitaireCard } from "types/game";
 import { isAFullCard } from "lib/util";
-import { moveCardToEmptyColumnAsync } from "store/game/thunk";
+import { ChooseEmptyColumn } from "./choose/ChooseEmptyColumn";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;
@@ -25,25 +24,24 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
         const innerCard = moves[column];
 
         /**
-         * If the card
+         * If the card is not a full card then its most likely a empty card space
          */
         if (!isAFullCard(innerCard)) {
-            const chooseColumnClickHandler = (): void => {
-                dispatch(moveCardToEmptyColumnAsync({
-                    drag: cardWantingToBeMoved,
-                    column: innerCard.location.area
-                }));
-                dispatch(clearPossibleMovesAction());
-            };
             columnsBasedOnLocationsOfMoves.push(
-                <div className="cursor-pointer" key={index} onClick={chooseColumnClickHandler}>
-                    <EmptyCard/>
-                </div>
+                <ChooseEmptyColumn
+                    index={index}
+                    cardWantingToBeMoved={cardWantingToBeMoved}
+                    innerCard={innerCard}
+                />
             );
             return;
         }
         columnsBasedOnLocationsOfMoves.push(
-            <ChooseLocationColumn index={index} cardWantingToBeMoved={cardWantingToBeMoved} innerCard={innerCard as LocationAwareSolitaireCard}/>
+            <ChooseLocationColumn 
+                index={index} 
+                cardWantingToBeMoved={cardWantingToBeMoved} 
+                innerCard={innerCard as LocationAwareSolitaireCard}
+            />
         );
     });
 
