@@ -162,8 +162,6 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         }
     }
 
-    console.log(keysToRemove);
-
     /**
      * Remove the keys that are not required
      */
