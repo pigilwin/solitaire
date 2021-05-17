@@ -15,13 +15,16 @@ export interface SolitaireCard {
     color: COLOR;
 }
 
-export interface LocationAwareSolitaireCard extends SolitaireCard {
+export interface LocationAware {
     location: {
         namespace: string;
         area: string;
     };
 }
 
+export interface LocationAwareSolitaireCard extends SolitaireCard, LocationAware {}
+
+export type LocationAwarePotentiallyUndefinedSolitaireCard = LocationAwareSolitaireCard | LocationAware;
 export interface SolitaireFinal {
     diamond: SolitaireCard[];
     heart: SolitaireCard[];

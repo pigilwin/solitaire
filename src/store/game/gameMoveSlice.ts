@@ -3,9 +3,10 @@ import { RootState } from "store/rootReducer";
 import { deepCopy } from "lib/deepCopy";
 import { LocationAwareSolitaireCard } from "types/game";
 import { GameMove, PossibleMovesPayload } from "types/move";
+import { CanCardMoveFromWorker } from "types/worker";
 
 export const initialState: GameMove = {
-    potentialMoveLocations: [],
+    potentialMoveLocations: {},
     cardWantingToBeMoved: null
 };
 
@@ -21,7 +22,7 @@ const gameMoveSlice = createSlice({
         },
         clearPossibleMovesAction(state: GameMove) {
             const newState = deepCopy<GameMove>(state);
-            newState.potentialMoveLocations = [];
+            newState.potentialMoveLocations = {};
             return newState;
         }
     }
@@ -33,5 +34,5 @@ export const {
     clearPossibleMovesAction
 } = gameMoveSlice.actions;
 
-export const potentialMoveLocationsSelector = (state: RootState): LocationAwareSolitaireCard[] => state.gameMoveReducer.potentialMoveLocations;
+export const potentialMoveLocationsSelector = (state: RootState): CanCardMoveFromWorker => state.gameMoveReducer.potentialMoveLocations;
 export const cardWantingToBeMovedSelector = (state: RootState): LocationAwareSolitaireCard => state.gameMoveReducer.cardWantingToBeMoved as LocationAwareSolitaireCard;

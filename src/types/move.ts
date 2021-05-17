@@ -1,13 +1,14 @@
 import { LocationAwareSolitaireCard } from "./game";
+import { CanCardMoveFromWorker } from "./worker";
 
 export type CardWantingToBeMoved = LocationAwareSolitaireCard | null;
 
 export interface GameMove {
-    potentialMoveLocations: LocationAwareSolitaireCard[],
-    cardWantingToBeMoved: CardWantingToBeMoved
+    potentialMoveLocations: CanCardMoveFromWorker;
+    cardWantingToBeMoved: CardWantingToBeMoved;
 }
 
 export interface PossibleMovesPayload {
-    potentialMoves: LocationAwareSolitaireCard[],
-    cardWantingToBeMoved: CardWantingToBeMoved
+    potentialMoves: CanCardMoveFromWorker;
+    cardWantingToBeMoved: CardWantingToBeMoved;
 }

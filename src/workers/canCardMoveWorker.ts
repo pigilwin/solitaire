@@ -1,50 +1,68 @@
 import { expose } from "comlink";
-import { areCardsIdentical, columnFromLocation } from "lib/util";
+import { areCardsIdentical, columnFromLocation, isAFullCard, isCardAKing } from "lib/util";
 import { makeCardLocationAware } from "store/game/locationHelper";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
+import { CanCardMoveFromWorker } from "types/worker";
 
-type PotentiallyUndefinedLocationAwareSolitaireCard = LocationAwareSolitaireCard | undefined;
-
-const fetchTopLocationAwareCardFromList = (solitaire: Solitaire, namespace: string, area: string): PotentiallyUndefinedLocationAwareSolitaireCard => {
+const fetchTopLocationAwareCardFromList = (
+    build: CanCardMoveFromWorker,  
+    solitaire: Solitaire, 
+    namespace: string, 
+    area: string
+): void => {
     const cards = columnFromLocation(solitaire, namespace, area);
     const card = cards[cards.length - 1];
     
     if (card === undefined) {
-        return undefined;
+        build[area] = {
+            location: {
+                namespace,
+                area
+            }
+        };
     }
 
-    return makeCardLocationAware(card, namespace, area);
+    build[area] = makeCardLocationAware(card, namespace, area);
 };
 
-const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): LocationAwareSolitaireCard[] => {
-    const potentialCardLocations = [
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'one'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'two'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'three'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'four'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'five'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'six'),
-        fetchTopLocationAwareCardFromList(solitaire, 'columns', 'seven')
-    ];
+const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
+    let potentialCardLocations: CanCardMoveFromWorker = {};
 
-    /**
-     * Filter out the undefined from the list of cards
-     */
-    const potentialCardLocationsWithUndefinedRemoved = potentialCardLocations.filter((inner: PotentiallyUndefinedLocationAwareSolitaireCard): inner is LocationAwareSolitaireCard => {
-        return inner !== undefined;
-    });
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'one');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'two');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'three');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'four');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'five');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'six');
+    fetchTopLocationAwareCardFromList(potentialCardLocations, solitaire, 'columns', 'seven');
+
+    const keysToRemove: string[] = [];
 
     /**
      * Filter out the cards that are not needed
      */
-    const cards = potentialCardLocationsWithUndefinedRemoved.filter((inner: LocationAwareSolitaireCard) => {
-        
+    for(const key in potentialCardLocations) {
+        const inner = potentialCardLocations[key];
+
+        /**
+         * If the card we have clicked on is of type king and the current
+         * card we are looping over has only a location, then this is a empty
+         * space.
+         */
+        if (isCardAKing(card) && !isAFullCard(inner)) {
+            keysToRemove.push(inner.location.area);
+            continue; 
+        }
+
+        const cardToCheck = inner as LocationAwareSolitaireCard;
+
         /**
          * If the cards are indentical then it 
          * can't be moved to this stack
          */
-        if (areCardsIdentical(inner, card)) {
-            return false;
+        if (areCardsIdentical(cardToCheck, card)) {
+            keysToRemove.push(inner.location.area);
+            continue;
         }
 
         /**
@@ -52,22 +70,29 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Lo
          * color then these can't be
          * transferred
          */
-        if (inner.color === card.color) {
-            return false;
+        if (cardToCheck.color === card.color) {
+            keysToRemove.push(inner.location.area);
+            continue;
         }
 
         /**
          * If the cards are compatible then
          * allow the cards to be selected
          */
-        if (inner.index === card.index + 1) {
-            return true;
+        if (cardToCheck.index !== card.index + 1) {
+            keysToRemove.push(inner.location.area);
+            continue;
         }
+    }
 
-        return false;
-    });
+    /**
+     * Remove the keys that are not required
+     */
+    for (const key of keysToRemove) {
+        delete potentialCardLocations[key];
+    }
 
-    return cards;
+    return potentialCardLocations;
 };
 
 const exports = {

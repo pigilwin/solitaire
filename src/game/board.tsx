@@ -13,7 +13,7 @@ export const Board = (): JSX.Element => {
     /**
      * If we have moves then show them
      */
-    if (potentialMoves.length > 0) {
+    if (Object.keys(potentialMoves).length > 0) {
         return <ChooseLocation moves={potentialMoves}/>;
     }
     

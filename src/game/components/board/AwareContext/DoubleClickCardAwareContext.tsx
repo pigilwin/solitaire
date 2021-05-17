@@ -15,14 +15,19 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     const solitare = useSelector(currentGameSelector);
     const doubleClickEventListener = async () => {
         const potentialMoves = await invokeIsCardClickable(solitare, card);
-        console.log(potentialMoves);
+        const keys = Object.keys(potentialMoves);
         /**
          * If the potential moves are only one then execute the move
          */
-        if (potentialMoves.length === 1) {
+        if (keys.length === 1) {
+            const droppableCard = potentialMoves[keys[keys.length - 1]] as LocationAwareSolitaireCard;
             dispatch(moveCardToColumnAsync({
                 drag: card,
-                drop: potentialMoves[0]
+                drop: droppableCard
+            }));
+            dispatch(updatePossibleMovesAction({
+                cardWantingToBeMoved: null,
+                potentialMoves: {}
             }));
             return;
         }

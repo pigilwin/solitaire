@@ -1,10 +1,11 @@
 import { releaseProxy, wrap } from "comlink";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
+import { CanCardMoveFromWorker } from "types/worker";
 
 export const invokeIsCardClickable = async (
   solitaire: Solitaire,
   card: LocationAwareSolitaireCard
-): Promise<LocationAwareSolitaireCard[]> => {
+): Promise<CanCardMoveFromWorker> => {
   /**
    * Here we create our worker and wrap it with comlink so we can interact with it
   */

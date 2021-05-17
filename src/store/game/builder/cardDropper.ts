@@ -57,7 +57,3 @@ export const canCardBeDroppedOnToFinal = (drag: SolitaireCard, suit: SUIT, cards
      */
     return latestCard.index + 1 === drag.index;
 };
-
-export const canCardBeDroppedToEmptyColumn = (card: SolitaireCard) => {
-    return card.cardNumber === 'K';
-};
