@@ -1,4 +1,4 @@
-import { invokeIsCardClickable } from "invokers/invokeIsCardClickable";
+import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
 import { PropsWithChildren } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePossibleMovesAction } from "store/game/gameMoveSlice";
