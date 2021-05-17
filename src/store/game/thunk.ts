@@ -1,7 +1,7 @@
 import { AppDispatch, AppThunk } from "..";
 import { RootStateHook } from "../rootReducer";
 import { deepCopy } from "lib/deepCopy";
-import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from "types/game";
+import { Game } from "types/game";
 import { 
     fetchGame,
     drawCardFromDeckAction, 
@@ -16,6 +16,7 @@ import { addMoveAction, decrementScoreAction, fetchTracker, incrementScoreAction
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { isOnColumns, isOnDraw, isOnFinal } from "./locationHelper";
 import { TrackerState } from "types/tracker";
+import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from "types/gamePayload";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
