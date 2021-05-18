@@ -100,6 +100,15 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
                 continue;
             }
 
+            /**
+             * If the card we are checking is on the final
+             * we can just skip it
+             */
+            if (enhancedInner.isOnFinal()){
+                keysToRemove.push(inner.location.area);
+                continue;
+            }
+
             continue;
         }
         
