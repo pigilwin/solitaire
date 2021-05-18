@@ -10,7 +10,6 @@ interface ChooseFinalColumnProps {
 }
 export const ChooseFinalColumn = ({innerCard, cardWantingToBeMoved}: ChooseFinalColumnProps): JSX.Element => {
     const dispatch = useDispatch();
-    console.log('called');
     const chooseColumnClickHandler = (): void => {
         dispatch(moveCardToFinalColumnAsync({
             drag: cardWantingToBeMoved,
