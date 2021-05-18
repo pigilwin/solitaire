@@ -164,7 +164,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * color then these can't be
          * transferred
          */
-        if (cardToCheck.color === card.color) {
+        if (enhancedInner.hasIdenticalColour(card)) {
             keysToRemove.push(inner.location.area);
             continue;
         }
@@ -182,7 +182,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * If the card we are checking is on the final and is not of the same type
          * that has been clicked on then don't allow the that card to be used
          */
-        if (enhancedInner.isOnFinal() && cardToCheck.suit !== card.suit) {
+        if (enhancedInner.isOnFinal() && !enhancedInner.hasIdenticalSuit(card)) {
             keysToRemove.push(inner.location.area);
             continue;
         }

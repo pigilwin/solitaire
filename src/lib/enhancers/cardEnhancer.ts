@@ -23,6 +23,16 @@ export class CardEnhancer {
         return first.suit === card.suit;
     }
 
+    public hasIdenticalColour(card: LocationAwareSolitaireCard): boolean
+    {
+        if (!this.isAFullCard()) {
+            return false;
+        }
+
+        const first = this.card as LocationAwareSolitaireCard;
+        return first.color === card.color;
+    }
+
     public isAFullCard(): boolean
     {
         return this.card.hasOwnProperty('cardNumber');
