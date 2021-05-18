@@ -7,9 +7,9 @@ import { ColumnContainer } from '../layout/ColumnContainer';
 import { GameButton } from './Button';
 import { ChooseLocationColumn } from "./choose/ChooseLocationColumn";
 import { LocationAwareSolitaireCard } from "types/game";
-import { isAFullCard } from "lib/util";
 import { ChooseEmptyColumn } from "./choose/ChooseEmptyColumn";
 import { ChooseFinalColumn } from "./choose/ChooseFinalColumn";
+import { enhanceCard } from "lib/enhancers";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;
@@ -24,8 +24,9 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
     let index = 0;
     for (const column in moves){
         const innerCard = moves[column];
+        const enchancedInner = enhanceCard(innerCard);
 
-        if (isAFullCard(innerCard) && innerCard.location.namespace === 'final') {
+        if (enchancedInner.isAFullCard() && innerCard.location.namespace === 'final') {
             columnsBasedOnLocationsOfMoves.push(
                 <div key={index}>
                     <ChooseFinalColumn
@@ -41,7 +42,7 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
         /**
          * If the card is not a full card then its most likely a empty card space
          */
-        if (!isAFullCard(innerCard) && innerCard.location.namespace === 'columns') {
+        if (!enchancedInner.isAFullCard() && innerCard.location.namespace === 'columns') {
             columnsBasedOnLocationsOfMoves.push(
                 <div key={index}>
                     <ChooseEmptyColumn

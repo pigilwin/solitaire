@@ -1,5 +1,6 @@
 import { expose } from "comlink";
-import { areCardsIdentical, columnFromLocation, finalFromLocation, isAFullCard, isCardAAce, isCardAKing, makeCardLocationAware } from "lib/util";
+import { enhanceCard } from "lib/enhancers";
+import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
 
@@ -60,22 +61,25 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
     fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'spade');
 
     const keysToRemove: string[] = [];
+    const enhancedCard = enhanceCard(card);
 
     /**
      * Filter out the cards that are not needed
      */
     for(const key in potentialCardLocations) {
         const inner = potentialCardLocations[key];
+        const enhancedInner = enhanceCard(inner);
+
 
         /**
          * If the card we have clicked on is of type king
          */
-        if (isCardAKing(card)) {
+        if (enhancedCard.isAKing()) {
             /**
              * The current card we are looping over has only a 
              * location, then this is a empty space.
              */
-            if (isAFullCard(inner)){
+            if (enhancedInner.isAFullCard()){
                 keysToRemove.push(inner.location.area);
                 continue;
             }
@@ -94,12 +98,12 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         /**
          * If the card we have clicked on is of type ace
          */
-        if (isCardAAce(card)) {
+        if (enhancedCard.isAAce()) {
             /**
              * The current card we are looping over has only a 
              * location, then this is a empty space.
              */
-            if (isAFullCard(inner)){
+            if (enhancedInner.isAFullCard()){
                 keysToRemove.push(inner.location.area);
                 continue;
             }
@@ -137,7 +141,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * If the cards are indentical then it 
          * can't be moved to this stack
          */
-        if (areCardsIdentical(cardToCheck, card)) {
+        if (enhancedInner.isIdenticalToo(card)) {
             keysToRemove.push(inner.location.area);
             continue;
         }

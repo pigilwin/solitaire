@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
+import { enhanceCard } from "lib/enhancers";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
-import { isCardAKing } from "lib/util";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePossibleMovesAction } from "store/game/gameMoveSlice";
@@ -42,12 +42,13 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
 
 const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardMoveFromWorker, keys: string[], card: LocationAwareSolitaireCard): void => {
     const droppableCard = potentialMoves[keys[keys.length - 1]];
+    const enchancedCard = enhanceCard(card);
 
     /**
      * If the card is a king then use the specific action 
      * dedicated to moving cards to empty columns
      */
-    if (isCardAKing(card)) {
+    if (enchancedCard.isAKing()) {
         dispatch(moveCardToEmptyColumnAsync({
             drag: card,
             column: droppableCard.location.area

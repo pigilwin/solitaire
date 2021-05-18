@@ -1,10 +1,9 @@
+import { enhanceCard } from "lib/enhancers";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 
 import { moveCardToEmptyColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
-
-import { isCardAKing } from "lib/util";
 
 import { EmptyCard } from '../EmptyCard';
 
@@ -24,7 +23,7 @@ export const DroppableEmptyCardSpace = ({column}: EmptyCardSpaceProps): JSX.Elem
             }));
         },
         canDrop: (card) => {
-            return isCardAKing(card);
+            return enhanceCard(card).isAKing();
         }
     }), [column]);
     
