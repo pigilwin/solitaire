@@ -3,8 +3,8 @@ import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireC
 export class CardEnhancer {
     public constructor(private card: LocationAwarePotentiallyUndefinedSolitaireCard) {}
 
-    public isIdenticalToo = (second: LocationAwareSolitaireCard): boolean => {
-
+    public isIdenticalToo (second: LocationAwareSolitaireCard): boolean
+    {
         if (!this.isAFullCard()) {
             return false;
         }
@@ -13,21 +13,34 @@ export class CardEnhancer {
         return first.cardNumber === second.cardNumber && first.suit === second.suit && first.index === second.index;
     };
 
-    public isAFullCard = (): boolean => {
+    public isAFullCard (): boolean
+    {
         return this.card.hasOwnProperty('cardNumber');
     }
     
-    public isAKing = (): boolean => {
+    public isAKing (): boolean
+    {
         if (!this.isAFullCard()) {
             return false;
         }
         return (this.card as LocationAwareSolitaireCard).cardNumber === 'K';
     }
     
-    public isAAce = (): boolean => {
+    public isAAce(): boolean
+    {
         if (!this.isAFullCard()) {
             return false;
         }
         return (this.card as LocationAwareSolitaireCard).cardNumber === 'A';
+    }
+
+    public isOnFinal(): boolean
+    {
+        return this.card.location.namespace === 'final';
+    }
+
+    public isOnColumns(): boolean
+    {
+        return this.card.location.namespace === 'columns';
     }
 }

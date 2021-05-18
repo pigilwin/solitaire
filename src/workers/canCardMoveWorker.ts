@@ -76,8 +76,8 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          */
         if (enhancedCard.isAKing()) {
             /**
-             * The current card we are looping over has only a 
-             * location, then this is a empty space.
+             * If the current card is a full card then the 
+             * king can't be moved to this location
              */
             if (enhancedInner.isAFullCard()){
                 keysToRemove.push(inner.location.area);
@@ -88,7 +88,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              * If the current card we are looping over has only a
              * location and this is final it needs to be removed
              */
-            if (inner.location.namespace === 'final') {
+            if (enhancedInner.isOnFinal()) {
                 keysToRemove.push(inner.location.area);
                 continue;
             }
@@ -112,7 +112,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              * If the current card we are looping over has only a
              * location and this is columns it needs to be removed
              */
-            if (inner.location.namespace === 'columns') {
+            if (enhancedInner.isOnColumns()) {
                 keysToRemove.push(inner.location.area);
                 continue;
             }
@@ -133,7 +133,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         /**
          * If both the suits match and the card index is the next one in line
          */
-        if (cardToCheck.location.namespace === 'final' && cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
+        if (enhancedInner.isOnFinal() && cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
             continue;
         }
 
