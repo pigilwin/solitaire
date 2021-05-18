@@ -60,6 +60,7 @@ const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardM
             column: droppableCard.location.area,
             drag: card
         }));
+        return;
     }
 
     dispatch(moveCardToColumnAsync({
