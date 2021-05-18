@@ -55,6 +55,10 @@ const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardM
         return;
     }
 
+    /**
+     * If the card has only one place to go and its the 
+     * final then just dispatch the action
+     */
     if (droppableCard.location.namespace === 'final') {
         dispatch(moveCardToFinalColumnAsync({
             column: droppableCard.location.area,
