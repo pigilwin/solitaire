@@ -9,6 +9,7 @@ import { ChooseLocationColumn } from "./choose/ChooseLocationColumn";
 import { LocationAwareSolitaireCard } from "types/game";
 import { isAFullCard } from "lib/util";
 import { ChooseEmptyColumn } from "./choose/ChooseEmptyColumn";
+import { ChooseFinalColumn } from "./choose/ChooseFinalColumn";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;
@@ -23,6 +24,17 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
     let index = 0;
     for (const column in moves){
         const innerCard = moves[column];
+
+        if (!isAFullCard(innerCard) && innerCard.location.namespace === 'final') {
+            columnsBasedOnLocationsOfMoves.push(
+                <div key={index}>
+                    <ChooseFinalColumn
+                        cardWantingToBeMoved={cardWantingToBeMoved}
+                        innerCard={innerCard}
+                    />
+                </div>
+            );
+        }
 
         /**
          * If the card is not a full card then its most likely a empty card space
