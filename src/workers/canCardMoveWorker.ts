@@ -1,5 +1,5 @@
 import { expose } from "comlink";
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard, solitaireEnhancer } from "lib/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
@@ -45,6 +45,9 @@ const fetchTopLocationAwareCardFromFinal = (
 };
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
+
+    const enhancedSolitaire = solitaireEnhancer(solitaire); 
+
     let potentialCardLocations: CanCardMoveFromWorker = {};
 
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'one');
@@ -133,7 +136,12 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         /**
          * If both the suits match and the card index is the next one in line
          */
-        if (enhancedInner.isOnFinal() && cardToCheck.index + 1 === card.index && card.suit === cardToCheck.suit) {
+        if (
+            enhancedInner.isOnFinal() && 
+            cardToCheck.index + 1 === card.index && 
+            card.suit === cardToCheck.suit &&
+            !enhancedSolitaire.doAnyCardsExistAsChildren(card)
+        ) {
             continue;
         }
 

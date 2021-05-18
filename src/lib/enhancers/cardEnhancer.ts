@@ -1,9 +1,9 @@
-import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard } from "types/game";
+import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, SolitaireCard } from "types/game";
 
 export class CardEnhancer {
     public constructor(private card: LocationAwarePotentiallyUndefinedSolitaireCard) {}
 
-    public isIdenticalToo (second: LocationAwareSolitaireCard): boolean
+    public isIdenticalToo (second: SolitaireCard): boolean
     {
         if (!this.isAFullCard()) {
             return false;
