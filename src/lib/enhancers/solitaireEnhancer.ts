@@ -10,6 +10,6 @@ export class SolitaireEnhancer {
         const index = column.findIndex((inner) => {
             return enhanceCard(card).isIdenticalToo(inner);
         });
-        return column.slice(index).length > 0;
+        return column.slice(index).length > 1;
     }
 }

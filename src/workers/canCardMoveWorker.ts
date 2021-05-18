@@ -73,11 +73,23 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         const inner = potentialCardLocations[key];
         const enhancedInner = enhanceCard(inner);
 
-
         /**
          * If the card we have clicked on is of type king
          */
         if (enhancedCard.isAKing()) {
+
+            /**
+             * If the card we are checking is a full card,
+             * is currently on the final stack and matches
+             * the suit then allow it to be processed
+             */
+            if (
+                enhancedInner.isAQueen() && 
+                enhancedInner.isOnFinal() &&
+                enhancedInner.hasIdenticalSuit(card)
+            ) {
+                continue;
+            }
             /**
              * If the current card is a full card then the 
              * king can't be moved to this location
@@ -91,13 +103,14 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              * If the current card we are looping over has only a
              * location and this is final it needs to be removed
              */
-            if (enhancedInner.isOnFinal()) {
+            if (enhancedInner.isOnFinal() && !enhancedInner.isAQueen()) {
                 keysToRemove.push(inner.location.area);
                 continue;
             }
 
             continue;
         }
+        
         /**
          * If the card we have clicked on is of type ace
          */
@@ -169,6 +182,15 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * allow the cards to be selected
          */
         if (cardToCheck.index !== card.index + 1) {
+            keysToRemove.push(inner.location.area);
+            continue;
+        }
+
+        /**
+         * If the card we are checking is on the final and is not of the same type
+         * that has been clicked on then don't allow the that card to be used
+         */
+        if (enhancedInner.isOnFinal() && cardToCheck.suit !== card.suit) {
             keysToRemove.push(inner.location.area);
             continue;
         }
