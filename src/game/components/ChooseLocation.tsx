@@ -25,15 +25,17 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
     for (const column in moves){
         const innerCard = moves[column];
 
-        if (!isAFullCard(innerCard) && innerCard.location.namespace === 'final') {
+        if (isAFullCard(innerCard) && innerCard.location.namespace === 'final') {
             columnsBasedOnLocationsOfMoves.push(
                 <div key={index}>
                     <ChooseFinalColumn
                         cardWantingToBeMoved={cardWantingToBeMoved}
-                        innerCard={innerCard}
+                        innerCard={innerCard as LocationAwareSolitaireCard}
                     />
                 </div>
             );
+            index++;
+            continue;
         }
 
         /**

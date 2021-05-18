@@ -1,15 +1,16 @@
 import { useDispatch } from "react-redux";
 import { clearPossibleMovesAction } from "store/game/gameMoveSlice";
 import { moveCardToFinalColumnAsync } from "store/game/thunk";
-import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard } from "types/game";
-import { EmptyCard } from "../board/EmptyCard";
+import { LocationAwareSolitaireCard } from "types/game";
+import { Card } from '../board/Card';
 
 interface ChooseFinalColumnProps {
-    innerCard: LocationAwarePotentiallyUndefinedSolitaireCard;
+    innerCard: LocationAwareSolitaireCard;
     cardWantingToBeMoved: LocationAwareSolitaireCard;
 }
 export const ChooseFinalColumn = ({innerCard, cardWantingToBeMoved}: ChooseFinalColumnProps): JSX.Element => {
     const dispatch = useDispatch();
+    console.log('called');
     const chooseColumnClickHandler = (): void => {
         dispatch(moveCardToFinalColumnAsync({
             drag: cardWantingToBeMoved,
@@ -20,7 +21,7 @@ export const ChooseFinalColumn = ({innerCard, cardWantingToBeMoved}: ChooseFinal
     
     return (
         <div className="cursor-pointer" onClick={chooseColumnClickHandler}>
-            <EmptyCard/>
+            <Card card={innerCard}/>
         </div>
     );
 }
