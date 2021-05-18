@@ -90,20 +90,12 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
             ) {
                 continue;
             }
-            /**
-             * If the current card is a full card then the 
-             * king can't be moved to this location
-             */
-            if (enhancedInner.isAFullCard()){
-                keysToRemove.push(inner.location.area);
-                continue;
-            }
 
             /**
-             * If the current card we are looping over has only a
-             * location and this is final it needs to be removed
+             * If the card we are checking is a full card
+             * then don't allow the card to be placed upon
              */
-            if (enhancedInner.isOnFinal() && !enhancedInner.isAQueen()) {
+            if (enhancedInner.isAFullCard()){
                 keysToRemove.push(inner.location.area);
                 continue;
             }
