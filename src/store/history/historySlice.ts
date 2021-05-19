@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Game } from "../../types/game";
+import { Game } from "types/game";
 import { RootState } from "../rootReducer";
-import { deepCopy } from "../util";
+import { deepCopy } from "lib/deepCopy";
 import { HistoryState } from "./type";
 
 export const initialState: HistoryState =  {

@@ -15,13 +15,16 @@ export interface SolitaireCard {
     color: COLOR;
 }
 
-export interface LocationAwareSolitaireCard extends SolitaireCard {
+export interface LocationAware {
     location: {
         namespace: string;
         area: string;
     };
 }
 
+export interface LocationAwareSolitaireCard extends SolitaireCard, LocationAware {}
+
+export type LocationAwarePotentiallyUndefinedSolitaireCard = LocationAwareSolitaireCard | LocationAware;
 export interface SolitaireFinal {
     diamond: SolitaireCard[];
     heart: SolitaireCard[];
@@ -47,18 +50,4 @@ export interface SolitaireColumn {
 export interface Game {
     game: Solitaire;
     generatedByTesting: boolean;
-}
-export interface MoveCardPayload {
-    drop: LocationAwareSolitaireCard;
-    drag: LocationAwareSolitaireCard;
-}
-
-export interface MoveCardToEmptyColumnPayload {
-    drag: LocationAwareSolitaireCard;
-    column: string;
-}
-
-export interface MoveCardToFinalColumnPayload {
-    drag: LocationAwareSolitaireCard;
-    column: string;
 }

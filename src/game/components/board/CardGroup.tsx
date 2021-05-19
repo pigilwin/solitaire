@@ -1,8 +1,11 @@
 import { PropsWithChildren } from "react";
 import { LocationAwareSolitaireCard } from "types/game";
+
 import { Card } from "./Card";
-import { DraggableCardAwareContext } from "./DraggableCardAwareContext";
-import { DroppableCardAwareContext } from "./DroppableCardAwareContext";
+
+import { DraggableCardAwareContext } from "./AwareContext/DraggableCardAwareContext";
+import { DroppableCardAwareContext } from "./AwareContext/DroppableCardAwareContext";
+import { DoubleClickCardAwareContext } from "./AwareContext/DoubleClickCardAwareContext";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
@@ -11,7 +14,7 @@ interface CardGroupProps {
 }
 
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
-    
+
     const classes = [];
     /**
      * If its not the initial card then 
@@ -42,14 +45,17 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
      */
     if (index !== maxDepth - 1){
 
-        return (
+        const draggableCard = (
             <div className={className}>
-                <DraggableCardAwareContext card={card}>
-                    <Card card={card}/>
-                    {children}
-                </DraggableCardAwareContext>
+                <DoubleClickCardAwareContext card={card}>
+                    <DraggableCardAwareContext card={card}>
+                        <Card card={card}/>
+                        {children}
+                    </DraggableCardAwareContext>
+                </DoubleClickCardAwareContext>
             </div>
         );
+        return draggableCard;
     }
 
     /**
@@ -57,14 +63,17 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
      * its allowed to be dragged and
      * dropped onto
      */
-    return (
+    const draggableDroppableCard = (
         <div className={className}>
-            <DraggableCardAwareContext card={card}>
-                <DroppableCardAwareContext card={card}>
-                    <Card card={card}/>
-                    {children}
-                </DroppableCardAwareContext>
-            </DraggableCardAwareContext>
+            <DoubleClickCardAwareContext card={card}>
+                <DraggableCardAwareContext card={card}>
+                    <DroppableCardAwareContext card={card}>
+                        <Card card={card}/>
+                        {children}
+                    </DroppableCardAwareContext>
+                </DraggableCardAwareContext>
+            </DoubleClickCardAwareContext>
         </div>
     );
+    return draggableDroppableCard;
 };

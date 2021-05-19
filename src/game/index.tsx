@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
@@ -10,23 +9,20 @@ import { currentGameSelector } from "store/game/gameSlice";
 import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
-import { isTheGameComplete } from "invokeWorkers";
-import { useEffectAsync } from "hooks/useEffectAsync";
+import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
 
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
-    const [gameComplete, setGameComplete] = useState(false);
+    const [isGameComplete] = useIsTheGameComplete(solitaire);
 
-    useEffectAsync(async () => {
-        const state = await isTheGameComplete(solitaire);
-        setGameComplete(state);
-    }, []);
-
+    /**
+     * Show the empty game screen if no game exists
+     */
     if (solitaire.id.length === 0) {
         return (
             <FullPageContainer>
-                <GameBar solitaire={solitaire}/>
+                <GameBar isGameComplete={true}/>
             </FullPageContainer>
         );
     }
@@ -34,15 +30,15 @@ export const Game = (): JSX.Element => {
     /**
      * If the game is complete
      */
-    if (gameComplete) {
-        return <GameComplete solitaire={solitaire}/>;
+    if (isGameComplete) {
+        return <GameComplete/>;
     }
 
     return (
         <FullPageContainer>
-            <GameBar solitaire={solitaire}/>
+            <GameBar isGameComplete={isGameComplete}/>
             <DndProvider backend={HTML5Backend}>
-                <Board solitaire={solitaire}/>
+                <Board/>
             </DndProvider>
         </FullPageContainer>
     );

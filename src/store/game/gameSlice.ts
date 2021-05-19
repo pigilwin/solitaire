@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, RootStateHook } from '../rootReducer';
-import { deepCopy } from '../util';
+import { deepCopy } from 'lib/deepCopy';
 import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } from './builder/gameBuilder';
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
-import { Game, MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload, Solitaire } from '../../types/game';
+import { Game, Solitaire } from 'types/game';
+import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from 'types/gamePayload';
 
 export const initialState: Game =  {
     game: {
@@ -40,6 +41,7 @@ const gameSlice = createSlice({
         initialiseGameAction(state: Game) {
             const newState = state;
             newState.game = generateGame();
+            newState.generatedByTesting = false;
             return newState;
         },
         refreshRemaningFromDrawAction(state: Game) {
@@ -93,3 +95,4 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
+export const isGameGeneratedByTestingSelector = (state: RootState): boolean => state.gameReducer.generatedByTesting;

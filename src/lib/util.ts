@@ -1,9 +1,8 @@
-import { LocationAwareSolitaireCard, Solitaire, SolitaireCard, SolitaireColumn, SolitaireFinal } from "../../../types/game";
+import { LocationAwareSolitaireCard, Solitaire, SolitaireCard, SolitaireColumn, SolitaireFinal } from "../types/game";
 
 export const columnFromLocation = (game: Solitaire, namespace: string, area: string): SolitaireCard[] => {
     const columns: SolitaireColumn = (game[namespace as keyof Solitaire] as SolitaireColumn);
-    const column: SolitaireCard[] = columns[area as keyof SolitaireColumn];
-    return column;
+    return columns[area as keyof SolitaireColumn];
 }
 
 export const finalFromLocation = (game: Solitaire, finalColumn: string): SolitaireCard[] => {
@@ -24,4 +23,26 @@ export const flipLatestCardInColumn = (dragColumn: SolitaireCard[]): void => {
     if (dragColumn.length > 0) {
         dragColumn[dragColumn.length - 1].showing = true;
     }
+}
+
+export const makeCardLocationAware = (card: SolitaireCard, namespace: string, area: string): LocationAwareSolitaireCard => {
+    return {
+        location: {
+            namespace,
+            area
+        },
+        ...card
+    }
+}
+
+export const isOnColumns = (card: LocationAwareSolitaireCard) => {
+    return card.location.namespace === 'columns';
+};
+
+export const isOnDraw = (card: LocationAwareSolitaireCard) => {
+    return card.location.namespace === 'draw';
+}
+
+export const isOnFinal = (card: LocationAwareSolitaireCard) => {
+    return card.location.namespace === 'final';
 }

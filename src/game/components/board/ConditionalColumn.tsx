@@ -1,6 +1,6 @@
 import { SolitaireCard } from "types/game";
 import { Column } from "./Column";
-import { DroppableEmptyCardSpace } from "./DroppableEmptyCardSpace";
+import { DroppableEmptyCardSpace } from "./AwareContext/DroppableEmptyCardSpace";
 
 interface ConditionalColumnProps {
     cards: SolitaireCard[];

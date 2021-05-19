@@ -1,5 +1,5 @@
-import { SUIT } from "../../../types/suit";
-import { SolitaireCard  } from "../../../types/game";
+import { SUIT } from "types/suit";
+import { SolitaireCard  } from "types/game";
 
 export const canCardBeDroppedOnToColumn = (target: SolitaireCard, drag: SolitaireCard): boolean => {    
     /**
@@ -56,8 +56,4 @@ export const canCardBeDroppedOnToFinal = (drag: SolitaireCard, suit: SUIT, cards
      * being dragged in
      */
     return latestCard.index + 1 === drag.index;
-};
-
-export const canCardBeDroppedToEmptyColumn = (card: SolitaireCard) => {
-    return card.cardNumber === 'K';
 };

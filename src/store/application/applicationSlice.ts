@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ApplicationState } from "types/application";
 import { BACK_GREEN } from "types/back";
 import { RootState } from "../rootReducer";
-import { deepCopy } from "../util";
+import { deepCopy } from "lib/deepCopy";
 import { localStorageKey } from "./constants";
 
 export const initialState: ApplicationState =  {

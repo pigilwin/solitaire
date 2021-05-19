@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TrackerState } from "types/tracker";
 import { RootState, RootStateHook } from "../rootReducer";
-import { deepCopy } from "../util";
+import { deepCopy } from "lib/deepCopy";
 
 export const initialState: TrackerState =  {
     score: 0,
@@ -34,11 +34,6 @@ const historySlice = createSlice({
             const newState = deepCopy<TrackerState>(state);
             newState.score = action.payload;
             return newState;
-        },
-        replaceMovesAction(state: TrackerState, action: PayloadAction<number>) {
-            const newState = deepCopy<TrackerState>(state);
-            newState.moves = action.payload;
-            return newState;
         }
     }
 });
@@ -49,8 +44,7 @@ export const {
     decrementScoreAction,
     addMoveAction,
     clearTrackerAction,
-    replaceScoreAction,
-    replaceMovesAction
+    replaceScoreAction
 } = historySlice.actions;
 
 export const fetchTracker = (state: RootStateHook): TrackerState => {

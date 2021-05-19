@@ -1,12 +1,21 @@
-import { makeCardLocationAware } from "store/game/locationHelper";
-import { SolitaireCard, SolitaireDraw } from "types/game";
+import { useSelector } from "react-redux";
+
+import { SolitaireCard } from "types/game";
+
+import { makeCardLocationAware } from "lib/util";
+
+import { currentGameSelector } from "store/game/gameSlice";
+
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
+import { DoubleClickCardAwareContext } from "../../AwareContext/DoubleClickCardAwareContext";
 
-interface DrawProps {
-    draw: SolitaireDraw;
-}
-export const Draw = ({draw}: DrawProps): JSX.Element => {
+
+export const Draw = (): JSX.Element => {
+    
+    const solitaire = useSelector(currentGameSelector);
+    const draw = solitaire.draw;
+    
     return (
         <div className="w-1/2 overflow-hidden flex flex-row justify-center">
             <div className="px-2">
@@ -39,5 +48,9 @@ const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
     const card = cards[cards.length - 1];
     const cardWithLocation = makeCardLocationAware(card, 'draw', 'current');
 
-    return <DrawCard card={cardWithLocation}/>;
+    return (
+        <DoubleClickCardAwareContext card={cardWithLocation}>
+            <DrawCard card={cardWithLocation}/>;
+        </DoubleClickCardAwareContext>
+    );
 }
