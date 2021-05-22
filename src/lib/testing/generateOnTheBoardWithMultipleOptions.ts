@@ -14,13 +14,13 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
     const aceOfSpades = fetchCard(game, 'A', SUIT_TYPE_SPADE);
     const twoOfHearts = fetchCard(game, '2', SUIT_TYPE_HEART);
     const twoOfSpades = fetchCard(game, '2', SUIT_TYPE_SPADE);
-    const fiveOfSpades = fetchCard(game, '5', SUIT_TYPE_SPADE);
-    const sixOfSpades = fetchCard(game, '6', SUIT_TYPE_SPADE);
-    const nineOfDiamonds = fetchCard(game, '9', SUIT_TYPE_DIAMOND);
-    const nineOfHearts = fetchCard(game, '9', SUIT_TYPE_HEART);
+    const fiveOfClubs = fetchCard(game, '5', SUIT_TYPE_CLUB);
+    const sixOfClubs = fetchCard(game, '6', SUIT_TYPE_CLUB);
     const sevenOfHearts = fetchCard(game, '7', SUIT_TYPE_HEART);
     const eightOfClubs = fetchCard(game, '8', SUIT_TYPE_CLUB);
     const eightOfSpades = fetchCard(game, '8', SUIT_TYPE_SPADE);
+    const nineOfDiamonds = fetchCard(game, '9', SUIT_TYPE_DIAMOND);
+    const nineOfHearts = fetchCard(game, '9', SUIT_TYPE_HEART);
     const kingOfClubs = fetchCard(game, 'K', SUIT_TYPE_CLUB);
 
     return {
@@ -28,7 +28,7 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
         game: {
             id: v4(),
             columns: {
-                one: [sixOfSpades],
+                one: [sixOfClubs],
                 two: [nineOfDiamonds, eightOfClubs],
                 three: [sevenOfHearts],
                 four: [nineOfHearts, eightOfSpades],
@@ -41,8 +41,8 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
                remaining: [] 
             },
             final: {
-                club: [],
-                spade: [fiveOfSpades],
+                club: [fiveOfClubs],
+                spade: [],
                 heart: [],
                 diamond: []
             }
