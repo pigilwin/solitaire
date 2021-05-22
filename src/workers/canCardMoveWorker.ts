@@ -1,5 +1,5 @@
 import { expose } from "comlink";
-import { enhanceCard, solitaireEnhancer } from "lib/enhancers";
+import { enhanceCard, enhanceSolitaire } from "lib/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
@@ -46,7 +46,7 @@ const fetchTopLocationAwareCardFromFinal = (
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
 
-    const enhancedSolitaire = solitaireEnhancer(solitaire); 
+    const enhancedSolitaire = enhanceSolitaire(solitaire); 
 
     let potentialCardLocations: CanCardMoveFromWorker = {};
 
