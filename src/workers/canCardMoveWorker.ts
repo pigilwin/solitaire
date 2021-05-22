@@ -46,171 +46,117 @@ const fetchTopLocationAwareCardFromFinal = (
 
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
 
-    const enhancedSolitaire = enhanceSolitaire(solitaire); 
-
-    let potentialCardLocations: CanCardMoveFromWorker = {};
+    const enhancedSolitaire = enhanceSolitaire(solitaire);
+    const potentialMoves: CanCardMoveFromWorker = {};
 
     /**
      * Load the last card in every column into the list of checks
      */
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'one');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'two');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'three');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'four');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'five');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'six');
-    fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'seven');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'one');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'two');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'three');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'four');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'five');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'six');
+    fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'seven');
 
     /**
      * Load the last card in the final locations into the list of checks
      */
-    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'diamond');
-    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'heart');
-    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'club');
-    fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'spade');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'diamond');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'heart');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'club');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'spade');
 
-    const keysToRemove: string[] = [];
-    const enhancedCard = enhanceCard(card);
+    const enhancedCardToCheck = enhanceCard(card);
 
-    /**
-     * Filter out the cards that are not needed
-     */
-    for(const key in potentialCardLocations) {
-        const inner = potentialCardLocations[key];
+    const locationsOfCardsWanted = Object.keys(potentialMoves).filter((key) => {
+        const inner = potentialMoves[key];
         const enhancedInner = enhanceCard(inner);
 
         /**
          * If the card we have clicked on is of type king
          */
-        if (enhancedCard.isAKing()) {
+         if (enhancedCardToCheck.isAKing()) {
 
             /**
-             * If the card we are checking is a full card,
-             * is currently on the final stack and matches
+             * If the card we are checking currently on the final stack, is a queen and matches
              * the suit then allow it to be processed
              */
-            if (
-                enhancedInner.isAQueen() && 
-                enhancedInner.isOnFinal() &&
-                enhancedInner.hasIdenticalSuit(card)
-            ) {
-                continue;
+            if (enhancedInner.isAQueen() && enhancedInner.isOnFinal() && enhancedInner.hasIdenticalSuit(card)) {
+                return true;
             }
 
             /**
              * If the card we are checking is a full card
              * then don't allow the card to be placed upon
              */
-            if (enhancedInner.isAFullCard()){
-                keysToRemove.push(inner.location.area);
-                continue;
+            if (!enhancedInner.isAFullCard()){
+                return true;
             }
 
-            /**
-             * If the card we are checking is on the final
-             * we can just skip it
-             */
-            if (enhancedInner.isOnFinal()){
-                keysToRemove.push(inner.location.area);
-                continue;
-            }
-
-            continue;
+            return false;
         }
-        
+
         /**
-         * If the card we have clicked on is of type ace
+         * The current card we are looping over has only a 
+         * location, then this is a empty space. Empty spaces
+         * can be forgotten about as only kings can use these
          */
-        if (enhancedCard.isAAce()) {
-            /**
-             * The current card we are looping over has only a 
-             * location, then this is a empty space.
-             */
-            if (enhancedInner.isAFullCard()){
-                keysToRemove.push(inner.location.area);
-                continue;
-            }
-
-            /**
-             * If the current card we are looping over has only a
-             * location and this is columns it needs to be removed
-             */
-            if (enhancedInner.isOnColumns()) {
-                keysToRemove.push(inner.location.area);
-                continue;
-            }
-
-            /**
-             * If the location of the final is not of the same suit then remove
-             */
-            if (inner.location.area !== card.suit.toLowerCase()) {
-                keysToRemove.push(inner.location.area);
-                continue;
-            }
-
-            continue;
+        if (!enhancedInner.isAFullCard()){
+            return false;
         }
 
         const cardToCheck = inner as LocationAwareSolitaireCard;
 
         /**
-         * If both the suits match and the card index is the next one in line
+         * If the suits match and the card, the card index
+         * of the card being checked plus one matches the 
+         * card clicked on, both card suits match and the
+         * card being clicke on has no children then the
+         * card can be moved to the final
          */
         if (
             enhancedInner.isOnFinal() && 
             cardToCheck.index + 1 === card.index && 
-            card.suit === cardToCheck.suit &&
+            enhancedInner.hasIdenticalSuit(card) && 
             !enhancedSolitaire.doAnyCardsExistAsChildren(card)
         ) {
-            continue;
+            return true;
         }
 
         /**
          * If the cards are indentical then it 
          * can't be moved to this stack
-         */
+        */
         if (enhancedInner.isIdenticalToo(card)) {
-            keysToRemove.push(inner.location.area);
-            continue;
+            return false;
         }
 
         /**
-         * If the cards are of the same
-         * color then these can't be
-         * transferred
-         */
+         * If the cards are of the same color then 
+         * these can't be transferred
+        */
         if (enhancedInner.hasIdenticalColour(card)) {
-            keysToRemove.push(inner.location.area);
-            continue;
+            return false;
         }
 
         /**
-         * If the cards are compatible then
-         * allow the cards to be selected
-         */
-        if (cardToCheck.index !== card.index + 1) {
-            keysToRemove.push(inner.location.area);
-            continue;
+         * If the card indexes aren't compatible then don't allow
+         * the index to be moved
+        */
+        if (cardToCheck.index === card.index + 1) {
+            return true;
         }
 
-        /**
-         * If the card we are checking is on the final and is not of the same type
-         * that has been clicked on then don't allow the that card to be used
-         */
-        if (enhancedInner.isOnFinal() && !enhancedInner.hasIdenticalSuit(card)) {
-            keysToRemove.push(inner.location.area);
-            continue;
-        }
-    }
-
-    /**
-     * Remove the keys that are not required
-     */
-    for (const key of keysToRemove) {
-        delete potentialCardLocations[key];
-    }
-
-    return potentialCardLocations;
+        return false;
+    });
+    
+    const moves: CanCardMoveFromWorker = {};
+    locationsOfCardsWanted.forEach((k) => {
+        moves[k] = potentialMoves[k];
+    });
+    return moves;
 };
 
 const exports = {
