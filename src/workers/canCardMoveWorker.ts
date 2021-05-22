@@ -50,6 +50,9 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
 
     let potentialCardLocations: CanCardMoveFromWorker = {};
 
+    /**
+     * Load the last card in every column into the list of checks
+     */
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'one');
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'two');
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'three');
@@ -58,6 +61,9 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'six');
     fetchTopLocationAwareCardFromColumns(potentialCardLocations, solitaire, 'seven');
 
+    /**
+     * Load the last card in the final locations into the list of checks
+     */
     fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'diamond');
     fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'heart');
     fetchTopLocationAwareCardFromFinal(potentialCardLocations, solitaire, 'club');
