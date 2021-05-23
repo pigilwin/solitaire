@@ -81,10 +81,10 @@ export const Testing = (): JSX.Element => {
         <div className="flex min-h-screen bg-green-300">
             <div className="m-auto p-10 w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md">
                 <h1 className="text-center text-4xl">Testing Helpers</h1>
-                <GameButton buttonText="One move away from victory" onClick={oneMoveAwayClickHandler}/>
-                <GameButton buttonText="All on the board" onClick={allOnTheBoardClickHandler}/>
-                <GameButton buttonText="Card with multiple options" onClick={cardWithMultipleOptionsClickHandler}/>
-                <GameButton buttonText="Hide testing page" onClick={hideTestingPageClickHandler}/>
+                <GameButton testID="cy-testing-one-move-away" buttonText="One move away from victory" onClick={oneMoveAwayClickHandler}/>
+                <GameButton testID="cy-testing-all-one-the-board" buttonText="All on the board" onClick={allOnTheBoardClickHandler}/>
+                <GameButton testID="cy-testing-multiple-options" buttonText="Card with multiple options" onClick={cardWithMultipleOptionsClickHandler}/>
+                <GameButton testID="cy-testing-hide-page" buttonText="Hide testing page" onClick={hideTestingPageClickHandler}/>
             </div>
         </div>
     );

@@ -33,6 +33,7 @@ export const UndoGameButton = (): JSX.Element => {
     return (
         <div className="flex flex-row">    
             <IconGameButton
+                testID="cy-undo"
                 buttonText="Undo"
                 icon={<Undo/>}
                 onClick={undoHistoryClickHandler}

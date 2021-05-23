@@ -16,16 +16,16 @@ export const GameButtons = (): JSX.Element => {
 
     let testing: JSX.Element | null = null;
     if(useSelector(areWeAllowedToSeeTestingRouteSelector)) {
-        testing = <RouteButton buttonText="Testing" route="/testing"/>;
+        testing = <RouteButton testID="cy-testing" buttonText="Testing" route="/testing"/>;
     }
 
     return (
         <div className="flex flex-row">
             <div className="px-1">
-                <GameButton buttonText="New Game" onClick={newGameClickHandler}/>
+                <GameButton testID="cy-new-game" buttonText="New Game" onClick={newGameClickHandler}/>
             </div>
-            <RouteButton buttonText="Leaderboard" route="/leaderboard"/>
-            <RouteButton buttonText="Settings" route="/settings"/>
+            <RouteButton testID="cy-leaderboard" buttonText="Leaderboard" route="/leaderboard"/>
+            <RouteButton testID="cy-settings" buttonText="Settings" route="/settings"/>
             {testing}
         </div>
     );
@@ -34,8 +34,9 @@ export const GameButtons = (): JSX.Element => {
 interface RouteButtonProps {
     route: string;
     buttonText: string;
+    testID: string;
 }
-const RouteButton = ({route, buttonText}: RouteButtonProps): JSX.Element => {
+const RouteButton = ({route, buttonText, testID}: RouteButtonProps): JSX.Element => {
     
     const history = useHistory();
     const clickHandler = () => {
@@ -44,7 +45,7 @@ const RouteButton = ({route, buttonText}: RouteButtonProps): JSX.Element => {
 
     return (
         <div className="px-1">
-            <GameButton buttonText={buttonText} onClick={clickHandler}/>
+            <GameButton testID={testID} buttonText={buttonText} onClick={clickHandler}/>
         </div>
     );
 }
