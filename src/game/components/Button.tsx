@@ -14,7 +14,7 @@ export const GameButton = forwardRef<HTMLButtonElement, GameButtonProps>(({butto
             disabled={disabled}
             className="bg-blue-600 text-gray-200 p-2 rounded hover:bg-blue-500 hover:text-gray-100"
             onClick={onClick}
-            data-test-id={testID}
+            data-cy-test-id={testID}
         >{buttonText}</button>
     );
 });
@@ -29,7 +29,7 @@ export const IconGameButton = ({buttonText, disabled, onClick, icon, testID}: Ic
             disabled={disabled}
             className="bg-blue-600 text-gray-200 p-2 rounded hover:bg-blue-500 hover:text-gray-100 inline-flex items-center"
             onClick={onClick}
-            data-test-id={testID}
+            data-cy-test-id={testID}
         >
             {icon}
             <span className="ml-1">{buttonText}</span>
