@@ -21,3 +21,14 @@ it('should load the page and unlock the testing page then navigate there', () =>
         expect(loc.href).to.contain('testing');
     });
 });
+
+it('should allow access to the testing page if the local storage key is present', () => {
+
+    localStorage.setItem('USING_TESTING_ROUTES', 'YES');
+    
+    cy.visit('/');
+
+    cy.dataCy('cy-testing').click({
+        force: true
+    });
+});
