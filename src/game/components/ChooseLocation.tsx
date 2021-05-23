@@ -79,7 +79,7 @@ export const ChooseLocation = ({moves}: ChooseLocationProps): JSX.Element => {
                 {columnsBasedOnLocationsOfMoves}
             </ColumnContainer>
             <div className="flex justify-center items-center">
-                <GameButton buttonText="Back" onClick={goBackClickHandler}/>
+                <GameButton testID="cy-choose-location-back" buttonText="Back" onClick={goBackClickHandler}/>
             </div>
         </div>
     );
