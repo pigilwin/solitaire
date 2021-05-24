@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { releaseProxy, wrap } from "comlink";
 import { useState, useEffect } from "react";
 import { Solitaire } from "types/game";

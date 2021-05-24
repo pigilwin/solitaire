@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { expose } from 'comlink';
 import { enhanceSolitaire } from 'lib/enhancers';
 import { Solitaire } from "types/game";

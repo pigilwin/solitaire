@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { expose } from "comlink";
 import { enhanceCard, enhanceSolitaire } from "lib/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
