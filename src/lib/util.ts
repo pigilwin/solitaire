@@ -52,3 +52,28 @@ export const fetchCard = (cards: SolitaireCard[], number: string, suit: string):
         return card.cardNumber === number && card.suit === suit;
     }) as SolitaireCard;
 }
+
+export const emptySolitaire = (): Solitaire => {
+    return {
+        id: '',
+        columns: {
+            one: [],
+            two: [],
+            three: [],
+            four: [],
+            five: [],
+            six: [],
+            seven: []
+        },
+        final: {
+            heart: [],
+            diamond: [],
+            spade: [],
+            club: []
+        },
+        draw: {
+            remaining: [],
+            current: []
+        }
+    };
+};
