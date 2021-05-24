@@ -1,5 +1,6 @@
+import { fetchCard } from "lib/util";
 import { generateDeck } from "store/game/initialiseGame";
-import { Game, SolitaireCard } from "types/game";
+import { Game } from "types/game";
 import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "types/suit";
 import { v4 } from "uuid";
 
@@ -49,9 +50,3 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
         }
     };
 }
-
-const fetchCard = (cards: SolitaireCard[], number: string, suit: string): SolitaireCard => {
-    return cards.find((card) => {
-        return card.cardNumber === number && card.suit === suit;
-    }) as SolitaireCard;
-};
