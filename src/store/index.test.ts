@@ -1,5 +1,5 @@
-import {store} from './index';
+import {initialiseStore} from './index';
 
 test('should create a store', () => {
-    expect(store.getState().gameReducer.game.id).toBe('');
+    expect(initialiseStore().getState().gameReducer.game.id).toBe('');
 });
