@@ -16,6 +16,6 @@ test('Can a card be enchanced', () => {
 });
 
 test('Can a solitaire object be enchanced', () => {
-    const solitaire = emptySolitaire();
+    const solitaire = emptySolitaire('empty-game');
     expect(enhanceSolitaire(solitaire)).toBeInstanceOf(SolitaireEnhancer);
 });

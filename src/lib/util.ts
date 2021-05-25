@@ -41,9 +41,9 @@ export const fetchCard = (cards: SolitaireCard[], number: string, suit: string):
     }) as SolitaireCard;
 }
 
-export const emptySolitaire = (): Solitaire => {
+export const emptySolitaire = (id: string): Solitaire => {
     return {
-        id: '',
+        id: id,
         columns: {
             one: [],
             two: [],
