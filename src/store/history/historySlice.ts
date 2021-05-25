@@ -44,7 +44,8 @@ export const {
     clearHistoryAction,
     addGameToHistoryAction,
     addScoreToHistoryAction,
-    removeLatestHistoryItemAction
+    removeLatestHistoryItemAction,
+    removeLatestScoreAction
 } = historySlice.actions;
 
 export const doWeHaveAnyHistorySelector = (state: RootState): boolean => state.historyReducer.games.length > 0;
