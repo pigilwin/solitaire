@@ -16,7 +16,7 @@ import { addMoveAction, decrementScoreAction, fetchTracker, incrementScoreAction
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { TrackerState } from "types/tracker";
 import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from "types/gamePayload";
-import { isOnColumns, isOnDraw, isOnFinal } from "lib/util";
+import { enhanceCard } from "lib/enhancers";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (
@@ -128,11 +128,14 @@ export const moveCardToColumnAsync = (
      */
     dispatch(moveCardToColumnAction(payload));
 
+    const enhancedDrop = enhanceCard(payload.drop);
+    const enhancedDrag = enhanceCard(payload.drag);
+
     /**
      * If the cards are being dragged between the two 
      * columns the incrementing the score is not required
      */
-    if (isOnColumns(payload.drag) && isOnColumns(payload.drop)) {
+    if (enhancedDrag.isOnColumns() && enhancedDrop.isOnColumns()) {
         return;
     }
 
@@ -140,7 +143,7 @@ export const moveCardToColumnAsync = (
      * If the cards are being dragged from the draw 
      * to the board then increment the score
      */
-    if (isOnDraw(payload.drag) && isOnColumns(payload.drop)) {
+    if (enhancedDrag.isOnDraw() && enhancedDrop.isOnColumns()) {
         dispatch(incrementScoreAction(FROM_DRAW));
         return;
     }
@@ -149,7 +152,7 @@ export const moveCardToColumnAsync = (
      * If the card is being moved back from the final location
      * to the columns then the score will need to be decremented
      */
-    if (isOnFinal(payload.drag) && isOnColumns(payload.drop)) {
+    if (enhancedDrag.isOnFinal() && enhancedDrop.isOnColumns()) {
         dispatch(decrementScoreAction(REMOVE_FROM_FINAL));
         return;
     }
@@ -187,7 +190,7 @@ export const moveCardToEmptyColumnAsync = (
      * If the king is being added from the 
      * drag then increment the score
      */
-    if (isOnDraw(payload.drag)) {
+    if (enhanceCard(payload.drag).isOnDraw()) {
         dispatch(incrementScoreAction(FROM_DRAW_WITH_EMPTY_KING));
         return;
     }

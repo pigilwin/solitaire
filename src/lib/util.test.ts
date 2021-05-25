@@ -6,9 +6,6 @@ import {
     finalFromLocation,
     findIndexOfCardWithinColumn,
     flipLatestCardInColumn,
-    isOnFinal,
-    isOnColumns,
-    isOnDraw,
     makeCardLocationAware,
     emptySolitaire
 } from './util';
@@ -45,19 +42,4 @@ test('Can the latest card in the column be flipped in the column', () => {
 test('Can no cards effect the flip latest card', () => {
     flipLatestCardInColumn([]);
     expect(true).toBeTruthy();
-});
-
-test('Is the card identifiable for final', () => {
-    const final = makeCardLocationAware(aceOfHearts, 'final', 'hearts');
-    expect(isOnFinal(final)).toBeTruthy();
-});
-
-test('Is the card identifiable for draw', () => {
-    const draw = makeCardLocationAware(aceOfHearts, 'draw', 'current');
-    expect(isOnDraw(draw)).toBeTruthy();
-});
-
-test('Is the card identifiable for columns', () => {
-    const columnOne = makeCardLocationAware(aceOfHearts, 'columns', 'one');
-    expect(isOnColumns(columnOne)).toBeTruthy();
 });

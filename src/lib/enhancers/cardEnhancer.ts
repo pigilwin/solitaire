@@ -71,4 +71,9 @@ export class CardEnhancer {
     {
         return this.card.location.namespace === 'columns';
     }
+
+    public isOnDraw(): boolean
+    {
+        return this.card.location.namespace === 'draw';
+    }
 }
