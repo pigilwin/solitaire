@@ -1,4 +1,4 @@
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 

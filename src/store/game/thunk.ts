@@ -16,7 +16,7 @@ import { addMoveAction, decrementScoreAction, fetchTracker, incrementScoreAction
 import { ADD_TO_FINAL, FROM_DRAW, FROM_DRAW_WITH_EMPTY_KING, LOSS_FOR_DRAW_RESET, REMOVE_FROM_FINAL } from "../tracker/scoreConstants";
 import { TrackerState } from "types/tracker";
 import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from "types/gamePayload";
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 
 export const initialiseGameAsync = (
 ): AppThunk => async (

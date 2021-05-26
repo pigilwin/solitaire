@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
