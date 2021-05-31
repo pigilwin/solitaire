@@ -162,7 +162,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * If the card indexes aren't compatible then don't allow
          * the index to be moved
         */
-        if (innerAsLocationAware.index === card.index + 1) {
+        if (innerAsLocationAware.index === card.index + 1 && !enhancedInner.isOnFinal()) {
             return true;
         }
 
