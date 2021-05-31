@@ -152,10 +152,7 @@ export const moveCardToColumnAsync = (
      * If the card is being moved back from the final location
      * to the columns then the score will need to be decremented
      */
-    if (enhancedDrag.isOnFinal() && enhancedDrop.isOnColumns()) {
-        dispatch(decrementScoreAction(REMOVE_FROM_FINAL));
-        return;
-    }
+     dispatch(decrementScoreAction(REMOVE_FROM_FINAL));
 }
 
 export const moveCardToEmptyColumnAsync = (
