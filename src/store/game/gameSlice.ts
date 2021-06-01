@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, RootStateHook } from '../rootReducer';
 import { deepCopy } from 'lib/deepCopy';
-import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } from './builder/gameBuilder';
+import { drawCardFromRemainingAddToDraw, refreshRemainingFromDraw , moveCard } from './builder/gameBuilder';
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
@@ -46,7 +46,7 @@ const gameSlice = createSlice({
         },
         refreshRemaningFromDrawAction(state: Game) {
             const newState = deepCopy<Game>(state);
-            newState.game = refreshRemaningFromDraw(newState.game);
+            newState.game = refreshRemainingFromDraw(newState.game);
             return newState;
         },
         drawCardFromDeckAction(state: Game) {

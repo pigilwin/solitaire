@@ -1,6 +1,6 @@
 import { Solitaire, SolitaireCard } from "types/game";
 import { MoveCardPayload } from "types/gamePayload";
-import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "../../../lib/util";
+import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "lib/util";
 
 export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};
@@ -10,7 +10,7 @@ export const drawCardFromRemainingAddToDraw = (game: Solitaire): Solitaire => {
     return newGame;
 }
 
-export const refreshRemaningFromDraw = (game: Solitaire): Solitaire => {
+export const refreshRemainingFromDraw = (game: Solitaire): Solitaire => {
     const newGame: Solitaire = {...game};
     
     /**
@@ -108,15 +108,7 @@ const moveCardFromDrawToColumn = (game: Solitaire, payload: MoveCardPayload): So
     /**
      * Find the latest card on the draw
      */
-    const latestCardOnDraw = game.draw.current.pop();
-
-    /**
-     * If the latest card on the draw is undefined then exit out
-     */
-    if (latestCardOnDraw === undefined){
-        return game;
-    }
-
+    const latestCardOnDraw = (game.draw.current.pop() as SolitaireCard);
 
     /**
      * Find the column from the location and attach
