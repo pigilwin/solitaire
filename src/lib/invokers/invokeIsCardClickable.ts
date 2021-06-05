@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { releaseProxy, wrap } from "comlink";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
