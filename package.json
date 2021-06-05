@@ -26,11 +26,13 @@
   },
   "devDependencies": {
     "@craco/craco": "^5.9.0",
+    "@cypress/code-coverage": "^3.9.6",
+    "@cypress/instrument-cra": "^1.4.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.21",
-    "@types/node": "^12.20.6",
+    "@types/node": "^12.20.14",
     "@types/react": "^17.0.3",
     "@types/react-dnd": "^3.0.2",
     "@types/react-dom": "^17.0.3",
@@ -38,16 +40,18 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/uuid": "^8.3.0",
     "autoprefixer": "^9.8.6",
+    "babel-plugin-istanbul": "^6.0.0",
     "fake-indexeddb": "^3.1.2",
     "jest-junit": "^12.0.0",
-    "postcss": "^7.0.35"
+    "postcss": "^7.0.35",
+    "start-server-and-test": "^1.12.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco -r @cypress/instrument-cra start",
     "build": "craco build",
-    "test": "craco test",
-    "test:ci": "npm run test -- --coverage --ci --testResultsProcessor='jest-junit' --watchAll=false",
-    "test:e2e": "npm run start & npx cypress open",
+    "cypress:ci": "npx cypress run",
+    "test:ci": "BROWSER=none start-server-and-test start http://localhost:3000/ cypress:ci",
+    "test:e2e": "npx cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
