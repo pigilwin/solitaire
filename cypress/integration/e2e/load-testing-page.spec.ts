@@ -32,3 +32,15 @@ it('should allow access to the testing page if the local storage key is present'
         force: true
     });
 });
+
+it('Should click each testing element', () => {
+    cy.enableTesting();
+
+    cy.visit('/');
+
+    for (const id of ['cy-testing-one-move-away', 'cy-testing-all-one-the-board', 'cy-testing-multiple-options', 'cy-testing-hide-page']){
+        cy.visit('/testing');
+
+        cy.dataCy(id).click();
+    }
+});
