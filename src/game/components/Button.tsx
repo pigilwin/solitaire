@@ -1,10 +1,10 @@
 import { MouseEventHandler, forwardRef } from "react";
+import { CypressTesting } from "types/test";
 
-interface GameButtonProps {
+interface GameButtonProps extends CypressTesting {
     buttonText: string;
     disabled?: boolean;
     onClick: MouseEventHandler<HTMLButtonElement>;
-    testID: string;
 }
 
 export const GameButton = forwardRef<HTMLButtonElement, GameButtonProps>(({buttonText, disabled, onClick, testID}, ref): JSX.Element => {

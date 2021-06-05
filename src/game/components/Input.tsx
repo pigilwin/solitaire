@@ -1,9 +1,9 @@
 import { ChangeEventHandler } from "react";
+import { CypressTesting } from "types/test";
 
-interface InputProps {
+interface InputProps extends CypressTesting {
     placeholder: string;
     onChangeHandler: ChangeEventHandler<HTMLInputElement>;
-    testID: string;
 }
 export const Input = ({placeholder, onChangeHandler, testID}: InputProps): JSX.Element => {
     return (
