@@ -4,7 +4,7 @@ it('should save the game to the leaderboard', () => {
     cy.createGameSavedToLeaderboard();
 });
 
-it('should save the game to the leaderboard then delete the record', () => {
+it('should save the game to the leaderboard, visit the leaderboard then go home', () => {
     cy.enableTesting();
 
     cy.createGameSavedToLeaderboard();
@@ -12,4 +12,6 @@ it('should save the game to the leaderboard then delete the record', () => {
     cy.dataCy('cy-leaderboard').click({
         force: true
     });
+
+    cy.dataCy('cy-leaderboard-go-home').click();
 });
