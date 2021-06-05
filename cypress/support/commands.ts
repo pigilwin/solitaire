@@ -17,7 +17,10 @@ Cypress.Commands.add('enableTesting', () => {
   localStorage.setItem('USING_TESTING_ROUTES', 'YES');
 });
 
-Cypress.Commands.add('createGameSavedToLeaderboard', () => {
+Cypress.Commands.add('createCompletedGame', () => {
+  
+  cy.enableTesting();
+  
   cy.visit('/');
 
   cy.dataCy('cy-testing').click({
@@ -29,6 +32,11 @@ Cypress.Commands.add('createGameSavedToLeaderboard', () => {
   cy.dataCy("double-click-K-CLUB").dblclick();
 
   cy.dataCy('choose-column-club').click();
+});
+
+Cypress.Commands.add('createCompletedGameAndSave', () => {
+
+  cy.createCompletedGame();
 
   cy.dataCy('cy-confirm-save').click();
 
@@ -44,19 +52,22 @@ Cypress.Commands.add('createGameSavedToLeaderboard', () => {
 /// <reference types="cypress" />
 
 declare namespace Cypress {
-    interface Chainable {
-      
-      /**
-       * Custom command to select DOM element by data-cy attribute.
-       * @example cy.dataCy('greeting')
-       */
-      dataCy(value: string): Chainable<Element>;
+  interface Chainable {
+    
+    /**
+     * Custom command to select DOM element by data-cy attribute.
+     */
+    dataCy(value: string): Chainable<JQuery<HTMLElement>>;
 
-      /**
-       * Custom command to enable testing
-       */
-      enableTesting(): void;
+    /**
+     * Custom command to enable testing
+     */
+    enableTesting(): void;
 
-      createGameSavedToLeaderboard(): void;
-    }
+    createCompletedGame(): void;
+
+    createCompletedGameAndSave(): void;
+
+    dragToHere(drag: string, drop: any): void;
   }
+}
