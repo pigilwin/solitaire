@@ -22,6 +22,7 @@ const applicationSlice = createSlice({
              * Load the local storage item
              */
             localStorage.removeItem(localStorageKey);
+            /* istanbul ignore else */
             if (action.payload) {
                 localStorage.setItem(localStorageKey, 'YES');
             }
