@@ -49,5 +49,4 @@ export interface SolitaireColumn {
 
 export interface Game {
     game: Solitaire;
-    generatedByTesting: boolean;
 }

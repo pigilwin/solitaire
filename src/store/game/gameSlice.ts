@@ -30,8 +30,7 @@ export const initialState: Game =  {
             remaining: [],
             current: []
         }
-    },
-    generatedByTesting: false
+    }
 };
 
 const gameSlice = createSlice({
@@ -41,7 +40,6 @@ const gameSlice = createSlice({
         initialiseGameAction(state: Game) {
             const newState = state;
             newState.game = generateGame();
-            newState.generatedByTesting = false;
             return newState;
         },
         refreshRemaningFromDrawAction(state: Game) {
@@ -95,4 +93,3 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
-export const isGameGeneratedByTestingSelector = (state: RootState): boolean => state.gameReducer.generatedByTesting;

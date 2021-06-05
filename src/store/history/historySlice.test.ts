@@ -14,7 +14,6 @@ import {
 
 test('Can a game be added to the history and then retrieved', () => {
     const game: Game = {
-        generatedByTesting: true,
         game: emptySolitaire('empty-game')
     };
     const store = initialiseStore();
@@ -31,12 +30,10 @@ test('Can score be added to the history and then retrieved', () => {
 
 test('Can a game object be added then removed', () => {
     const firstGame: Game = {
-        generatedByTesting: true,
         game: emptySolitaire('first-game')
     };
 
     const secondGame: Game = {
-        generatedByTesting: true,
         game: emptySolitaire('second-game')
     };
 
@@ -80,7 +77,6 @@ test('Can a score value be added then removed', () => {
 
 test('Can a game be added then the state reset', () => {
     const firstGame: Game = {
-        generatedByTesting: true,
         game: emptySolitaire('first-game')
     };
 

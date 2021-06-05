@@ -25,7 +25,6 @@ export const generateOnTheBoardWithMultipleOptions = (): Game => {
     const kingOfClubs = fetchCard(game, 'K', SUIT_TYPE_CLUB);
 
     return {
-        generatedByTesting: true,
         game: {
             id: v4(),
             columns: {
