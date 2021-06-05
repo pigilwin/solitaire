@@ -17,13 +17,9 @@ export const ChooseLocationColumn = ({innerCard, cardWantingToBeMoved}: ChooseLo
     const dispatch = useDispatch();
     const solitaire = useSelector(currentGameSelector);
     const cards = columnFromLocation(solitaire, innerCard.location.namespace, innerCard.location.area);
+    const card = makeCardLocationAware(cards[cards.length - 1], innerCard.location.namespace, innerCard.location.area);
 
     const chooseColumnClickHandler = (): void => {
-        const card = makeCardLocationAware(
-            cards[cards.length - 1], 
-            innerCard.location.namespace, 
-            innerCard.location.area
-        );
         dispatch(moveCardToColumnAsync({
             drag: cardWantingToBeMoved,
             drop: card
@@ -32,7 +28,7 @@ export const ChooseLocationColumn = ({innerCard, cardWantingToBeMoved}: ChooseLo
     };
     
     return (
-        <div className="cursor-pointer" onClick={chooseColumnClickHandler}>
+        <div className="cursor-pointer" data-cy-test-id={"choose-column-" + card.cardNumber + "-" + card.suit} onClick={chooseColumnClickHandler}>
             <Column cards={cards} column={innerCard.location.area}/>
         </div>  
     );

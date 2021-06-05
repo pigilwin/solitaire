@@ -34,7 +34,7 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     };
     
     return (
-        <div className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
+        <div data-cy-test-id={"double-click-" + card.cardNumber + "-" + card.suit} className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
             {children}
         </div>
     );
