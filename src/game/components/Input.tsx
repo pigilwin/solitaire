@@ -2,12 +2,13 @@ import { ChangeEventHandler } from "react";
 
 interface InputProps {
     placeholder: string;
-    onChangeHandler: ChangeEventHandler<HTMLInputElement>
-
+    onChangeHandler: ChangeEventHandler<HTMLInputElement>;
+    testID: string;
 }
-export const Input = ({placeholder, onChangeHandler}: InputProps): JSX.Element => {
+export const Input = ({placeholder, onChangeHandler, testID}: InputProps): JSX.Element => {
     return (
         <input
+            data-cy-test-id={testID}
 			type="text"
             onChange={onChangeHandler}
 			placeholder={placeholder}
