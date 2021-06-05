@@ -27,7 +27,7 @@ export const DroppableCardAwareContext = ({card, children}: PropsWithChildren<Dr
     
     return (
         <div data-cy-test-id={'droppable-' + card.cardNumber + '-' + card.suit} className="droppable" ref={drop}>
-            {children}   
+            {children} 
         </div>
     );
 }
