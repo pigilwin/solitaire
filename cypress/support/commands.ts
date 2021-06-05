@@ -17,6 +17,28 @@ Cypress.Commands.add('enableTesting', () => {
   localStorage.setItem('USING_TESTING_ROUTES', 'YES');
 });
 
+Cypress.Commands.add('createGameSavedToLeaderboard', () => {
+  cy.visit('/');
+
+  cy.dataCy('cy-testing').click({
+      force: true
+  });
+
+  cy.dataCy('cy-testing-one-move-away').click();
+
+  cy.dataCy("double-click-K-CLUB").dblclick();
+
+  cy.dataCy('choose-column-club').click();
+
+  cy.dataCy('cy-confirm-save').click();
+
+  cy.dataCy('cy-save-game').click();
+
+  cy.dataCy('cy-player-name').type('Tim');
+
+  cy.dataCy('cy-save-game').click();
+});
+
 // in cypress/support/index.ts
 // load type definitions that come with Cypress module
 /// <reference types="cypress" />
@@ -34,5 +56,7 @@ declare namespace Cypress {
        * Custom command to enable testing
        */
       enableTesting(): void;
+
+      createGameSavedToLeaderboard(): void;
     }
   }
