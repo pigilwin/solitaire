@@ -1,5 +1,5 @@
 import { expose } from 'comlink';
-import { enhanceSolitaire } from 'lib/enhancers';
+import { enhanceSolitaire } from 'lib/enhancers/enhancers';
 import { Solitaire } from "types/game";
 
 const isGameComplete = (solitaire: Solitaire): boolean => {

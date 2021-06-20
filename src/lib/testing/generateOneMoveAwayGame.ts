@@ -17,7 +17,6 @@ export const generateOneMoveAwayGame = (): Game => {
     remaining.showing = true;
 
     return {
-        generatedByTesting: true,
         game: {
             id: v4(),
             columns: {

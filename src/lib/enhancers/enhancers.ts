@@ -1,6 +1,6 @@
 import { LocationAwarePotentiallyUndefinedSolitaireCard, Solitaire } from "types/game";
-import { CardEnhancer } from "./enhancers/cardEnhancer";
-import { SolitaireEnhancer } from "./enhancers/solitaireEnhancer";
+import { CardEnhancer } from "./cardEnhancer";
+import { SolitaireEnhancer } from "./solitaireEnhancer";
 
 export const enhanceCard = (card: LocationAwarePotentiallyUndefinedSolitaireCard): CardEnhancer => {
     return new CardEnhancer(card);

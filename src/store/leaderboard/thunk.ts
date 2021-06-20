@@ -1,3 +1,4 @@
+import { CompletedGame } from "types/leaderboard";
 import { v4 } from "uuid";
 import { AppDispatch, AppThunk } from "..";
 import { clearGameAction } from "../game/gameSlice";
@@ -6,7 +7,6 @@ import { RootStateHook } from "../rootReducer";
 import { clearTrackerAction } from "../tracker/trackerSlice";
 import { LeaderboardDatabase } from "./leaderboardDatabase";
 import { addGameAction, loadGamesAction, removeGameAction } from "./leaderboardSlice";
-import { CompletedGame } from "./types";
 
 export const loadLeaderboardAsync = (): AppThunk => async (
     dispatch: AppDispatch,

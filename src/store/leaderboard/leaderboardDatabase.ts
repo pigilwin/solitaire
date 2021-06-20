@@ -1,5 +1,5 @@
+import { CompletedGame } from "types/leaderboard";
 import { openDatabase } from "../database";
-import { CompletedGame } from "./types";
 
 export class LeaderboardDatabase {
     

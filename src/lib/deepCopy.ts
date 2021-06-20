@@ -7,9 +7,6 @@
     if (target === null) {
       return target;
     }
-    if (target instanceof Date) {
-      return new Date(target.getTime()) as any;
-    }
     if (target instanceof Array) {
       const cp = [] as any[];
       (target as any[]).forEach((v) => { cp.push(v); });

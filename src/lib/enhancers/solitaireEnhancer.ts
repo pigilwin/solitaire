@@ -1,4 +1,4 @@
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 import { columnFromLocation } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
 

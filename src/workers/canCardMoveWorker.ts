@@ -1,5 +1,5 @@
 import { expose } from "comlink";
-import { enhanceCard, enhanceSolitaire } from "lib/enhancers";
+import { enhanceCard, enhanceSolitaire } from "lib/enhancers/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
@@ -161,7 +161,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * If the card indexes aren't compatible then don't allow
          * the index to be moved
         */
-        if (innerAsLocationAware.index === card.index + 1) {
+        if (innerAsLocationAware.index === card.index + 1 && !enhancedInner.isOnFinal()) {
             return true;
         }
 

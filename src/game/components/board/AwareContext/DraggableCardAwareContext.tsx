@@ -28,7 +28,7 @@ export const DraggableCardAwareContext = ({card, children}: PropsWithChildren<Dr
     }
     
     return (
-        <div className={classes.join(' ')} ref={drag}>
+        <div data-cy-test-id={'draggable-' + card.cardNumber + '-' + card.suit} className={classes.join(' ')} ref={drag}>
             {children}
         </div>
     );

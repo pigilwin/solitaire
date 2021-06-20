@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { areWeAllowedToSeeTestingRouteSelector } from "store/application/applicationSlice";
 import { initialiseGameAsync } from "store/game/thunk";
+import { CypressTesting } from "types/test";
 import { GameButton } from '../Button';
 
 export const GameButtons = (): JSX.Element => {
@@ -31,10 +32,9 @@ export const GameButtons = (): JSX.Element => {
     );
 }
 
-interface RouteButtonProps {
+interface RouteButtonProps extends CypressTesting {
     route: string;
     buttonText: string;
-    testID: string;
 }
 const RouteButton = ({route, buttonText, testID}: RouteButtonProps): JSX.Element => {
     

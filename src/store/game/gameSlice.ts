@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, RootStateHook } from '../rootReducer';
 import { deepCopy } from 'lib/deepCopy';
-import { drawCardFromRemainingAddToDraw, refreshRemaningFromDraw , moveCard } from './builder/gameBuilder';
+import { drawCardFromRemainingAddToDraw, refreshRemainingFromDraw , moveCard } from './builder/gameBuilder';
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
@@ -30,8 +30,7 @@ export const initialState: Game =  {
             remaining: [],
             current: []
         }
-    },
-    generatedByTesting: false
+    }
 };
 
 const gameSlice = createSlice({
@@ -41,12 +40,11 @@ const gameSlice = createSlice({
         initialiseGameAction(state: Game) {
             const newState = state;
             newState.game = generateGame();
-            newState.generatedByTesting = false;
             return newState;
         },
         refreshRemaningFromDrawAction(state: Game) {
             const newState = deepCopy<Game>(state);
-            newState.game = refreshRemaningFromDraw(newState.game);
+            newState.game = refreshRemainingFromDraw(newState.game);
             return newState;
         },
         drawCardFromDeckAction(state: Game) {
@@ -95,4 +93,3 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
-export const isGameGeneratedByTestingSelector = (state: RootState): boolean => state.gameReducer.generatedByTesting;

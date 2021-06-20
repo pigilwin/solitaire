@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +34,7 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     };
     
     return (
-        <div className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
+        <div data-cy-test-id={"double-click-" + card.cardNumber + "-" + card.suit} className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
             {children}
         </div>
     );

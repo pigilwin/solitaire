@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { replaceGameAction } from "store/game/gameSlice";
-import { latestHistoryGameSelector, latestHistoryScoreSelector, removeLatestHistoryItemAction } from "store/history/historySlice";
+import { latestHistoryGameSelector, latestHistoryScoreSelector, removeLatestHistoryItemAction, removeLatestScoreAction } from "store/history/historySlice";
 import { addMoveAction, replaceScoreAction } from "store/tracker/trackerSlice";
 import { IconGameButton } from './../Button';
 
@@ -18,6 +18,7 @@ export const UndoGameButton = (): JSX.Element => {
          * Remove the latest history item action
          */
         dispatch(removeLatestHistoryItemAction());
+        dispatch(removeLatestScoreAction());
 
         /**
          * Replace the action by the game

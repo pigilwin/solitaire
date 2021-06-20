@@ -9,7 +9,7 @@ import { ChooseLocationColumn } from "./choose/ChooseLocationColumn";
 import { LocationAwareSolitaireCard } from "types/game";
 import { ChooseEmptyColumn } from "./choose/ChooseEmptyColumn";
 import { ChooseFinalColumn } from "./choose/ChooseFinalColumn";
-import { enhanceCard } from "lib/enhancers";
+import { enhanceCard } from "lib/enhancers/enhancers";
 
 interface ChooseLocationProps {
     moves: CanCardMoveFromWorker;

@@ -44,7 +44,7 @@ export const Settings = (): JSX.Element => {
                     <GameButton testID="cy-settings-go-home" buttonText="Go Home" onClick={onClickHandler}/>
                 </div>
                 <div className="m-1 p-1">
-                    <Accordion title="Choose a new card back">
+                    <Accordion title="Choose a new card back" testID="new-card-back-chooser">
                         <div className="grid grid-cols-3 gap-4">
                             {Object.keys(cardBacks).map((id) => {
                                 return (
@@ -77,7 +77,7 @@ const SelectableCardBack = ({id, children}: PropsWithChildren<SelectableCardBack
     }
 
     return (
-        <div className={classes.join(' ')} onClick={onClickHandler}>
+        <div data-cy-test-id={"card-back-color-" + id} className={classes.join(' ')} onClick={onClickHandler}>
             {children}
         </div>
     );

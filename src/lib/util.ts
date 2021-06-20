@@ -35,14 +35,8 @@ export const makeCardLocationAware = (card: SolitaireCard, namespace: string, ar
     }
 }
 
-export const isOnColumns = (card: LocationAwareSolitaireCard) => {
-    return card.location.namespace === 'columns';
-};
-
-export const isOnDraw = (card: LocationAwareSolitaireCard) => {
-    return card.location.namespace === 'draw';
-}
-
-export const isOnFinal = (card: LocationAwareSolitaireCard) => {
-    return card.location.namespace === 'final';
+export const fetchCard = (cards: SolitaireCard[], number: string, suit: string): SolitaireCard => {
+    return cards.find((card) => {
+        return card.cardNumber === number && card.suit === suit;
+    }) as SolitaireCard;
 }

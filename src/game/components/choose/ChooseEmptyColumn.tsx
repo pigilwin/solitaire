@@ -19,7 +19,7 @@ export const ChooseEmptyColumn = ({innerCard, cardWantingToBeMoved}: ChooseEmpty
     };
     
     return (
-        <div className="cursor-pointer" onClick={chooseColumnClickHandler}>
+        <div className="cursor-pointer" data-cy-test-id={"choose-column-" + innerCard.location.area}  onClick={chooseColumnClickHandler}>
             <EmptyCard/>
         </div>
     );

@@ -1,5 +1,5 @@
 import { DBSchema, IDBPDatabase, openDB } from 'idb';
-import { CompletedGame } from './leaderboard/types';
+import { CompletedGame } from 'types/leaderboard';
 
 export const openDatabase = async (): Promise<IDBPDatabase<SavedScores>> => {
     return await openDB<SavedScores>('solitaire', 1, {
