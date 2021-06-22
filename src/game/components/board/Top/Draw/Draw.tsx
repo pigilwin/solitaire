@@ -50,7 +50,7 @@ const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
 
     return (
         <DoubleClickCardAwareContext card={cardWithLocation}>
-            <DrawCard card={cardWithLocation}/>;
+            <DrawCard card={cardWithLocation}/>
         </DoubleClickCardAwareContext>
     );
 }
