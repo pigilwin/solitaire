@@ -3,7 +3,7 @@ import { CompletedGame } from 'types/leaderboard';
 
 export const openDatabase = async (): Promise<IDBPDatabase<SavedScores>> => {
     return await openDB<SavedScores>('solitaire', 1, {
-        upgrade: (db) => {
+        upgrade: (db: IDBPDatabase<SavedScores>) => {
             db.createObjectStore('completed-games');
         }
     });

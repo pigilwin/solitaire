@@ -25,7 +25,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
     const scoreCount = useSelector(currentScoreSelector);
 
     return (
-        <nav className="w-full bg-white shadow-lg border-b border-green-500 h-16 mb-2">
+        <nav className="hidden md:block w-full bg-white shadow-lg border-b border-green-500 h-16 mb-2">
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                 <GameLogo/>
                 {undoButton}
