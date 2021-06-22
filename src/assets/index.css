@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .playing-card-dimensions {
-    @apply h-12;
-    @apply w-10;
+    @apply h-16;
+    @apply w-12;
 }
 
 .playing-card-back-inner {
