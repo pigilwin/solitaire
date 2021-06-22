@@ -1,11 +1,14 @@
 interface SuitIconProps {
-    width: number;
-    height: number;
+    large: boolean;
 }
 
-export const Heart = ({width, height}: SuitIconProps): JSX.Element => {    
+const smallClass: string = 'h-2 w-2 md:h-4 md:w-4';
+const largeClass: string = 'h-6 w-6 md:h-16 md:w-16';
+
+export const Heart = ({large}: SuitIconProps): JSX.Element => {
+    const className = large ? largeClass : smallClass;
     return (
-        <svg fill="red" xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
+        <svg className={className} fill="red" xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
             <g transform="rotate(45,300,300)" >
                 <rect x="150" y="150" height="350" width="350"/>
                 <circle cx="150" cy="325" r="175"/>
@@ -15,17 +18,19 @@ export const Heart = ({width, height}: SuitIconProps): JSX.Element => {
     );
 };
 
-export const Diamond = ({width, height}: SuitIconProps): JSX.Element => {
+export const Diamond = ({large}: SuitIconProps): JSX.Element => {
+    const className = large ? largeClass : smallClass;
     return (
-        <svg fill="red" xmlns="http://www.w3.org/2000/svg" width={width} height={height} baseProfile="tiny" viewBox="0 0 600 600">
+        <svg className={className} fill="red" xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" viewBox="0 0 600 600">
             <rect x="100" y="100" width="400" height="400" transform="rotate(45,300,300)" />
         </svg>
     );
 };
 
-export const Spade = ({width, height}: SuitIconProps): JSX.Element => {  
+export const Spade = ({large}: SuitIconProps): JSX.Element => {
+    const className = large ? largeClass : smallClass;
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 1088.000000 1280.000000"preserveAspectRatio="xMidYMid meet">
+        <svg className={className} version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1088.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                 <path d="M5386 12707 c-231 -387 -542 -770 -1021 -1256 -327 -332 -529 -522
                 -1165 -1100 -300 -272 -639 -583 -755 -690 -824 -764 -1329 -1317 -1718 -1879
@@ -43,9 +48,10 @@ export const Spade = ({width, height}: SuitIconProps): JSX.Element => {
     );
 };
 
-export const Club = ({width, height}: SuitIconProps): JSX.Element => {    
+export const Club = ({large}: SuitIconProps): JSX.Element => {
+    const className = large ? largeClass : smallClass;
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
+        <svg className={className} version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"fill="#000000" stroke="none">
                 <path d="M6210 12794 c-19 -2 -78 -9 -130 -15 -470 -53 -954 -260 -1350 -575
                 -108 -86 -335 -313 -424 -424 -415 -519 -646 -1177 -646 -1841 0 -749 276

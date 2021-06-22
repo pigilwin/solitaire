@@ -71,9 +71,9 @@ const SelectableCardBack = ({id, children}: PropsWithChildren<SelectableCardBack
         dispatch(applyNewCardBackAction(id));
     };
 
-    const classes = ['w-36', 'h-46', 'mx-auto', 'cursor-pointer'];
+    const classes = ['mx-auto', 'cursor-pointer'];
     if (useSelector(currentlySelectedCardBackSelector) === id) {
-        classes.push('border-8', 'border-blue-200');
+        classes.push('border-2', 'border-blue-200');
     }
 
     return (

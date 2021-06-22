@@ -3,7 +3,7 @@ interface MovesCountProps {
 }
 export const MovesCount = ({count}: MovesCountProps): JSX.Element => {
     return (
-        <div className="flex flex-row">    
+        <div className="flex flex-row px-4">
             <p>Moves: {count}</p>
         </div>
     );

@@ -85,7 +85,7 @@ const SaveContainer = (): JSX.Element => {
      */
     if (showSavePage){
         return (
-            <div className='mt-5 p-10 w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md'>
+            <div className='mt-5 p-10 md:w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md'>
                 <p>Please enter your name to save the score</p>
                 <Input testID="cy-player-name" onChangeHandler={onNameChangeHandler} placeholder="Name"/>
                 <GameButton testID="cy-save-game" onClick={saveNameClickHandler} buttonText="Save"/>

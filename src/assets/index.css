@@ -3,8 +3,35 @@
 @tailwind utilities;
 
 .playing-card-dimensions {
-    @apply w-32;
-    @apply h-44;
+    @apply h-16;
+    @apply w-12;
+}
+
+.playing-card-back-inner {
+    @apply h-12;
+    @apply w-8;
+}
+
+.card-container {
+    flex: 1 1 0;
+    @apply -mt-8;
+}
+
+@screen md {
+    .playing-card-dimensions {
+        @apply w-32;
+        @apply h-44;
+    }
+
+    .playing-card-back-inner {
+        @apply w-28;
+        @apply h-40;
+    }
+
+    .card-container {
+        flex: 100px 1 0;
+        @apply -mt-32;
+    }
 }
 
 .playing-card {
@@ -22,14 +49,4 @@
     @apply border-black;
     @apply rounded-md;
     @apply shadow-md;
-}
-
-.playing-card-back-inner {
-    @apply w-28;
-    @apply h-40;
-}
-
-.card-container {
-    flex: 100px 1 0;
-    @apply -mt-32;
 }

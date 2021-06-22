@@ -30,7 +30,7 @@ export const Back = (): JSX.Element => {
 export const Green = (): JSX.Element => {
     return (
         <div className="playing-card p-1">
-            <div className="border-2 border-white border-dotted playing-card-back-inner bg-green-500 mx-auto"></div>
+            <div className="border-2 border-white border-dotted playing-card-back-inner bg-green-500 mx-auto"/>
         </div>
     );
 }
@@ -38,7 +38,7 @@ export const Green = (): JSX.Element => {
 export const Blue = (): JSX.Element => {
     return (
         <div className="playing-card p-1">
-            <div className="border-2 border-white border-dashed playing-card-back-inner bg-blue-500 mx-auto"></div>
+            <div className="border-2 border-white border-dashed playing-card-back-inner bg-blue-500 mx-auto"/>
         </div>
     );
 }
@@ -46,7 +46,7 @@ export const Blue = (): JSX.Element => {
 export const Red = (): JSX.Element => {
     return (
         <div className="playing-card p-1">
-            <div className="border-2 border-white border-dotted playing-card-back-inner bg-red-500 mx-auto"></div>
+            <div className="border-2 border-white border-dotted playing-card-back-inner bg-red-500 mx-auto"/>
         </div>
     );
 }
@@ -54,7 +54,7 @@ export const Red = (): JSX.Element => {
 export const Yellow = (): JSX.Element => {
     return (
         <div className="playing-card p-1">
-            <div className="border-2 border-white border-dotted playing-card-back-inner bg-yellow-500 mx-auto"></div>
+            <div className="border-2 border-white border-dotted playing-card-back-inner bg-yellow-500 mx-auto"/>
         </div>
     );
 }
@@ -62,7 +62,7 @@ export const Yellow = (): JSX.Element => {
 export const Purple = (): JSX.Element => {
     return (
         <div className="playing-card p-1">
-            <div className="border-2 border-white border-dotted playing-card-back-inner bg-purple-500 mx-auto"></div>
+            <div className="border-2 border-white border-dotted playing-card-back-inner bg-purple-500 mx-auto"/>
         </div>
     );
 }
