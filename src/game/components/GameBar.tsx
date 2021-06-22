@@ -34,7 +34,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
     };
 
     if (isMenuOpen) {
-        miniMenuClasses.push('flex', 'open');
+        miniMenuClasses.push('flex', 'open', 'transition', 'duration-500', 'ease-in-out');
     } else {
         miniMenuClasses.push('hidden');
     }
@@ -50,8 +50,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
                 </button>
             </div>
             <div className={miniMenuClasses.join(' ')}>
-                {undoButton}
-                <GameButtons/>
+                <GameButtons undoButton={undoButton}/>
             </div>
         </nav>
     );

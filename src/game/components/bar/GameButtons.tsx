@@ -5,7 +5,10 @@ import { initialiseGameAsync } from "store/game/thunk";
 import { CypressTesting } from "types/test";
 import { GameButton } from '../Button';
 
-export const GameButtons = (): JSX.Element => {
+interface GameButtonProps {
+    undoButton: JSX.Element | null;
+}
+export const GameButtons = ({undoButton}: GameButtonProps): JSX.Element => {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,6 +25,7 @@ export const GameButtons = (): JSX.Element => {
 
     return (
         <div className="flex flex-row">
+            {undoButton}
             <div className="px-1">
                 <GameButton testID="cy-new-game" buttonText="New Game" onClick={newGameClickHandler}/>
             </div>

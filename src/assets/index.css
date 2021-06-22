@@ -8,8 +8,8 @@
 }
 
 .playing-card-back-inner {
-    @apply h-8;
-    @apply w-6;
+    @apply h-12;
+    @apply w-8;
 }
 
 .card-container {

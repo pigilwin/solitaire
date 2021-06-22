@@ -1,5 +1,6 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 import { useSelector } from "react-redux";
 
 import { Board } from "./board";
@@ -10,6 +11,8 @@ import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
+
+type BackendFactory = typeof HTML5Backend;
 
 export const Game = (): JSX.Element => {
 
@@ -34,10 +37,12 @@ export const Game = (): JSX.Element => {
         return <GameComplete/>;
     }
 
+    const backend: BackendFactory = "ontouchstart" in window ? TouchBackend : HTML5Backend;
+
     return (
         <FullPageContainer>
             <GameBar isGameComplete={isGameComplete}/>
-            <DndProvider backend={HTML5Backend}>
+            <DndProvider backend={backend}>
                 <Board/>
             </DndProvider>
         </FullPageContainer>

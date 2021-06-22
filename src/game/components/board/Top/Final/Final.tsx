@@ -14,7 +14,7 @@ export const Final = (): JSX.Element => {
     const final = solitaire.final;
 
     return ( 
-        <div className="w-1/2 overflow-hidden flex flex-row justify-center">
+        <div className="w-2/3 overflow-hidden flex flex-row justify-end">
             <div className="px-2">
                 {generateFinalContainer(final.heart, SUIT_TYPE_HEART)}
             </div>
