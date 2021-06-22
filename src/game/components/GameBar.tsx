@@ -27,12 +27,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
     const movesCount = useSelector(currentMovesSelector);
     const scoreCount = useSelector(currentScoreSelector);
 
-    const miniMenuClasses: string[] = [
-        'w-full', 'sm:w-auto', 'self-end', 'sm:self-center',
-        'sm:flex', 'flex-col', 'sm:flex-row', 'items-center',
-        'justify-between', 'h-full', 'py-1', 'pb-4',
-        'sm:py-0', 'sm:pb-0'
-    ];
+    const miniMenuClasses: string[] = 'w-full sm:w-auto self-end sm:self-center sm:flex flex-col sm:flex-row items-center justify-between h-full py-1 pb-4 sm:py-0 sm:pb-0'.split(' ');
 
     const openMenuClickHandler = (): void => {
         openMenu(!isMenuOpen);
@@ -45,7 +40,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
     }
 
     return (
-        <nav className="flex flex-col sm:flex-row w-full justify-between items-center px-4 sm:px-6 py-1 bg-white shadow sm:shadow-none border-t-4 border-red-900">
+        <nav className="flex flex-col sm:flex-row w-full justify-between items-center px-4 sm:px-6 py-1 bg-white shadow sm:shadow-none">
             <div className="w-full sm:w-auto self-start sm:self-center flex flex-row sm:flex-none flex-no-wrap justify-between items-center">
                 <GameLogo/>
                 <MovesCount count={movesCount}/>
