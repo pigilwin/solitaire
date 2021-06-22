@@ -18,7 +18,7 @@ export const Board = (): JSX.Element => {
     }
     
     return (
-        <div id="board">
+        <div id="board" className="w-auto">
             <TopBar/>
             <Columns/>
         </div>
