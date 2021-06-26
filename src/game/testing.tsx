@@ -8,6 +8,7 @@ import { clearGameAction, replaceGameAction } from "store/game/gameSlice";
 import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
 import { GameButton } from "./components/Button"
+import { generateFullBoardWithKingDraw } from "lib/testing/generateFullBoardWithKingDraw";
 
 export const Testing = (): JSX.Element => {
 
@@ -50,6 +51,18 @@ export const Testing = (): JSX.Element => {
          history.replace('/');
     };
 
+    const fullBoardWithKingInTheDrawClickHandler = () => {
+        /**
+         * Generate a one move away game and set the game
+         */
+         dispatch(replaceGameAction(generateFullBoardWithKingDraw()));
+
+         /**
+          * Navigate to the game page
+          */
+         history.replace('/');
+    }
+
     const hideTestingPageClickHandler = () => {
         /**
          * Hide the test route
@@ -84,6 +97,7 @@ export const Testing = (): JSX.Element => {
                 <GameButton testID="cy-testing-one-move-away" buttonText="One move away from victory" onClick={oneMoveAwayClickHandler}/>
                 <GameButton testID="cy-testing-all-one-the-board" buttonText="All on the board" onClick={allOnTheBoardClickHandler}/>
                 <GameButton testID="cy-testing-multiple-options" buttonText="Card with multiple options" onClick={cardWithMultipleOptionsClickHandler}/>
+                <GameButton testID="cy-full-board-king-in-the-draw" buttonText="Full board with king in the draw" onClick={fullBoardWithKingInTheDrawClickHandler}/>
                 <GameButton testID="cy-testing-hide-page" buttonText="Hide testing page" onClick={hideTestingPageClickHandler}/>
             </div>
         </div>
