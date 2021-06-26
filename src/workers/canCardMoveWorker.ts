@@ -91,7 +91,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              * If the card we are checking is a full card
              * then don't allow the card to be placed upon
              */
-            if (!enhancedInner.isAFullCard()){
+            if (!enhancedInner.isAFullCard() && !enhancedInner.isOnFinal()){
                 return true;
             }
 
@@ -167,6 +167,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
 
         return false;
     });
+    console.log(locationsOfCardsWanted);
     
     const moves: CanCardMoveFromWorker = {};
     locationsOfCardsWanted.forEach((k) => {
