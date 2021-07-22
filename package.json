@@ -44,12 +44,13 @@
     "start-server-and-test": "^1.12.4"
   },
   "scripts": {
-    "start": "craco -r @cypress/instrument-cra start",
+    "start": "craco start",
+    "start:in-testing": "craco -r @cypress/instrument-cra start",
     "build": "craco build",
     "cypress:ci": "npx cypress run",
     "cypress:open": "npx cypress open",
-    "test:ci": "BROWSER=none start-server-and-test start http://localhost:3000/ cypress:ci",
-    "test:e2e": "BROWSER=none start-server-and-test start http://localhost:3000/ cypress:open",
+    "test:ci": "BROWSER=none start-server-and-test start:in-testing http://localhost:3000/ cypress:ci",
+    "test:e2e": "BROWSER=none start-server-and-test start:in-testing http://localhost:3000/ cypress:open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
