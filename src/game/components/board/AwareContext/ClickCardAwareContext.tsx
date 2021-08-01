@@ -3,7 +3,6 @@ import { enhanceCard } from "lib/enhancers/enhancers";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePossibleMovesAction } from "store/game/gameMoveSlice";
 import { currentGameSelector } from "store/game/gameSlice";
 import { moveCardToColumnAsync, moveCardToEmptyColumnAsync, moveCardToFinalColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
@@ -19,18 +18,8 @@ export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickC
     const doubleClickEventListener = async (e: MouseEvent) => {
         e.stopPropagation();
         const potentialMoves = await invokeIsCardClickable(solitare, card);
-        const keys = Object.keys(potentialMoves);
-        /**
-         * If the potential moves are only one then execute the move
-         */
-        if (keys.length === 1) {
-            handleOnlyOneResponse(dispatch, potentialMoves, keys, card);
-            return;
-        }
-        dispatch(updatePossibleMovesAction({
-            cardWantingToBeMoved: card,
-            potentialMoves: potentialMoves
-        }));
+        handleOnlyOneResponse(dispatch, potentialMoves, Object.keys(potentialMoves), card);
+        return;
     };
     
     return (
