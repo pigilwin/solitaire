@@ -18,7 +18,13 @@ export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickC
     const doubleClickEventListener = async (e: MouseEvent) => {
         e.stopPropagation();
         const potentialMoves = await invokeIsCardClickable(solitare, card);
-        handleOnlyOneResponse(dispatch, potentialMoves, Object.keys(potentialMoves), card);
+        const keys = Object.keys(potentialMoves);
+
+        if (keys.length === 0) {
+            return;
+        }
+
+        handleOnlyOneResponse(dispatch, potentialMoves, keys, card);
         return;
     };
     
