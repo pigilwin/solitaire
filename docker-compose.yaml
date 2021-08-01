@@ -20,4 +20,10 @@ services:
       dockerfile: docker/production.Dockerfile
     volumes:
       - '.:/app'
-      - '/app/node_modules'
+  testing:
+    container_name: testing
+    build:
+      context: .
+      dockerfile: docker/testing.Dockerfile
+    volumes:
+      - '.:/app'
