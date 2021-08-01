@@ -167,7 +167,6 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
 
         return false;
     });
-    console.log(locationsOfCardsWanted);
     
     const moves: CanCardMoveFromWorker = {};
     locationsOfCardsWanted.forEach((k) => {
