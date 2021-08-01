@@ -8,7 +8,7 @@ import { currentGameSelector } from "store/game/gameSlice";
 
 import { DrawCard } from "./DrawCard";
 import { RemainingDraw } from "./RemainingDraw";
-import { DoubleClickCardAwareContext } from "../../AwareContext/DoubleClickCardAwareContext";
+import { ClickCardAwareContext } from "../../AwareContext/ClickCardAwareContext";
 
 
 export const Draw = (): JSX.Element => {
@@ -49,8 +49,8 @@ const getDrawCard = (cards: SolitaireCard[]): JSX.Element => {
     const cardWithLocation = makeCardLocationAware(card, 'draw', 'current');
 
     return (
-        <DoubleClickCardAwareContext card={cardWithLocation}>
+        <ClickCardAwareContext card={cardWithLocation}>
             <DrawCard card={cardWithLocation}/>
-        </DoubleClickCardAwareContext>
+        </ClickCardAwareContext>
     );
 }

@@ -9,10 +9,10 @@ import { moveCardToColumnAsync, moveCardToEmptyColumnAsync, moveCardToFinalColum
 import { LocationAwareSolitaireCard } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
 
-interface DoubleClickCardAwareContextProps {
+interface ClickCardAwareContextProps {
     card: LocationAwareSolitaireCard;
 }
-export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<DoubleClickCardAwareContextProps>) => {
+export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickCardAwareContextProps>) => {
     
     const dispatch = useDispatch();
     const solitare = useSelector(currentGameSelector);
@@ -34,7 +34,7 @@ export const DoubleClickCardAwareContext = ({card, children}: PropsWithChildren<
     };
     
     return (
-        <div data-cy-test-id={"double-click-" + card.cardNumber + "-" + card.suit} className="double-click-card cursor-pointer" onDoubleClick={doubleClickEventListener}>
+        <div data-cy-test-id={"click-" + card.cardNumber + "-" + card.suit} className="click-card cursor-pointer" onClick={doubleClickEventListener}>
             {children}
         </div>
     );

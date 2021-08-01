@@ -29,7 +29,7 @@ Cypress.Commands.add('createCompletedGame', () => {
 
   cy.dataCy('cy-testing-one-move-away').click();
 
-  cy.dataCy("double-click-K-CLUB").dblclick();
+  cy.dataCy("click-K-CLUB").click();
 
   cy.dataCy('choose-column-club').click();
 });
