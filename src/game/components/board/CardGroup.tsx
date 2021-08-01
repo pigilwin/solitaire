@@ -47,12 +47,12 @@ export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<C
 
         const draggableCard = (
             <div className={className}>
-                <DoubleClickCardAwareContext card={card}>
+                <ClickCardAwareContext card={card}>
                     <DraggableCardAwareContext card={card}>
                         <Card card={card}/>
                         {children}
                     </DraggableCardAwareContext>
-                </DoubleClickCardAwareContext>
+                </ClickCardAwareContext>
             </div>
         );
         return draggableCard;
