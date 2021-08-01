@@ -10,6 +10,12 @@ This implementation has drag and drop or double click functionality to move the 
 
 This project has been developed using NPM but yarn will also work. This README file contains commands in NPM but the yarn equivalent will also work.
 
+## The easiest way to run this application
+
+The simplest way to have this application running is by using `docker`:
+
+Just type `docker compose up development`
+
 ## Installing the project locally
 
 To install the project locally just clone the repository and run the command:
