@@ -22,9 +22,9 @@ import {
     CARD_BACK_YELLOW,
     CARD_BACK_PURPLE
 } from "types/back";
-import { BackgroundColorMap, BACKGROUND_BLUE, BACKGROUND_GREEN, BACKGROUND_PURPLE, BACKGROUND_RED, BACKGROUND_YELLOW } from "types/background";
 
 import { currentlySelectedCardBackSelector, applyNewCardBackAction, applyNewBackgroundColor, currentlySelectedBackgroundSelector } from "store/application/applicationSlice";
+import { backgroundColors } from "store/application/constants";
 
 export const Settings = (): JSX.Element => {
     const history = useHistory();
@@ -38,14 +38,6 @@ export const Settings = (): JSX.Element => {
         [CARD_BACK_PURPLE]: (<Purple/>),
         [CARD_BACK_RED]: (<Red/>),
         [CARD_BACK_YELLOW]: (<Yellow/>)
-    };
-
-    const backgroundColors: BackgroundColorMap = {
-        [BACKGROUND_GREEN]: 'bg-green-300',
-        [BACKGROUND_YELLOW]: 'bg-yellow-300',
-        [BACKGROUND_RED]: 'bg-red-300',
-        [BACKGROUND_PURPLE]: 'bg-purple-300',
-        [BACKGROUND_BLUE]: 'bg-blue-300'
     };
 
     return (
