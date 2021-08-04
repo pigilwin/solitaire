@@ -16,14 +16,24 @@ interface CardGroupProps {
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
 
     const classes = [];
+    
     /**
      * If its not the initial card then 
      * assign the container class to apply
      * the margin
      */
     if (index !== 0){
-        classes.push("card-container");
+        /**
+         * If there are more than 10 cards on the stack apply more margin
+         */
+        if (maxDepth < 10){
+            classes.push("card-container");
+        } else {
+            classes.push("card-container-more-than-ten");
+        }
     }
+
+
 
     const className = classes.join(' ');
 
