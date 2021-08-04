@@ -1,10 +1,9 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { enhanceCard } from "lib/enhancers/enhancers";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentGameSelector } from "store/game/gameSlice";
-import { moveCardToColumnAsync, moveCardToEmptyColumnAsync, moveCardToFinalColumnAsync } from "store/game/thunk";
+import { moveCardToColumnAsync, moveCardToFinalColumnAsync } from "store/game/thunk";
 import { LocationAwareSolitaireCard } from "types/game";
 import { CanCardMoveFromWorker } from "types/worker";
 
@@ -37,19 +36,6 @@ export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickC
 
 const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardMoveFromWorker, keys: string[], card: LocationAwareSolitaireCard): void => {
     const droppableCard = potentialMoves[keys[keys.length - 1]];
-    const enchancedCard = enhanceCard(card);
-
-    /**
-     * If the card is a king then use the specific action 
-     * dedicated to moving cards to empty columns
-     */
-    if (enchancedCard.isAKing()) {
-        dispatch(moveCardToEmptyColumnAsync({
-            drag: card,
-            column: droppableCard.location.area
-        }));
-        return;
-    }
 
     /**
      * If the card has only one place to go and its the 
