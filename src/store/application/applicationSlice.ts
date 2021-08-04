@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ApplicationState } from "types/application";
-import { BACK_GREEN } from "types/back";
+import { CARD_BACK_GREEN } from "types/back";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "lib/deepCopy";
 import { localStorageKey } from "./constants";
 
 export const initialState: ApplicationState =  {
     allowedToSeeTestingRoute: false,
-    cardBack: BACK_GREEN
+    cardBack: CARD_BACK_GREEN
 };
 
 const applicationSlice = createSlice({
