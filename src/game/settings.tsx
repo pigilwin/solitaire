@@ -1,8 +1,8 @@
+import { PropsWithChildren } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { GameButton } from './components/Button';
-import { Accordion } from "./layout/Accordion";
-import { FullPageContainer } from "./layout/FullPageContainer";
 
+import { GameButton } from './components/Button';
 import {
     Blue,
     Red,
@@ -10,17 +10,21 @@ import {
     Purple,
     Yellow,
 } from './components/board/card/Back';
+
+import { Accordion } from "./layout/Accordion";
+import { FullPageContainer } from "./layout/FullPageContainer";
+
 import { 
     CardBackMap,
-    BACK_BLUE,
-    BACK_GREEN,
-    BACK_RED,
-    BACK_YELLOW,
-    BACK_PURPLE
+    CARD_BACK_BLUE,
+    CARD_BACK_GREEN,
+    CARD_BACK_RED,
+    CARD_BACK_YELLOW,
+    CARD_BACK_PURPLE
 } from "types/back";
-import { PropsWithChildren } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currentlySelectedCardBackSelector, applyNewCardBackAction } from "store/application/applicationSlice";
+import { BackgroundColorMap, BACKGROUND_BLUE, BACKGROUND_GREEN, BACKGROUND_PURPLE, BACKGROUND_RED, BACKGROUND_YELLOW } from "types/background";
+
+import { currentlySelectedCardBackSelector, applyNewCardBackAction, applyNewBackgroundColor, currentlySelectedBackgroundSelector } from "store/application/applicationSlice";
 
 export const Settings = (): JSX.Element => {
     const history = useHistory();
@@ -29,11 +33,19 @@ export const Settings = (): JSX.Element => {
     };
 
     const cardBacks: CardBackMap = {
-        [BACK_BLUE]: (<Blue/>),
-        [BACK_GREEN]: (<Green/>),
-        [BACK_PURPLE]: (<Purple/>),
-        [BACK_RED]: (<Red/>),
-        [BACK_YELLOW]: (<Yellow/>)
+        [CARD_BACK_BLUE]: (<Blue/>),
+        [CARD_BACK_GREEN]: (<Green/>),
+        [CARD_BACK_PURPLE]: (<Purple/>),
+        [CARD_BACK_RED]: (<Red/>),
+        [CARD_BACK_YELLOW]: (<Yellow/>)
+    };
+
+    const backgroundColors: BackgroundColorMap = {
+        [BACKGROUND_GREEN]: 'bg-green-300',
+        [BACKGROUND_YELLOW]: 'bg-yellow-300',
+        [BACKGROUND_RED]: 'bg-red-300',
+        [BACKGROUND_PURPLE]: 'bg-purple-300',
+        [BACKGROUND_BLUE]: 'bg-blue-300'
     };
 
     return (
@@ -44,7 +56,7 @@ export const Settings = (): JSX.Element => {
                     <GameButton testID="cy-settings-go-home" buttonText="Go Home" onClick={onClickHandler}/>
                 </div>
                 <div className="m-1 p-1">
-                    <Accordion title="Choose a new card back" testID="new-card-back-chooser">
+                    <Accordion title="Choose a card back" testID="new-card-back-chooser">
                         <div className="grid grid-cols-3 gap-4">
                             {Object.keys(cardBacks).map((id) => {
                                 return (
@@ -55,6 +67,21 @@ export const Settings = (): JSX.Element => {
                             })}
                         </div>
                     </Accordion>
+                    <div className="mt-3">
+                        <Accordion title="Choose a background color" testID="new-back-ground-chooser">
+                            <div className="grid grid-cols-3 gap-4">
+                                {Object.keys(backgroundColors).map((id) => {
+                                    return (
+                                        <SelectableBackground 
+                                            key={id} 
+                                            id={id} 
+                                            color={backgroundColors[id]} 
+                                        />
+                                    );
+                                })}
+                            </div>
+                        </Accordion>
+                    </div>
                 </div>
             </div>
         </FullPageContainer>
@@ -80,5 +107,26 @@ const SelectableCardBack = ({id, children}: PropsWithChildren<SelectableCardBack
         <div data-cy-test-id={"card-back-color-" + id} className={classes.join(' ')} onClick={onClickHandler}>
             {children}
         </div>
+    );
+}
+
+interface SelectableBackgroundProps {
+    id: string;
+    color: string;
+}
+const SelectableBackground = ({id, color}: SelectableBackgroundProps): JSX.Element => {
+    
+    const dispatch = useDispatch();
+    const onClickHandler = () => {
+        dispatch(applyNewBackgroundColor(id));
+    };
+
+    const classes = ['mx-auto', 'cursor-pointer', 'playing-card-dimensions', color];
+    if (useSelector(currentlySelectedBackgroundSelector) === id) {
+        classes.push('border-2', 'border-blue-200');
+    }
+
+    return (
+        <div data-cy-test-id={"background-color-" + id} className={classes.join(' ')} onClick={onClickHandler}></div>
     );
 }

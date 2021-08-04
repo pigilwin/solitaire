@@ -4,10 +4,12 @@ import { CARD_BACK_GREEN } from "types/back";
 import { RootState } from "../rootReducer";
 import { deepCopy } from "lib/deepCopy";
 import { localStorageKey } from "./constants";
+import { BACKGROUND_GREEN } from "types/background";
 
 export const initialState: ApplicationState =  {
     allowedToSeeTestingRoute: false,
-    cardBack: CARD_BACK_GREEN
+    cardBack: CARD_BACK_GREEN,
+    background: BACKGROUND_GREEN
 };
 
 const applicationSlice = createSlice({
@@ -33,6 +35,11 @@ const applicationSlice = createSlice({
             const newState = deepCopy<ApplicationState>(state);
             newState.cardBack = action.payload;
             return newState;
+        },
+        applyNewBackgroundColor(state: ApplicationState, action: PayloadAction<string>) {
+            const newState = deepCopy<ApplicationState>(state);
+            newState.background = action.payload;
+            return newState;
         }
     }
 });
@@ -40,8 +47,10 @@ const applicationSlice = createSlice({
 export const reducer = applicationSlice.reducer;
 export const {
     allowedToSeeTestingRouteAction,
-    applyNewCardBackAction
+    applyNewCardBackAction,
+    applyNewBackgroundColor
 } = applicationSlice.actions;
 
 export const areWeAllowedToSeeTestingRouteSelector = (state: RootState): boolean => state.applicationReducer.allowedToSeeTestingRoute;
 export const currentlySelectedCardBackSelector = (state: RootState): string => state.applicationReducer.cardBack;
+export const currentlySelectedBackgroundSelector = (state: RootState): string => state.applicationReducer.background;
