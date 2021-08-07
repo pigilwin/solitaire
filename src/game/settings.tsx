@@ -42,7 +42,7 @@ export const Settings = (): JSX.Element => {
 
     return (
         <FullPageContainer usingFlex={true}>
-            <div className="m-auto w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md">
+            <div className="m-auto w-2/3 bg-white flex flex-col justify-between space-y-4 rounded-md">
                 <h1 className="text-center text-4xl mt-4">Settings</h1>
                 <div className="my-2 text-center">
                     <GameButton testID="cy-settings-go-home" buttonText="Go Home" onClick={onClickHandler}/>
