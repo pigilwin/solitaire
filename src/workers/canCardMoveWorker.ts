@@ -49,6 +49,15 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
     const enhancedSolitaire = enhanceSolitaire(solitaire);
     const potentialMoves: PotentialCardMovesWorker = {};
 
+
+    /**
+     * Load the last card in the final locations into the list of checks
+     */
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'diamond');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'heart');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'club');
+    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'spade');
+
     /**
      * Load the last card in every column into the list of checks
      */
@@ -60,18 +69,11 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
     fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'six');
     fetchTopLocationAwareCardFromColumns(potentialMoves, solitaire, 'seven');
 
-    /**
-     * Load the last card in the final locations into the list of checks
-     */
-    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'diamond');
-    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'heart');
-    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'club');
-    fetchTopLocationAwareCardFromFinal(potentialMoves, solitaire, 'spade');
-
     const enhancedCardToCheck = enhanceCard(card);
 
 
     for (const key in potentialMoves) {
+        console.log(key);
         const inner = potentialMoves[key];
         const enhancedInner = enhanceCard(inner);
 
@@ -142,6 +144,14 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         }
 
         /**
+         * If the card indexes aren't compatible then don't allow
+         * the index to be moved
+        */
+         if (innerAsLocationAware.index === card.index + 1 && !enhancedInner.isOnFinal()) {
+            return innerAsLocationAware;
+        }
+
+        /**
          * If the cards are indentical then it 
          * can't be moved to this stack
         */
@@ -155,14 +165,6 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
         */
         if (enhancedInner.hasIdenticalColour(card)) {
             continue;
-        }
-
-        /**
-         * If the card indexes aren't compatible then don't allow
-         * the index to be moved
-        */
-        if (innerAsLocationAware.index === card.index + 1 && !enhancedInner.isOnFinal()) {
-            return innerAsLocationAware;
         }
 
         continue;
