@@ -14,36 +14,37 @@ export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickC
     
     const dispatch = useDispatch();
     const solitare = useSelector(currentGameSelector);
-    const doubleClickEventListener = async (e: MouseEvent) => {
+    const clickEventListener = async (e: MouseEvent) => {
         e.stopPropagation();
-        const potentialMoves = await invokeIsCardClickable(solitare, card);
-        const keys = Object.keys(potentialMoves);
+        const move = await invokeIsCardClickable(solitare, card);
 
-        if (keys.length === 0) {
+        if (move === undefined) {
             return;
         }
 
-        handleOnlyOneResponse(dispatch, potentialMoves, keys, card);
+        handleOnlyOneResponse(dispatch, move, card);
         return;
     };
     
     return (
-        <div data-cy-test-id={"click-" + card.cardNumber + "-" + card.suit} className="click-card cursor-pointer" onClick={doubleClickEventListener}>
+        <div data-cy-test-id={"click-" + card.cardNumber + "-" + card.suit} className="click-card cursor-pointer" onClick={clickEventListener}>
             {children}
         </div>
     );
 };
 
-const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardMoveFromWorker, keys: string[], card: LocationAwareSolitaireCard): void => {
-    const droppableCard = potentialMoves[keys[keys.length - 1]];
-
+const handleOnlyOneResponse = (dispatch: Dispatch<any>, move: CanCardMoveFromWorker, card: LocationAwareSolitaireCard): void => {
+    if (move === undefined) {
+        return;
+    }
+    
     /**
      * If the card has only one place to go and its the 
      * final then just dispatch the action
      */
-    if (droppableCard.location.namespace === 'final') {
+    if (move.location.namespace === 'final') {
         dispatch(moveCardToFinalColumnAsync({
-            column: droppableCard.location.area,
+            column: move.location.area,
             drag: card
         }));
         return;
@@ -51,7 +52,7 @@ const handleOnlyOneResponse = (dispatch: Dispatch<any>, potentialMoves: CanCardM
 
     dispatch(moveCardToColumnAsync({
         drag: card,
-        drop: droppableCard as LocationAwareSolitaireCard
+        drop: move as LocationAwareSolitaireCard
     }));
     return;
 }

@@ -2,10 +2,10 @@ import { expose } from "comlink";
 import { enhanceCard, enhanceSolitaire } from "lib/enhancers/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
-import { CanCardMoveFromWorker } from "types/worker";
+import { CanCardMoveFromWorker, PotentialCardMovesWorker } from "types/worker";
 
 const fetchTopLocationAwareCardFromColumns = (
-    build: CanCardMoveFromWorker,  
+    build: PotentialCardMovesWorker,  
     solitaire: Solitaire,
     area: string
 ): void => {
@@ -25,7 +25,7 @@ const fetchTopLocationAwareCardFromColumns = (
 };
 
 const fetchTopLocationAwareCardFromFinal = (
-    build: CanCardMoveFromWorker,  
+    build: PotentialCardMovesWorker,  
     solitaire: Solitaire,
     area: string
 ): void => {
@@ -47,7 +47,7 @@ const fetchTopLocationAwareCardFromFinal = (
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
 
     const enhancedSolitaire = enhanceSolitaire(solitaire);
-    const potentialMoves: CanCardMoveFromWorker = {};
+    const potentialMoves: PotentialCardMovesWorker = {};
 
     /**
      * Load the last card in every column into the list of checks
@@ -70,21 +70,22 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
 
     const enhancedCardToCheck = enhanceCard(card);
 
-    const locationsOfCardsWanted = Object.keys(potentialMoves).filter((key) => {
+
+    for (const key in potentialMoves) {
         const inner = potentialMoves[key];
         const enhancedInner = enhanceCard(inner);
 
         /**
          * If the card we have clicked on is of type king
          */
-         if (enhancedCardToCheck.isAKing()) {
+        if (enhancedCardToCheck.isAKing()) {
 
             /**
              * If the card we are checking currently on the final stack, is a queen and matches
              * the suit then allow it to be processed
              */
             if (enhancedInner.isAQueen() && enhancedInner.isOnFinal() && enhancedInner.hasIdenticalSuit(card)) {
-                return true;
+                return inner;
             }
 
             /**
@@ -92,37 +93,36 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
              * then don't allow the card to be placed upon
              */
             if (!enhancedInner.isAFullCard() && !enhancedInner.isOnFinal()){
-                return true;
+                return inner;
             }
 
-            return false;
+            continue;
         }
 
         /**
          * If the card we have clicked on is of type ace
          */
         if (enhancedCardToCheck.isAAce()) {
-
             /**
              * If the card we are checking is on a final and not a full card then
              * allow the card to move it to the space
              */
             if (enhancedInner.isOnFinal() && !enhancedInner.isAFullCard() && inner.location.area === card.suit.toLowerCase()) {
-                return true;
+                return inner;
             }
 
-            return false;
+            continue;
         }
 
-        /**
+         /**
          * The current card we are looping over has only a 
          * location, then this is a empty space. Empty spaces
          * can be forgotten about as only kings can use these
          */
         if (!enhancedInner.isAFullCard()){
-            return false;
+            continue;
         }
-
+        
         const innerAsLocationAware = inner as LocationAwareSolitaireCard;
 
         /**
@@ -132,21 +132,21 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * card being clicke on has no children then the
          * card can be moved to the final
          */
-        if (
+         if (
             enhancedInner.isOnFinal() && 
             innerAsLocationAware.index + 1 === card.index && 
             enhancedInner.hasIdenticalSuit(card) && 
             !enhancedSolitaire.doAnyCardsExistAsChildren(card)
         ) {
-            return true;
+            return inner;
         }
 
         /**
          * If the cards are indentical then it 
          * can't be moved to this stack
         */
-        if (enhancedInner.isIdenticalToo(card)) {
-            return false;
+         if (enhancedInner.isIdenticalToo(card)) {
+            continue;
         }
 
         /**
@@ -154,7 +154,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * these can't be transferred
         */
         if (enhancedInner.hasIdenticalColour(card)) {
-            return false;
+            continue;
         }
 
         /**
@@ -162,17 +162,14 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
          * the index to be moved
         */
         if (innerAsLocationAware.index === card.index + 1 && !enhancedInner.isOnFinal()) {
-            return true;
+            return innerAsLocationAware;
         }
 
-        return false;
-    });
-    
-    const moves: CanCardMoveFromWorker = {};
-    locationsOfCardsWanted.forEach((k) => {
-        moves[k] = potentialMoves[k];
-    });
-    return moves;
+        continue;
+
+    }
+
+    return undefined;
 };
 
 const exports = {
