@@ -9,5 +9,7 @@ export type PotentialClickCardMovesWorker = {
 export type CanCardMoveFromWorker = LocationAwarePotentiallyUndefinedSolitaireCard | undefined;
 
 export type PotentialMovesFromWorker = {
-    [id: string]: LocationAwarePotentiallyUndefinedSolitaireCard;
+    [id: string]: {
+        [id: string]: string[];
+    }
 };

@@ -5,7 +5,7 @@ import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireC
 
 export const canCardMoveToCard = (
     solitaire: Solitaire, 
-    card: LocationAwareSolitaireCard, 
+    card: LocationAwarePotentiallyUndefinedSolitaireCard, 
     inner: LocationAwarePotentiallyUndefinedSolitaireCard
 ): boolean => {
     const enhancedSolitaire = enhanceSolitaire(solitaire);
@@ -17,12 +17,11 @@ export const canCardMoveToCard = (
      * If the card we have clicked on is of type king
      */
      if (enhancedCardToCheck.isAKing()) {
-
         /**
          * If the card we are checking currently on the final stack, is a queen and matches
          * the suit then allow it to be processed
          */
-        if (enhancedInner.isAQueen() && enhancedInner.isOnFinal() && enhancedInner.hasIdenticalSuit(card)) {
+        if (enhancedInner.isAQueen() && enhancedInner.isOnFinal() && enhancedInner.hasIdenticalSuit(card as LocationAwareSolitaireCard)) {
             return true;
         }
 
@@ -45,14 +44,14 @@ export const canCardMoveToCard = (
          * If the card we are checking is on a final and not a full card then
          * allow the card to move it to the space
          */
-        if (enhancedInner.isOnFinal() && !enhancedInner.isAFullCard() && inner.location.area === card.suit.toLowerCase()) {
+        if (enhancedInner.isOnFinal() && !enhancedInner.isAFullCard() && inner.location.area === (card as LocationAwareSolitaireCard).suit.toLowerCase()) {
             return true;
         }
 
         return false;
     }
 
-     /**
+    /**
      * The current card we are looping over has only a 
      * location, then this is a empty space. Empty spaces
      * can be forgotten about as only kings can use these

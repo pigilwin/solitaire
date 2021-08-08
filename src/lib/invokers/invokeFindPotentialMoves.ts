@@ -9,7 +9,7 @@ export const invokeFindPotentialMoves = async (
    * Here we create our worker and wrap it with comlink so we can interact with it
   */
   const worker = new Worker("../../workers/potentialMovesWorker", {
-    name: "can-card-move-worker",
+    name: "potential-moves-worker",
     type: "module",
   });
 

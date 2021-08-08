@@ -1,4 +1,13 @@
-import { LocationAwareSolitaireCard, Solitaire, SolitaireCard, SolitaireColumn, SolitaireFinal } from "../types/game";
+import { 
+    LocationAware,
+    LocationAwarePotentiallyUndefinedSolitaireCard, 
+    LocationAwareSolitaireCard, 
+    Solitaire, 
+    SolitaireCard, 
+    SolitaireColumn, 
+    SolitaireFinal 
+} from "../types/game";
+import { enhanceCard } from "./enhancers/enhancers";
 
 export const columnFromLocation = (game: Solitaire, namespace: string, area: string): SolitaireCard[] => {
     const columns: SolitaireColumn = (game[namespace as keyof Solitaire] as SolitaireColumn);
@@ -40,3 +49,15 @@ export const fetchCard = (cards: SolitaireCard[], number: string, suit: string):
         return card.cardNumber === number && card.suit === suit;
     }) as SolitaireCard;
 }
+
+export const makeCardIndentifier = (card: LocationAwarePotentiallyUndefinedSolitaireCard): string => {
+    const enchancedCard = enhanceCard(card);
+    
+    if (!enchancedCard.isAFullCard()) {
+        const locationOnly = (card as LocationAware).location;
+        return "location-" + locationOnly.namespace + "-" + locationOnly.area;
+    }
+    
+    const locationAwareCard = card as LocationAwareSolitaireCard;
+    return "full-" + locationAwareCard.suit + "-" + locationAwareCard.cardNumber;
+};
