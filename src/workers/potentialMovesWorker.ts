@@ -60,7 +60,7 @@ const loadCardsFromLocation = (solitaire: Solitaire): Cards => {
     return cards;
 };
 
-const findAllCardsThatAreOnTheBottomWithoutColumn = (cards: Cards, column: string): CardsForTop => {
+const findAllCardsThatAreOnTheBottomWithoutColumn = (cards: Cards, columnsToIgnore: string[]): CardsForTop => {
     const foundCards: CardsForTop = {};
 
     for (const key in cards) {
@@ -69,7 +69,7 @@ const findAllCardsThatAreOnTheBottomWithoutColumn = (cards: Cards, column: strin
         /**
          * If the current column is the same as the key then continue
          */
-        if (key === column) {
+        if (columnsToIgnore.includes(key)) {
             continue;
         }
 
@@ -80,34 +80,30 @@ const findAllCardsThatAreOnTheBottomWithoutColumn = (cards: Cards, column: strin
 };
 
 const potentialMoves = (solitaire: Solitaire): PotentialMovesFromWorker => {
-    const moves: PotentialMovesFromWorker = {};
+    const moves: PotentialMovesFromWorker = [];
     const cards = loadCardsFromLocation(solitaire);
+    const finalColumns = Object.keys(solitaire.final);
     
     /**
      * Loop over every column in the 
      * list of currently shown cards
      */
     for (const column in cards) {
+        /**
+         * Ignore all final columns to move back
+         */
+        if (finalColumns.includes(column)) {
+            continue;
+        }
 
-        const allCardsThatAreOnTheBottomWithoutThisColumn = findAllCardsThatAreOnTheBottomWithoutColumn(cards, column);
+        const allCardsThatAreOnTheBottomWithoutThisColumn = findAllCardsThatAreOnTheBottomWithoutColumn(cards, [column]);
         
         for (const card of cards[column]) {
             const cardIdentifier = makeCardIndentifier(card);
             for (const cardInnerLocation in allCardsThatAreOnTheBottomWithoutThisColumn) {
                 const cardInner = allCardsThatAreOnTheBottomWithoutThisColumn[cardInnerLocation];
-
-                if (cardInner === undefined) {
-                    console.log(column, cardInnerLocation);
-                }
-
                 if (canCardMoveToCard(solitaire, card, cardInner)) {
-                    if (moves[column] === undefined) {
-                        moves[column] = {};
-                    }
-                    if (moves[column][cardIdentifier] === undefined) {
-                        moves[column][cardIdentifier] = [];
-                    }
-                    moves[column][cardIdentifier].push(makeCardIndentifier(cardInner));
+                    moves.push(cardIdentifier);
                 }
             }
         }
