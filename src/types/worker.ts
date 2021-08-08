@@ -5,4 +5,9 @@ export type IsGameCompleteFromWorker<T> = [T, boolean];
 export type PotentialCardMovesWorker = {
     [id: string]: LocationAwarePotentiallyUndefinedSolitaireCard;
 };
+
 export type CanCardMoveFromWorker = LocationAwarePotentiallyUndefinedSolitaireCard | undefined;
+
+export type PotentialMovesFromWorker = {
+    [id: string]: LocationAwarePotentiallyUndefinedSolitaireCard;
+};
