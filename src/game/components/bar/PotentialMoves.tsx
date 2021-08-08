@@ -2,6 +2,7 @@ import { MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { invokeFindPotentialMoves } from "lib/invokers/invokeFindPotentialMoves";
 import { currentGameSelector } from "store/game/gameSlice";
+import { applyMovesAction, clearMovesAction } from "store/moves/movesSlice";
 
 export const PotentialMoves = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -9,7 +10,18 @@ export const PotentialMoves = (): JSX.Element => {
     const onClickHandler = async (e: MouseEvent) => {
         e.stopPropagation();
         const cardsThatCanMove = await invokeFindPotentialMoves(solitare);
-        console.log(cardsThatCanMove);
+       
+        /**
+         * Highlight the cards that can move
+         */
+        dispatch(applyMovesAction(cardsThatCanMove));
+
+        /**
+         * Remove the highlight
+         */
+        setTimeout(() => {
+            dispatch(clearMovesAction());
+        }, 1000);
     };
     return (
         <div className="flex flex-row px-4 cursor-pointer" onClick={onClickHandler}>

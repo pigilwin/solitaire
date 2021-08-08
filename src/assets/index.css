@@ -17,6 +17,12 @@
     @apply -mt-8;
 }
 
+.card-move-border {
+    @apply border-2;
+    @apply border-yellow-400;
+    @apply animate-bounce;
+}
+
 @screen md {
     .playing-card-dimensions {
         @apply w-32;

@@ -6,6 +6,9 @@ import { Card } from "./Card";
 import { DraggableCardAwareContext } from "./AwareContext/DraggableCardAwareContext";
 import { DroppableCardAwareContext } from "./AwareContext/DroppableCardAwareContext";
 import { ClickCardAwareContext } from "./AwareContext/ClickCardAwareContext";
+import { makeCardIndentifier } from "lib/util";
+import { useSelector } from "react-redux";
+import { cardsCurrentlyHavingMovesSelector } from "store/moves/movesSlice";
 
 interface CardGroupProps {
     card: LocationAwareSolitaireCard;
@@ -16,6 +19,13 @@ interface CardGroupProps {
 export const CardGroup = ({card, children, index, maxDepth}: PropsWithChildren<CardGroupProps>): JSX.Element | null => {
 
     const classes = [];
+
+    const id = makeCardIndentifier(card);
+    const cardsThatCanMove = useSelector(cardsCurrentlyHavingMovesSelector);
+
+    if (cardsThatCanMove.includes(id)) {
+        classes.push('card-move-border');
+    }
     
     /**
      * If its not the initial card then 

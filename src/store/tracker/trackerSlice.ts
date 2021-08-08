@@ -8,7 +8,7 @@ export const initialState: TrackerState =  {
     moves: 0
 };
 
-const historySlice = createSlice({
+const trackerSlice = createSlice({
     name: 'tracker',
     initialState,
     reducers: {
@@ -38,14 +38,14 @@ const historySlice = createSlice({
     }
 });
 
-export const reducer = historySlice.reducer;
+export const reducer = trackerSlice.reducer;
 export const {
     incrementScoreAction,
     decrementScoreAction,
     addMoveAction,
     clearTrackerAction,
     replaceScoreAction
-} = historySlice.actions;
+} = trackerSlice.actions;
 
 export const fetchTracker = (state: RootStateHook): TrackerState => {
     const tracker = state().trackerReducer;
