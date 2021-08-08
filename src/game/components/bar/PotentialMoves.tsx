@@ -3,7 +3,7 @@ export const PotentialMoves = (): JSX.Element => {
 
     };
     return (
-        <div className="flex flex-row px-4" onClick={onClickHandler}>
+        <div className="flex flex-row px-4 cursor-pointer" onClick={onClickHandler}>
             <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
                     <circle cx="8.5" cy="8.5" r="8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
