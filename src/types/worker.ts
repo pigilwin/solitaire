@@ -2,7 +2,7 @@ import { LocationAwarePotentiallyUndefinedSolitaireCard } from "./game";
 
 export type IsGameCompleteFromWorker<T> = [T, boolean];
 
-export type PotentialCardMovesWorker = {
+export type PotentialClickCardMovesWorker = {
     [id: string]: LocationAwarePotentiallyUndefinedSolitaireCard;
 };
 

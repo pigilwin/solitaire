@@ -2,10 +2,10 @@ import { expose } from "comlink";
 import { enhanceCard, enhanceSolitaire } from "lib/enhancers/enhancers";
 import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
 import { LocationAwareSolitaireCard, Solitaire } from "types/game";
-import { CanCardMoveFromWorker, PotentialCardMovesWorker } from "types/worker";
+import { CanCardMoveFromWorker, PotentialClickCardMovesWorker } from "types/worker";
 
 const fetchTopLocationAwareCardFromColumns = (
-    build: PotentialCardMovesWorker,  
+    build: PotentialClickCardMovesWorker,  
     solitaire: Solitaire,
     area: string
 ): void => {
@@ -25,7 +25,7 @@ const fetchTopLocationAwareCardFromColumns = (
 };
 
 const fetchTopLocationAwareCardFromFinal = (
-    build: PotentialCardMovesWorker,  
+    build: PotentialClickCardMovesWorker,  
     solitaire: Solitaire,
     area: string
 ): void => {
@@ -47,7 +47,7 @@ const fetchTopLocationAwareCardFromFinal = (
 const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): CanCardMoveFromWorker => {
 
     const enhancedSolitaire = enhanceSolitaire(solitaire);
-    const potentialMoves: PotentialCardMovesWorker = {};
+    const potentialMoves: PotentialClickCardMovesWorker = {};
 
 
     /**
@@ -71,9 +71,7 @@ const canCardMove = (solitaire: Solitaire, card: LocationAwareSolitaireCard): Ca
 
     const enhancedCardToCheck = enhanceCard(card);
 
-
     for (const key in potentialMoves) {
-        console.log(key);
         const inner = potentialMoves[key];
         const enhancedInner = enhanceCard(inner);
 
