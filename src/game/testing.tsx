@@ -9,6 +9,7 @@ import { clearHistoryAction } from "store/history/historySlice";
 import { clearTrackerAction } from "store/tracker/trackerSlice";
 import { GameButton } from "./components/Button"
 import { generateFullBoardWithKingDraw } from "lib/testing/generateFullBoardWithKingDraw";
+import { FullPageContainer } from "./layout/FullPageContainer";
 
 export const Testing = (): JSX.Element => {
 
@@ -91,7 +92,7 @@ export const Testing = (): JSX.Element => {
     };
 
     return (
-        <div className="flex min-h-screen bg-green-300">
+        <FullPageContainer usingFlex={true}>
             <div className="m-auto p-10 w-1/2 bg-white flex flex-col justify-between space-y-4 rounded-md">
                 <h1 className="text-center text-4xl">Testing Helpers</h1>
                 <GameButton testID="cy-testing-one-move-away" buttonText="One move away from victory" onClick={oneMoveAwayClickHandler}/>
@@ -100,6 +101,6 @@ export const Testing = (): JSX.Element => {
                 <GameButton testID="cy-full-board-king-in-the-draw" buttonText="Full board with king in the draw" onClick={fullBoardWithKingInTheDrawClickHandler}/>
                 <GameButton testID="cy-testing-hide-page" buttonText="Hide testing page" onClick={hideTestingPageClickHandler}/>
             </div>
-        </div>
+        </FullPageContainer>
     );
 };
