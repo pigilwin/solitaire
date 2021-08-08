@@ -1,6 +1,15 @@
-export const PotentialMoves = (): JSX.Element => {
-    const onClickHandler = (): void => {
+import { MouseEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { invokeFindPotentialMoves } from "lib/invokers/invokeFindPotentialMoves";
+import { currentGameSelector } from "store/game/gameSlice";
 
+export const PotentialMoves = (): JSX.Element => {
+    const dispatch = useDispatch();
+    const solitare = useSelector(currentGameSelector);
+    const onClickHandler = async (e: MouseEvent) => {
+        e.stopPropagation();
+        const cardsThatCanMove = await invokeFindPotentialMoves(solitare);
+        console.log(cardsThatCanMove);
     };
     return (
         <div className="flex flex-row px-4 cursor-pointer" onClick={onClickHandler}>

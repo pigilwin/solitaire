@@ -2,7 +2,7 @@ import { releaseProxy, wrap } from "comlink";
 import { Solitaire } from "types/game";
 import { PotentialMovesFromWorker } from "types/worker";
 
-export const invokeIsCardClickable = async (
+export const invokeFindPotentialMoves = async (
   solitaire: Solitaire
 ): Promise<PotentialMovesFromWorker> => {
   /**
