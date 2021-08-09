@@ -1,8 +1,6 @@
 import { enhanceCard, enhanceSolitaire } from "lib/enhancers/enhancers";
 import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, Solitaire } from "types/game";
 
-
-
 export const canCardMoveToCard = (
     solitaire: Solitaire, 
     card: LocationAwarePotentiallyUndefinedSolitaireCard, 
@@ -83,7 +81,7 @@ export const canCardMoveToCard = (
      * If the card indexes aren't compatible then don't allow
      * the index to be moved
     */
-     if (innerAsLocationAware.index === cardAsLocationAware.index + 1 && !enhancedInner.isOnFinal()) {
+    if (innerAsLocationAware.index === cardAsLocationAware.index + 1 && !enhancedInner.isOnFinal() && !enhancedInner.hasIdenticalColour(cardAsLocationAware)) {
         return true;
     }
 
