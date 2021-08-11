@@ -11,6 +11,7 @@ import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
+import { useAreAllTheCardsOnTheBoard } from "lib/hooks/useAreAllTheCardsOnTheBoard";
 
 type BackendFactory = typeof HTML5Backend;
 
@@ -18,6 +19,8 @@ export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
     const [isGameComplete] = useIsTheGameComplete(solitaire);
+    const [areAllCardsOnTheBoard] = useAreAllTheCardsOnTheBoard(solitaire);
+    console.log(areAllCardsOnTheBoard);
 
     /**
      * Show the empty game screen if no game exists

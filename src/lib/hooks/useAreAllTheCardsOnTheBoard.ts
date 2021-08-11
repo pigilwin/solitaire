@@ -24,6 +24,8 @@ export const useAreAllTheCardsOnTheBoard = (
       });
   
       const workerApi = wrap<import("../../workers/areAllCardsOnTheBoard").WorkerType>(worker);
+
+      setData({isCalculating: true, value: false});
   
       workerApi.areAllCardsOnTheBoard(solitaire).then((value: boolean) => {
         setData({ isCalculating: false, value });

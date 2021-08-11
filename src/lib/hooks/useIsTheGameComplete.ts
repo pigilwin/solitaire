@@ -23,6 +23,8 @@ export const useIsTheGameComplete = (
       type: "module",
     });
 
+    setData({isCalculating: true, value: false});
+
     const workerApi = wrap<import("../../workers/isGameCompleteWorker").WorkerType>(worker);
 
     workerApi.isGameComplete(solitaire).then((value: boolean) => {
