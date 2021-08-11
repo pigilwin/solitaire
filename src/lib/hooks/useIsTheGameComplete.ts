@@ -5,7 +5,7 @@ import { IsGameCompleteFromWorker } from "types/worker";
 
 export const useIsTheGameComplete = (
   solitaire: Solitaire
-): IsGameCompleteFromWorker<boolean> => {
+): IsGameCompleteFromWorker => {
   /**
    * We'll want to expose a wrapping object so we know when a calculation is in progress
    */
