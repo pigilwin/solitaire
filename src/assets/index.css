@@ -17,6 +17,11 @@
     @apply -mt-8;
 }
 
+.card-container-more-than-ten {
+    flex: 100px 1 0;
+    @apply -mt-8;
+}
+
 .card-move-border {
     @apply border-2;
     @apply border-yellow-400;
