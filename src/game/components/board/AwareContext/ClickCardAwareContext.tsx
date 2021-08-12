@@ -1,5 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { invokeIsCardClickable } from "lib/invokers/invokeIsCardClickable";
+import { makeCardIndentifier } from "lib/util";
 import { PropsWithChildren, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentGameSelector } from "store/game/gameSlice";
@@ -27,7 +28,7 @@ export const ClickCardAwareContext = ({card, children}: PropsWithChildren<ClickC
     };
     
     return (
-        <div data-cy-test-id={"click-" + card.cardNumber + "-" + card.suit} className="click-card cursor-pointer" onClick={clickEventListener}>
+        <div id={'click-' + makeCardIndentifier(card)} data-cy-test-id={"click-" + card.cardNumber + "-" + card.suit} className="click-card cursor-pointer" onClick={clickEventListener}>
             {children}
         </div>
     );
