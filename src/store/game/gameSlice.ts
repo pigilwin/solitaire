@@ -30,7 +30,8 @@ export const initialState: Game =  {
             remaining: [],
             current: []
         }
-    }
+    },
+    cardOrderToCompleteGame: []
 };
 
 const gameSlice = createSlice({
@@ -72,6 +73,11 @@ const gameSlice = createSlice({
         },
         clearGameAction() {
             return initialState;
+        },
+        updateCardOrder(state: Game, action: PayloadAction<string[]>) {
+            const newState = deepCopy<Game>(state);
+            newState.cardOrderToCompleteGame = action.payload;
+            return newState;
         }
     }
 });
@@ -85,7 +91,8 @@ export const {
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction,
     replaceGameAction,
-    clearGameAction
+    clearGameAction,
+    updateCardOrder
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {

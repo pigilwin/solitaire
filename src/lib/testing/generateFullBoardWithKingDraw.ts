@@ -11,6 +11,7 @@ export const generateFullBoardWithKingDraw = (): Game => {
         return card;
     });
     return {
+        cardOrderToCompleteGame: [],
         game: {
             id: v4(),
             columns: {
