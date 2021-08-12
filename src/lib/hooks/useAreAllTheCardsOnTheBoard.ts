@@ -4,14 +4,16 @@ import { Solitaire } from "types/game";
 import { AreAllCardsOnTheBoardFromWorker } from "types/worker";
 
 export const useAreAllTheCardsOnTheBoard = (
-    solitaire: Solitaire
+    solitaire: Solitaire,
+    hasExceptedToCompleteGame: boolean
 ): AreAllCardsOnTheBoardFromWorker => {
+    const value: string[] = [];
     /**
      * We'll want to expose a wrapping object so we know when a calculation is in progress
      */
     const [data, setData] = useState({
       isCalculating: false,
-      value: false,
+      value,
     });
   
     useEffect(() => {
@@ -25,9 +27,9 @@ export const useAreAllTheCardsOnTheBoard = (
   
       const workerApi = wrap<import("../../workers/areAllCardsOnTheBoard").WorkerType>(worker);
 
-      setData({isCalculating: true, value: false});
+      setData({isCalculating: true, value: []});
   
-      workerApi.areAllCardsOnTheBoard(solitaire).then((value: boolean) => {
+      workerApi.areAllCardsOnTheBoard(solitaire).then((value: string[]) => {
         setData({ isCalculating: false, value });
         workerApi[releaseProxy]();
         worker.terminate();

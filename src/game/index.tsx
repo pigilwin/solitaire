@@ -2,6 +2,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import { Board } from "./board";
 
@@ -17,9 +18,10 @@ type BackendFactory = typeof HTML5Backend;
 
 export const Game = (): JSX.Element => {
 
+    const [hasExceptedToCompleteGame, setHasExceptedToCompleteGame] = useState(false);
     const solitaire = useSelector(currentGameSelector);
     const [isGameComplete] = useIsTheGameComplete(solitaire);
-    const [areAllCardsOnTheBoard] = useAreAllTheCardsOnTheBoard(solitaire);
+    const [areAllCardsOnTheBoard] = useAreAllTheCardsOnTheBoard(solitaire, hasExceptedToCompleteGame);
     console.log(areAllCardsOnTheBoard);
 
     /**
