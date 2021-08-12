@@ -31,7 +31,8 @@ export const initialState: Game =  {
             current: []
         }
     },
-    cardOrderToCompleteGame: []
+    cardOrderToCompleteGame: [],
+    hasGameBeenAskedToBeCompleted: false
 };
 
 const gameSlice = createSlice({
@@ -101,3 +102,4 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
 export const isGameActiveSelector = (state: RootState): boolean => state.gameReducer.game.id.length > 0;
+export const orderToImportSelector = (state: RootState): string[] => state.gameReducer.cardOrderToCompleteGame;

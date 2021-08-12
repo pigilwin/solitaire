@@ -50,4 +50,5 @@ export interface SolitaireColumn {
 export interface Game {
     game: Solitaire;
     cardOrderToCompleteGame: string[];
+    hasGameBeenAskedToBeCompleted: boolean;
 }

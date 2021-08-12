@@ -17,6 +17,7 @@ export const generateOneMoveAwayGame = (): Game => {
     remaining.showing = true;
 
     return {
+        hasGameBeenAskedToBeCompleted: false,
         cardOrderToCompleteGame: [],
         game: {
             id: v4(),
