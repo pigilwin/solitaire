@@ -93,4 +93,3 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
     return {...currentGame};
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
-export const isGameActiveSelector = (state: RootState): boolean => state.gameReducer.game.id.length > 0;

@@ -10,7 +10,7 @@ import { UndoGameButton } from './bar/UndoButton';
 import { GameButtons } from "./bar/GameButtons";
 import { ScoreCount } from "./bar/ScoreCount";
 import { PotentialMoves } from "./bar/PotentialMoves";
-import { isGameActiveSelector } from "store/game/gameSlice";
+import { currentGameSelector } from "store/game/gameSlice";
 
 interface GameBarProps {
     isGameComplete: boolean;
@@ -20,9 +20,9 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
     const [isMenuOpen, openMenu] = useState(false);
     
     const weHaveHistory = useSelector(doWeHaveAnyHistorySelector);
-    const isGameActive = useSelector(isGameActiveSelector);
     const movesCount = useSelector(currentMovesSelector);
     const scoreCount = useSelector(currentScoreSelector);
+    const solitaire = useSelector(currentGameSelector);
 
     let undoButton: JSX.Element | null = null;
     if (weHaveHistory && !isGameComplete) {
@@ -37,7 +37,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
      * If the current game is active and the game has 
      * not been completed then show the buttons
      */
-    if (isGameActive && !isGameComplete) {
+    if (solitaire.id.length !== 0 && !isGameComplete) {
         moveCountElement = <MovesCount count={movesCount}/>;
         scoreCountElement = <ScoreCount count={scoreCount}/>;
         helpButtonElement = <PotentialMoves/>;
