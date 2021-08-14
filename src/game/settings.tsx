@@ -23,11 +23,22 @@ import {
     CARD_BACK_PURPLE
 } from "types/back";
 
-import { currentlySelectedCardBackSelector, applyNewCardBackAction, applyNewBackgroundColor, currentlySelectedBackgroundSelector } from "store/application/applicationSlice";
+import { 
+    currentlySelectedCardBackSelector, 
+    applyNewCardBackAction, 
+    applyNewBackgroundColor, 
+    currentlySelectedBackgroundSelector, 
+    shouldTheGameBeFinishedAutomaticallySelector,
+    applyFinishGameAutomatically
+} from "store/application/applicationSlice";
 import { backgroundColors } from "store/application/constants";
+import { ToggleSwitch } from "./layout/inputs";
 
 export const Settings = (): JSX.Element => {
+
+    const shouldTheGameBeFinishedAutomatically = useSelector(shouldTheGameBeFinishedAutomaticallySelector);
     const history = useHistory();
+    const dispatch = useDispatch();
     const onClickHandler = () => {
         history.replace('/');
     };
@@ -47,7 +58,18 @@ export const Settings = (): JSX.Element => {
                 <div className="my-2 text-center">
                     <GameButton testID="cy-settings-go-home" buttonText="Go Home" onClick={onClickHandler}/>
                 </div>
-                <div className="m-1 p-1">
+                <div className="my-1 p-1">
+                    <Accordion title="Gameplay Settings" testID="gameplay-settings">
+                        <ToggleSwitch 
+                            title="Should the game be finished automatically?" 
+                            value={shouldTheGameBeFinishedAutomatically}
+                            onChange={(e) => {
+                                dispatch(applyFinishGameAutomatically(e.currentTarget.checked));
+                            }}
+                        />
+                    </Accordion>
+                </div>
+                <div className="my-1 p-1">
                     <Accordion title="Choose a card back" testID="new-card-back-chooser">
                         <div className="grid grid-cols-3 gap-4">
                             {Object.keys(cardBacks).map((id) => {
@@ -59,21 +81,21 @@ export const Settings = (): JSX.Element => {
                             })}
                         </div>
                     </Accordion>
-                    <div className="mt-3">
-                        <Accordion title="Choose a background color" testID="new-back-ground-chooser">
-                            <div className="grid grid-cols-3 gap-4">
-                                {Object.keys(backgroundColors).map((id) => {
-                                    return (
-                                        <SelectableBackground 
-                                            key={id} 
-                                            id={id} 
-                                            color={backgroundColors[id]} 
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </Accordion>
-                    </div>
+                </div>
+                <div className="my-1 p-1">
+                    <Accordion title="Choose a background color" testID="new-back-ground-chooser">
+                        <div className="grid grid-cols-3 gap-4">
+                            {Object.keys(backgroundColors).map((id) => {
+                                return (
+                                    <SelectableBackground 
+                                        key={id} 
+                                        id={id} 
+                                        color={backgroundColors[id]} 
+                                    />
+                                );
+                            })}
+                        </div>
+                    </Accordion>
                 </div>
             </div>
         </FullPageContainer>

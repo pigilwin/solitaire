@@ -4,8 +4,7 @@ import { Solitaire } from "types/game";
 import { AreAllCardsOnTheBoardFromWorker } from "types/worker";
 
 export const useAreAllTheCardsOnTheBoard = (
-    solitaire: Solitaire,
-    hasAcceptedToCompleteGame: boolean
+    solitaire: Solitaire
 ): AreAllCardsOnTheBoardFromWorker => {
     const value: string[] = [];
     /**
@@ -29,7 +28,7 @@ export const useAreAllTheCardsOnTheBoard = (
         workerApi[releaseProxy]();
         worker.terminate();
       });
-    }, [solitaire, hasAcceptedToCompleteGame]);
+    }, [solitaire]);
   
     return data;
   };

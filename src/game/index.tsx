@@ -11,16 +11,16 @@ import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
 import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
-import { useAreAllTheCardsOnTheBoard } from "lib/hooks/useAreAllTheCardsOnTheBoard";
+import { shouldTheGameBeFinishedAutomaticallySelector } from "store/application/applicationSlice";
+import { AutoComplete } from "./autocomplete";
 
 type BackendFactory = typeof HTML5Backend;
 
 export const Game = (): JSX.Element => {
 
     const solitaire = useSelector(currentGameSelector);
+    const autoComplete = useSelector(shouldTheGameBeFinishedAutomaticallySelector);
     const isGameComplete = useIsTheGameComplete(solitaire);
-    const areAllCardsOnTheBoard = useAreAllTheCardsOnTheBoard(solitaire, false);
-
 
     /**
      * Show the empty game screen if no game exists,
@@ -42,16 +42,31 @@ export const Game = (): JSX.Element => {
     }
 
     /**
+     * If the client has asked for auto complete
+     */
+    if (autoComplete) {
+        return (
+            <AutoComplete solitaire={solitaire}>
+                {generatePage(isGameComplete)}
+            </AutoComplete>
+        );
+    }
+
+    return generatePage(isGameComplete);
+};
+
+const generatePage = (isGameComplete: boolean): JSX.Element => {
+    /**
      * Depending if we are on mobile or not apply DND backend
      */
-    const backend: BackendFactory = "ontouchstart" in window ? TouchBackend : HTML5Backend;
+     const backend: BackendFactory = "ontouchstart" in window ? TouchBackend : HTML5Backend;
 
-    return (
-        <FullPageContainer>
-            <GameBar isGameComplete={isGameComplete}/>
-            <DndProvider backend={backend}>
-                <Board/>
-            </DndProvider>
-        </FullPageContainer>
-    );
-};
+     return (
+         <FullPageContainer>
+             <GameBar isGameComplete={isGameComplete}/>
+             <DndProvider backend={backend}>
+                 <Board/>
+             </DndProvider>
+         </FullPageContainer>
+     );
+}

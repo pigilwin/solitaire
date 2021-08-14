@@ -70,7 +70,7 @@ export class SolitaireEnhancer {
             return carry;
         }, {});
 
-        return Object.values(grouped).flat();
+        return Object.values(grouped).flat().reverse();
     }
 
     private makeCardsLocationAware(cards: SolitaireCard[], namespace: string, area: string): LocationAwareSolitaireCard[]
