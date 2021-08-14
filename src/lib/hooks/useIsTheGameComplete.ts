@@ -9,10 +9,7 @@ export const useIsTheGameComplete = (
   /**
    * We'll want to expose a wrapping object so we know when a calculation is in progress
    */
-  const [data, setData] = useState({
-    isCalculating: false,
-    value: false,
-  });
+  const [data, setData] = useState(false);
 
   useEffect(() => {
     /**
@@ -23,16 +20,14 @@ export const useIsTheGameComplete = (
       type: "module",
     });
 
-    setData({isCalculating: true, value: false});
-
     const workerApi = wrap<import("../../workers/isGameCompleteWorker").WorkerType>(worker);
 
     workerApi.isGameComplete(solitaire).then((value: boolean) => {
-      setData({ isCalculating: false, value });
+      setData(value);
       workerApi[releaseProxy]();
       worker.terminate();
     });
   }, [solitaire]);
 
-  return [data.value, data.isCalculating];
+  return data;
 };

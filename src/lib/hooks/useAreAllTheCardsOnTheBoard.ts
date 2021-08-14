@@ -11,10 +11,7 @@ export const useAreAllTheCardsOnTheBoard = (
     /**
      * We'll want to expose a wrapping object so we know when a calculation is in progress
      */
-    const [data, setData] = useState({
-      isCalculating: false,
-      value,
-    });
+    const [data, setData] = useState(value);
   
     useEffect(() => {
       /**
@@ -26,15 +23,13 @@ export const useAreAllTheCardsOnTheBoard = (
       });
   
       const workerApi = wrap<import("../../workers/areAllCardsOnTheBoard").WorkerType>(worker);
-
-      setData({isCalculating: true, value: []});
   
       workerApi.areAllCardsOnTheBoard(solitaire).then((value: string[]) => {
-        setData({ isCalculating: false, value });
+        setData(value);
         workerApi[releaseProxy]();
         worker.terminate();
       });
     }, [solitaire, hasAcceptedToCompleteGame]);
   
-    return [data.value, data.isCalculating];
+    return data;
   };
