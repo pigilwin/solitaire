@@ -15,16 +15,16 @@ export const Final = (): JSX.Element => {
 
     return ( 
         <div className="w-2/3 overflow-hidden flex flex-row justify-end">
-            <div className="px-2">
+            <div className="px-1">
                 {generateFinalContainer(final.heart, SUIT_TYPE_HEART)}
             </div>
-            <div className="px-2">
+            <div className="px-1">
                 {generateFinalContainer(final.diamond, SUIT_TYPE_DIAMOND)}
             </div>
-            <div className="px-2">
+            <div className="px-1">
                 {generateFinalContainer(final.club, SUIT_TYPE_CLUB)}
             </div>
-            <div className="px-2">
+            <div className="px-1">
                 {generateFinalContainer(final.spade, SUIT_TYPE_SPADE)}
             </div>
         </div>

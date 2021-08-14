@@ -18,10 +18,10 @@ export const Draw = (): JSX.Element => {
     
     return (
         <div className="w-1/3 overflow-hidden flex flex-row">
-            <div className="px-2">
+            <div className="px-1">
                 {getRemainingCard(draw.remaining, draw.current)}
             </div>
-            <div className="px-2">
+            <div className="px-1">
                 {getDrawCard(draw.current)}
             </div>
         </div>
