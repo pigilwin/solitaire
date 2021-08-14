@@ -2,7 +2,6 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 import { Board } from "./board";
 
@@ -18,14 +17,14 @@ type BackendFactory = typeof HTML5Backend;
 
 export const Game = (): JSX.Element => {
 
-    const [hasExceptedToCompleteGame, setHasExceptedToCompleteGame] = useState(false);
     const solitaire = useSelector(currentGameSelector);
-    const [isGameComplete] = useIsTheGameComplete(solitaire);
-    const [areAllCardsOnTheBoard] = useAreAllTheCardsOnTheBoard(solitaire, hasExceptedToCompleteGame);
-    console.log(areAllCardsOnTheBoard);
+    const isGameComplete = useIsTheGameComplete(solitaire);
+    const areAllCardsOnTheBoard = useAreAllTheCardsOnTheBoard(solitaire, false);
+
 
     /**
-     * Show the empty game screen if no game exists
+     * Show the empty game screen if no game exists,
+     * mark the game as complete to hide the buttons
      */
     if (solitaire.id.length === 0) {
         return (
@@ -42,6 +41,9 @@ export const Game = (): JSX.Element => {
         return <GameComplete/>;
     }
 
+    /**
+     * Depending if we are on mobile or not apply DND backend
+     */
     const backend: BackendFactory = "ontouchstart" in window ? TouchBackend : HTML5Backend;
 
     return (

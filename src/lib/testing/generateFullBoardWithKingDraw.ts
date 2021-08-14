@@ -11,8 +11,6 @@ export const generateFullBoardWithKingDraw = (): Game => {
         return card;
     });
     return {
-        hasGameBeenAskedToBeCompleted: false,
-        cardOrderToCompleteGame: [],
         game: {
             id: v4(),
             columns: {

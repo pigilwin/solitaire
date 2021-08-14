@@ -19,8 +19,6 @@ export const generateAllOneTheBoardGame = (): Game => {
     const {first: three, second: four} = generateCardLists(hearts, clubs);
 
     return {
-        hasGameBeenAskedToBeCompleted: false,
-        cardOrderToCompleteGame: [],
         game: {
             id: v4(),
             columns: {

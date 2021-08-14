@@ -30,9 +30,7 @@ export const initialState: Game =  {
             remaining: [],
             current: []
         }
-    },
-    cardOrderToCompleteGame: [],
-    hasGameBeenAskedToBeCompleted: false
+    }
 };
 
 const gameSlice = createSlice({
@@ -74,11 +72,6 @@ const gameSlice = createSlice({
         },
         clearGameAction() {
             return initialState;
-        },
-        updateCardOrder(state: Game, action: PayloadAction<string[]>) {
-            const newState = deepCopy<Game>(state);
-            newState.cardOrderToCompleteGame = action.payload;
-            return newState;
         }
     }
 });
@@ -92,8 +85,7 @@ export const {
     moveCardToEmptyColumnAction,
     moveCardToFinalColumnAction,
     replaceGameAction,
-    clearGameAction,
-    updateCardOrder
+    clearGameAction
 } = gameSlice.actions;
 
 export const fetchGame = (getStateHook: RootStateHook): Game => {
@@ -102,4 +94,3 @@ export const fetchGame = (getStateHook: RootStateHook): Game => {
 }
 export const currentGameSelector = (state: RootState): Solitaire => state.gameReducer.game;
 export const isGameActiveSelector = (state: RootState): boolean => state.gameReducer.game.id.length > 0;
-export const orderToImportSelector = (state: RootState): string[] => state.gameReducer.cardOrderToCompleteGame;
