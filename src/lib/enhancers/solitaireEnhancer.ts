@@ -1,8 +1,9 @@
 import { enhanceCard } from "lib/enhancers/enhancers";
 import { columnFromLocation, makeCardIndentifier, makeCardLocationAware } from "lib/util";
-import { LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
+import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
 
 export class SolitaireEnhancer {
+    
     public constructor(private solitaire: Solitaire) {}
 
     public doAnyCardsExistAsChildren(card: LocationAwareSolitaireCard): boolean {
@@ -71,6 +72,29 @@ export class SolitaireEnhancer {
         }, {});
 
         return Object.values(grouped).flat().reverse();
+    }
+
+    /**
+     * Is the card on the top of the column
+     * @param card 
+     * @returns 
+     */
+    public isOnTopOfColumn(locationAwarePotentiallyUndefinedSolitaireCard: LocationAwarePotentiallyUndefinedSolitaireCard): boolean {
+        if (locationAwarePotentiallyUndefinedSolitaireCard.location.namespace !== 'columns') {
+            return false;
+        }
+
+        const card = locationAwarePotentiallyUndefinedSolitaireCard as LocationAwareSolitaireCard;
+
+        const cards: SolitaireCard[] = columnFromLocation(
+            this.solitaire,
+            card.location.namespace,
+            card.location.area
+        );
+        
+        const index = cards.findIndex(inner => card.index === inner.index && card.suit === inner.suit);
+
+        return index === 0;
     }
 
     private makeCardsLocationAware(cards: SolitaireCard[], namespace: string, area: string): LocationAwareSolitaireCard[]

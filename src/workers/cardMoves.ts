@@ -15,12 +15,20 @@ export const canCardMoveToCard = (
      * If the card we have clicked on is of type king
      */
      if (enhancedCardToCheck.isAKing()) {
+         
         /**
          * If the card we are checking currently on the final stack, is a queen and matches
          * the suit then allow it to be processed
          */
         if (enhancedInner.isAQueen() && enhancedInner.isOnFinal() && enhancedInner.hasIdenticalSuit(card as LocationAwareSolitaireCard)) {
             return true;
+        }
+
+        /**
+         * If the card is on top of the column then don't allow it to
+         */
+        if (enhancedSolitaire.isOnTopOfColumn(card)) {
+            return false;
         }
 
         /**
