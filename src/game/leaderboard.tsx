@@ -15,9 +15,26 @@ export const Leaderboard = (): JSX.Element => {
         history.replace('/');
     };
 
+
+    /**
+     * If we have no leaderboard items then show the 
+     */
+    if (leaderboard.length === 0) {
+        return (
+            <FullPageContainer usingFlex={true}>
+                <div className="m-auto w-2/3 bg-white flex flex-col justify-between space-y-4 rounded-md">
+                    <h1 className="text-center text-4xl mt-4">Leaderboard - No saved games</h1>
+                    <div className="my-2 text-center">
+                        <GameButton testID="cy-leaderboard-go-home" buttonText="Go Home" onClick={onClickHandler}/>
+                    </div>
+                </div>
+            </FullPageContainer>
+        );
+    }
+
     return (
         <FullPageContainer usingFlex={true}>
-            <div className="m-auto md:w-2/3 bg-white flex flex-col justify-between space-y-4 rounded-md">
+            <div className="m-auto w-2/3 bg-white flex flex-col justify-between space-y-4 rounded-md">
                 <h1 className="text-center text-4xl mt-4">Leaderboard</h1>
                 <div className="my-2 text-center">
                     <GameButton testID="cy-leaderboard-go-home" buttonText="Go Home" onClick={onClickHandler}/>
