@@ -10,7 +10,7 @@ export const Face = ({index, type}: FaceProps): JSX.Element => {
     const large = resolveSuitIcon(type, true);
     
     return (
-        <div className="playing-card relative flex flex-col justify-center">
+        <div className="playing-card relative flex flex-col justify-center select-none">
             <div className="absolute top-0 left-0 md:p-2 md:m-1">
                 <p className="text-center">{index}</p>
                 {small}
