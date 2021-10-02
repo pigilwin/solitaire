@@ -67,7 +67,7 @@ export const GameBar = ({isGameComplete}: GameBarProps): JSX.Element => {
                 </button>
             </div>
             <div className={miniMenuClasses.join(' ')}>
-                <GameButtons undoButton={undoButton}/>
+                <GameButtons id={solitaire.id} undoButton={undoButton}/>
             </div>
         </nav>
     );

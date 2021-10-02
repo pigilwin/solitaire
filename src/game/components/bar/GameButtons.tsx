@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import * as H from 'history';
 import { areWeAllowedToSeeTestingRouteSelector } from "store/application/applicationSlice";
 import { initialiseGameAsync } from "store/game/thunk";
 import { CypressTesting } from "types/test";
@@ -7,15 +9,21 @@ import { GameButton } from '../Button';
 
 interface GameButtonProps {
     undoButton: JSX.Element | null;
+    id: string;
 }
-export const GameButtons = ({undoButton}: GameButtonProps): JSX.Element => {
+export const GameButtons = ({undoButton, id}: GameButtonProps): JSX.Element => {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     const newGameClickHandler = () => {
-        history.replace('/');
-        dispatch(initialiseGameAsync());
+
+        if (id.length === 0) {
+            history.replace('/');
+            dispatch(initialiseGameAsync());
+            return;
+        }
+        toast.warning(<GameInProgressButton history={history}/>);
     };
 
     let testing: JSX.Element | null = null;
@@ -50,6 +58,23 @@ const RouteButton = ({route, buttonText, testID}: RouteButtonProps): JSX.Element
     return (
         <div className="px-1">
             <GameButton testID={testID} buttonText={buttonText} onClick={clickHandler}/>
+        </div>
+    );
+}
+
+interface GameInProgressButtonProps {
+    history: H.History<unknown>
+}
+const GameInProgressButton = ({history}: GameInProgressButtonProps): JSX.Element => {
+    const dispatch = useDispatch();
+    const clickHandler = () => {
+        history.replace('/');
+        dispatch(initialiseGameAsync());
+    };
+    return (
+        <div className="px-1">
+            Game currently in progress
+            <GameButton testID="cy-game-in-progress" buttonText="Play new game" onClick={clickHandler}/>
         </div>
     );
 }
