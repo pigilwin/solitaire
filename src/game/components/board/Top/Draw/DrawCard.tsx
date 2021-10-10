@@ -1,3 +1,4 @@
+import { makeCardIndentifier } from "lib/util";
 import { useDrag } from "react-dnd";
 import { LocationAwareSolitaireCard } from "types/game";
 import { Face } from "../../card/Face";
@@ -28,7 +29,7 @@ export const DrawCard = ({card}: DrawCardProps): JSX.Element => {
 
     return (
         <div ref={drag} className={classes.join(' ')}>
-            <Face type={card.suit} index={card.cardNumber}/>
+            <Face id={makeCardIndentifier(card)} type={card.suit} index={card.cardNumber}/>
         </div>
     );
 };

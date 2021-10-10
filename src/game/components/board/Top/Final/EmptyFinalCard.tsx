@@ -1,3 +1,4 @@
+import { makeCardIndentifier } from "lib/util";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "store/game/builder/cardDropper";
@@ -28,7 +29,10 @@ export const EmptyFinalCard = ({type}: EmptyFinalCardProps): JSX.Element => {
     }), []);
 
     return (
-        <div ref={drop} className="playing-card-container flex flex-col justify-center">
+        <div id={makeCardIndentifier({location: {
+            namespace: 'final',
+            area: type.toLowerCase()
+        }})} ref={drop} className="playing-card-container flex flex-col justify-center">
             <div className="flex justify-center">
                 {large}
             </div>

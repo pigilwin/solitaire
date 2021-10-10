@@ -1,9 +1,10 @@
-import { SolitaireCard } from 'types/game';
+import { makeCardIndentifier } from 'lib/util';
+import { LocationAwareSolitaireCard } from 'types/game';
 import { Back } from './card/Back';
 import { Face } from './card/Face';
 
 interface CardProps {
-    card: SolitaireCard;
+    card: LocationAwareSolitaireCard;
 }
 
 export const Card = ({card}: CardProps): JSX.Element => {
@@ -13,6 +14,6 @@ export const Card = ({card}: CardProps): JSX.Element => {
     }
     
     return (
-        <Face index={card.cardNumber} type={card.suit}/>
+        <Face id={makeCardIndentifier(card)} index={card.cardNumber} type={card.suit}/>
     );
 };
