@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { GameButton } from "./components/Button";
 import { Tile } from "./components/leaderboard/Tile";
@@ -9,10 +9,10 @@ import { leaderboardSelector } from "store/leaderboard/leaderboardSlice";
 
 export const Leaderboard = (): JSX.Element => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const leaderboard = useSelector(leaderboardSelector);
     const onClickHandler = () => {
-        history.replace('/');
+        navigate('/');
     };
 
 

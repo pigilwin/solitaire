@@ -9,7 +9,7 @@ export const invokeIsCardClickable = async (
   /**
    * Here we create our worker and wrap it with comlink so we can interact with it
   */
-  const worker = new Worker("../../workers/canCardMoveWorker", {
+  const worker = new Worker(new URL("../../workers/canCardMoveWorker", import.meta.url), {
     name: "can-card-move-worker",
     type: "module",
   });

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import * as H from 'history';
 import { areWeAllowedToSeeTestingRouteSelector } from "store/application/applicationSlice";
 import { initialiseGameAsync } from "store/game/thunk";
 import { CypressTesting } from "types/test";
@@ -14,16 +13,16 @@ interface GameButtonProps {
 export const GameButtons = ({undoButton, id}: GameButtonProps): JSX.Element => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const newGameClickHandler = () => {
 
         if (id.length === 0) {
-            history.replace('/');
+            navigate('/');
             dispatch(initialiseGameAsync());
             return;
         }
-        toast.warning(<GameInProgressButton history={history}/>);
+        toast.warning(<GameInProgressButton navigate={navigate}/>);
     };
 
     let testing: JSX.Element | null = null;
@@ -50,9 +49,9 @@ interface RouteButtonProps extends CypressTesting {
 }
 const RouteButton = ({route, buttonText, testID}: RouteButtonProps): JSX.Element => {
     
-    const history = useHistory();
+    const navigate = useNavigate();
     const clickHandler = () => {
-        history.push(route);
+        navigate(route);
     };
 
     return (
@@ -63,12 +62,12 @@ const RouteButton = ({route, buttonText, testID}: RouteButtonProps): JSX.Element
 }
 
 interface GameInProgressButtonProps {
-    history: H.History<unknown>
+    navigate: NavigateFunction;
 }
-const GameInProgressButton = ({history}: GameInProgressButtonProps): JSX.Element => {
+const GameInProgressButton = ({navigate}: GameInProgressButtonProps): JSX.Element => {
     const dispatch = useDispatch();
     const clickHandler = () => {
-        history.replace('/');
+        navigate('/');
         dispatch(initialiseGameAsync());
     };
     return (

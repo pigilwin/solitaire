@@ -8,7 +8,7 @@ export const invokeFindPotentialMoves = async (
   /**
    * Here we create our worker and wrap it with comlink so we can interact with it
   */
-  const worker = new Worker("../../workers/potentialMovesWorker", {
+  const worker = new Worker(new URL("../../workers/potentialMovesWorker", import.meta.url), {
     name: "potential-moves-worker",
     type: "module",
   });

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { allowedToSeeTestingRouteAction } from "store/application/applicationSlice";
 import { generateAllOneTheBoardGame } from "lib/testing/generateAllOnTheBoardGame";
 import { generateOneMoveAwayGame } from "lib/testing/generateOneMoveAwayGame";
@@ -14,7 +14,7 @@ import { FullPageContainer } from "./layout/FullPageContainer";
 export const Testing = (): JSX.Element => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const oneMoveAwayClickHandler = () => {
         /**
@@ -25,7 +25,7 @@ export const Testing = (): JSX.Element => {
         /**
          * Navigate to the game page
          */
-        history.replace('/');
+        navigate('/');
     };
 
     const allOnTheBoardClickHandler = () => {
@@ -37,7 +37,7 @@ export const Testing = (): JSX.Element => {
          /**
           * Navigate to the game page
           */
-         history.replace('/');
+        navigate('/');
     };
 
     const cardWithMultipleOptionsClickHandler = () => {
@@ -49,7 +49,7 @@ export const Testing = (): JSX.Element => {
          /**
           * Navigate to the game page
           */
-         history.replace('/');
+          navigate('/');
     };
 
     const fullBoardWithKingInTheDrawClickHandler = () => {
@@ -61,7 +61,7 @@ export const Testing = (): JSX.Element => {
          /**
           * Navigate to the game page
           */
-         history.replace('/');
+          navigate('/');
     }
 
     const hideTestingPageClickHandler = () => {
@@ -88,7 +88,7 @@ export const Testing = (): JSX.Element => {
         /**
          * Navigate home
          */
-        history.replace('/');
+         navigate('/');
     };
 
     return (

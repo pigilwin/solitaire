@@ -16,7 +16,7 @@ export const useAreAllTheCardsOnTheBoard = (
       /**
        * Here we create our worker and wrap it with comlink so we can interact with it
        */
-      const worker = new Worker("../../workers/areAllCardsOnTheBoard", {
+      const worker = new Worker(new URL("../../workers/areAllCardsOnTheBoard", import.meta.url), {
         name: "are-all-cards-on-the-board-worker",
         type: "module",
       });

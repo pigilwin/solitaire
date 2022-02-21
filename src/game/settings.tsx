@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { GameButton } from './components/Button';
 import {
@@ -37,10 +37,10 @@ import { ToggleSwitch } from "./layout/inputs";
 export const Settings = (): JSX.Element => {
 
     const shouldTheGameBeFinishedAutomatically = useSelector(shouldTheGameBeFinishedAutomaticallySelector);
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const onClickHandler = () => {
-        history.replace('/');
+        navigate('/');
     };
 
     const cardBacks: CardBackMap = {

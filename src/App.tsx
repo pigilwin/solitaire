@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   BrowserRouter,
-  Switch,
-  Route
+  Route,
+  Routes
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -33,24 +33,15 @@ export const App = (): JSX.Element => {
     }
   });
   
-  
   return (
     <main className="font-sans antialiased leading-normal tracking-wider bg-gray-100 dark:bg-gray-700 dark:text-white">
       <BrowserRouter>
-        <Switch>
-          <Route path="/testing">
-            <Testing/>
-          </Route>
-          <Route path="/leaderboard">
-            <Leaderboard/>
-          </Route>
-          <Route path="/settings">
-            <Settings/>
-          </Route>
-          <Route path="/">
-            <Game/>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/testing" element={<Testing/>}/>
+          <Route path="/leaderboard" element={<Leaderboard/>}/>
+          <Route path="/settings" element={<Settings/>}/>
+          <Route path="/" element={<Game/>}/>
+        </Routes>
       </BrowserRouter>
       <ToastContainer/>
     </main>

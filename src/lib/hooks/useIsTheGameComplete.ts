@@ -15,7 +15,7 @@ export const useIsTheGameComplete = (
     /**
      * Here we create our worker and wrap it with comlink so we can interact with it
      */
-    const worker = new Worker("../../workers/isGameCompleteWorker", {
+    const worker = new Worker(new URL("../../workers/isGameCompleteWorker", import.meta.url), {
       name: "is-game-complete-worker",
       type: "module",
     });
