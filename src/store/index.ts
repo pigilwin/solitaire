@@ -1,4 +1,4 @@
-import { configureStore, Action, ThunkAction } from '@reduxjs/toolkit';
+import { configureStore, Action, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { rootReducer, RootState } from './rootReducer';
 
 export const initialiseStore = () => {
@@ -11,4 +11,4 @@ export const initialiseStore = () => {
 export const store = initialiseStore();
 
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, undefined, Action<string>>;

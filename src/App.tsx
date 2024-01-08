@@ -17,10 +17,11 @@ import { localStorageKey } from './store/application/constants';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { loadLeaderboardAsync } from './store/leaderboard/thunk';
+import { AppDispatch } from 'store';
 
 export const App = (): JSX.Element => {
   
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     
     dispatch(loadLeaderboardAsync());
@@ -34,7 +35,7 @@ export const App = (): JSX.Element => {
   });
   
   return (
-    <main className="font-sans antialiased leading-normal tracking-wider bg-gray-100 dark:bg-gray-700 dark:text-white">
+    <main className="font-sans antialiased leading-normal tracking-wider bg-gray-100 dark:bg-gray-700 white">
       <BrowserRouter>
         <Routes>
           <Route path="/testing" element={<Testing/>}/>
