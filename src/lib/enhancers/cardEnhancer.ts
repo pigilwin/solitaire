@@ -1,6 +1,10 @@
-import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, SolitaireCard } from "types/game";
+import { 
+    LocationAwarePotentiallyUndefinedSolitaireCard, 
+    LocationAwareSolitaireCard, 
+    SolitaireCard 
+} from "@typings/game";
 
-export class CardEnhancer {
+class CardEnhancer {
     public constructor(private card: LocationAwarePotentiallyUndefinedSolitaireCard) {}
 
     public isIdenticalToo (second: SolitaireCard): boolean
@@ -77,3 +81,7 @@ export class CardEnhancer {
         return this.card.location.namespace === 'draw';
     }
 }
+
+export const enhanceCard = (card: LocationAwarePotentiallyUndefinedSolitaireCard): CardEnhancer => {
+    return new CardEnhancer(card);
+};

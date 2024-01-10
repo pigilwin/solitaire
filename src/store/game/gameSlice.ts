@@ -5,8 +5,8 @@ import { drawCardFromRemainingAddToDraw, refreshRemainingFromDraw , moveCard } f
 import { moveCardToEmptyColumn } from './builder/moveCardToEmptyColumn';
 import { moveCardToFinalColumn } from './builder/moveCardToFinalColumn';
 import { generateGame } from './initialiseGame';
-import { Game, Solitaire } from 'types/game';
-import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from 'types/gamePayload';
+import { Game, Solitaire } from 'typings/game';
+import { MoveCardPayload, MoveCardToEmptyColumnPayload, MoveCardToFinalColumnPayload } from 'typings/gamePayload';
 
 export const initialState: Game =  {
     game: {

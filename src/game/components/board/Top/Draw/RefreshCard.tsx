@@ -1,9 +1,10 @@
+import { AppDispatch } from "@store/index";
 import { useDispatch } from "react-redux";
 import { refreshRemaningFromDrawAsync } from "store/game/thunk";
 
 export const RefreshCard = (): JSX.Element => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const onClickRefeshHandler = () => {
         dispatch(refreshRemaningFromDrawAsync());
     };

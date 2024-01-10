@@ -6,7 +6,7 @@ import {
     CARD_BACK_YELLOW,
     CARD_BACK_PURPLE,
     CARD_BACK_RED
-} from "types/back";
+} from "@typings/back";
 
 export const Back = (): JSX.Element => {    
     const color = useSelector(currentlySelectedCardBackSelector, shallowEqual);

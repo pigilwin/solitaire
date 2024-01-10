@@ -21,7 +21,7 @@ import {
     CARD_BACK_RED,
     CARD_BACK_YELLOW,
     CARD_BACK_PURPLE
-} from "types/back";
+} from "@typings/back";
 
 import { 
     currentlySelectedCardBackSelector, 

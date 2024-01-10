@@ -1,6 +1,6 @@
 import { generateDeck } from "store/game/initialiseGame";
-import { Game, SolitaireCard } from "types/game";
-import { SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE, SUIT_TYPE_CLUB } from "types/suit";
+import { Game, SolitaireCard } from "typings/game";
+import { SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE, SUIT_TYPE_CLUB } from "typings/suit";
 import { v4 } from "uuid";
 
 export const generateAllOneTheBoardGame = (): Game => {

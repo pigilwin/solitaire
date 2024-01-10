@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from "react";
-import { CypressTesting } from "types/test";
+import { CypressTesting } from "@typings/test";
 interface AccordionProps extends CypressTesting {
   title: string;
 }

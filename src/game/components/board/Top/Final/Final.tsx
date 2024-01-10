@@ -1,7 +1,13 @@
 import { useSelector } from "react-redux";
 
-import { SolitaireCard } from "types/game";
-import { SUIT, SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "types/suit";
+import { SolitaireCard } from "@typings/game";
+import { 
+    SUIT,
+    SUIT_TYPE_CLUB,
+    SUIT_TYPE_DIAMOND, 
+    SUIT_TYPE_HEART, 
+    SUIT_TYPE_SPADE 
+} from "@typings/suit";
 
 import { EmptyFinalCard } from "./EmptyFinalCard";
 import { FinalFaceCard } from "./FinalFaceCard";

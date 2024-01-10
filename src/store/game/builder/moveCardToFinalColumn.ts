@@ -1,5 +1,5 @@
-import { Solitaire } from "types/game";
-import { MoveCardToFinalColumnPayload } from "types/gamePayload";
+import { Solitaire } from "typings/game";
+import { MoveCardToFinalColumnPayload } from "typings/gamePayload";
 import { columnFromLocation, finalFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "lib/util";
 
 export const moveCardToFinalColumn = (game: Solitaire, payload: MoveCardToFinalColumnPayload): Solitaire => {

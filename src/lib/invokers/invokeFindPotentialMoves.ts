@@ -1,6 +1,6 @@
 import { releaseProxy, wrap } from "comlink";
-import { Solitaire } from "types/game";
-import { PotentialMovesFromWorker } from "types/worker";
+import { Solitaire } from "typings/game";
+import { PotentialMovesFromWorker } from "typings/worker";
 
 export const invokeFindPotentialMoves = async (
   solitaire: Solitaire

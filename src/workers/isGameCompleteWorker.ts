@@ -1,6 +1,6 @@
 import { expose } from 'comlink';
-import { enhanceSolitaire } from 'lib/enhancers/enhancers';
-import { Solitaire } from "types/game";
+import { Solitaire } from "@typings/game";
+import { enhanceSolitaire } from '../lib/enhancers/solitaireEnhancer';
 
 const isGameComplete = (solitaire: Solitaire): boolean => {
     const enhancedSolitaire = enhanceSolitaire(solitaire);

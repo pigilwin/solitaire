@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { SolitaireCard } from "types/game";
+import { SolitaireCard } from "@typings/game";
 
 import { makeCardLocationAware } from "lib/util";
 

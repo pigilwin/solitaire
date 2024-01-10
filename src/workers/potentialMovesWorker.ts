@@ -1,7 +1,7 @@
 import { expose } from "comlink";
-import { columnFromLocation, finalFromLocation, makeCardIndentifier, makeCardLocationAware } from "lib/util";
-import { LocationAwarePotentiallyUndefinedSolitaireCard, Solitaire } from "types/game";
-import { PotentialMovesFromWorker } from "types/worker";
+import { columnFromLocation, finalFromLocation, makeCardIndentifier, makeCardLocationAware } from "../lib/util";
+import { LocationAwarePotentiallyUndefinedSolitaireCard, Solitaire } from "@typings/game";
+import { PotentialMovesFromWorker } from "@typings/worker";
 import { canCardMoveToCard } from "./cardMoves";
 
 type Cards = {

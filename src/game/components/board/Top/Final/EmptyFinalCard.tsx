@@ -3,15 +3,16 @@ import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { canCardBeDroppedOnToFinal } from "store/game/builder/cardDropper";
 import { moveCardToFinalColumnAsync } from "store/game/thunk";
-import { LocationAwareSolitaireCard } from "types/game";
+import { LocationAwareSolitaireCard } from "@typings/game";
 import { resolveSuitIcon } from "../../card/SuitBuilder";
+import { AppDispatch } from "@store/index";
 
 interface EmptyFinalCardProps {
     type: string;
 }
 export const EmptyFinalCard = ({type}: EmptyFinalCardProps): JSX.Element => {
     
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const large = resolveSuitIcon(type, true);
 

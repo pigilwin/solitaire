@@ -15,10 +15,9 @@ export default defineConfig({
         minify: 'esbuild',
         rollupOptions: {
             output: {
-                inlineDynamicImports: true,
                 entryFileNames: 'assets/[name].js',
                 assetFileNames: 'assets/[name].[ext]',
             },
         },
-    },
+    }
 });

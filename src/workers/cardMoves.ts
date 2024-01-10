@@ -1,5 +1,6 @@
-import { enhanceCard, enhanceSolitaire } from "lib/enhancers/enhancers";
-import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, Solitaire } from "types/game";
+import { enhanceCard } from "../lib/enhancers/cardEnhancer";
+import { enhanceSolitaire } from "../lib/enhancers/solitaireEnhancer";
+import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, Solitaire } from "typings/game";
 
 export const canCardMoveToCard = (
     solitaire: Solitaire, 

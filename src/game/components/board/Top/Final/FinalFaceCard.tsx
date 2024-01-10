@@ -1,8 +1,8 @@
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 
-import { LocationAwareSolitaireCard, SolitaireCard } from "types/game";
-import { SUIT } from "types/suit";
+import { LocationAwareSolitaireCard, SolitaireCard } from "@typings/game";
+import { SUIT } from "@typings/suit";
 
 import { makeCardLocationAware } from "lib/util";
 
@@ -10,6 +10,7 @@ import { canCardBeDroppedOnToFinal } from "store/game/builder/cardDropper";
 import { moveCardToFinalColumnAsync } from "store/game/thunk";
 
 import { Card } from '../../Card';
+import { AppDispatch } from "@store/index";
 
 interface FinalFaceCardProps {
     cards: SolitaireCard[];
@@ -17,7 +18,7 @@ interface FinalFaceCardProps {
 }
 export const FinalFaceCard = ({cards, type}: FinalFaceCardProps): JSX.Element => {
     
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const [, drop] = useDrop<LocationAwareSolitaireCard, void, void>(() => ({
         accept: 'card',

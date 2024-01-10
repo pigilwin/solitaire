@@ -1,5 +1,5 @@
 import { MouseEventHandler, forwardRef } from "react";
-import { CypressTesting } from "types/test";
+import { CypressTesting } from "@typings/test";
 
 interface GameButtonProps extends CypressTesting {
     buttonText: string;

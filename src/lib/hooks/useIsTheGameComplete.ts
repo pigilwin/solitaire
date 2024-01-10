@@ -1,7 +1,7 @@
 import { releaseProxy, wrap } from "comlink";
 import { useState, useEffect } from "react";
-import { Solitaire } from "types/game";
-import { IsGameCompleteFromWorker } from "types/worker";
+import { Solitaire } from "@typings/game";
+import { IsGameCompleteFromWorker } from "@typings/worker";
 
 export const useIsTheGameComplete = (
   solitaire: Solitaire

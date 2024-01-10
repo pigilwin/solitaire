@@ -1,7 +1,7 @@
 import { expose } from "comlink";
-import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "lib/util";
-import { LocationAwareSolitaireCard, Solitaire } from "types/game";
-import { CanCardMoveFromWorker, PotentialClickCardMovesWorker } from "types/worker";
+import { columnFromLocation, finalFromLocation, makeCardLocationAware } from "../lib/util";
+import { LocationAwareSolitaireCard, Solitaire } from "typings/game";
+import { CanCardMoveFromWorker, PotentialClickCardMovesWorker } from "typings/worker";
 import { canCardMoveToCard } from "./cardMoves";
 
 const fetchTopLocationAwareCardFromColumns = (

@@ -1,7 +1,7 @@
 import { releaseProxy, wrap } from "comlink";
 import { useState, useEffect } from "react";
-import { Solitaire } from "types/game";
-import { AreAllCardsOnTheBoardFromWorker } from "types/worker";
+import { Solitaire } from "typings/game";
+import { AreAllCardsOnTheBoardFromWorker } from "typings/worker";
 
 export const useAreAllTheCardsOnTheBoard = (
     solitaire: Solitaire
@@ -16,7 +16,7 @@ export const useAreAllTheCardsOnTheBoard = (
       /**
        * Here we create our worker and wrap it with comlink so we can interact with it
        */
-      const worker = new Worker(new URL("../../workers/areAllCardsOnTheBoard", import.meta.url), {
+      const worker = new Worker(new URL("../../workers/areAllCardsOnTheBoard?worker&url", import.meta.url), {
         name: "are-all-cards-on-the-board-worker",
         type: "module",
       });

@@ -1,15 +1,16 @@
 import { useDispatch } from "react-redux";
 import { drawCardFromDeckAsync } from "store/game/thunk";
-import { SolitaireCard } from "types/game";
+import { SolitaireCard } from "@typings/game";
 import { Back } from "../../card/Back";
 import { RefreshCard } from "./RefreshCard";
+import { AppDispatch } from "@store/index";
 
 interface RemainingDrawProps {
     remaining: SolitaireCard[];
 }
 export const RemainingDraw = ({remaining}: RemainingDrawProps): JSX.Element => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const drawClickHandler = (): void => {
         dispatch(drawCardFromDeckAsync());

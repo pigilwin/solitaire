@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TrackerState } from "types/tracker";
+import { TrackerState } from "typings/tracker";
 import { RootState, RootStateHook } from "../rootReducer";
 import { deepCopy } from "lib/deepCopy";
 

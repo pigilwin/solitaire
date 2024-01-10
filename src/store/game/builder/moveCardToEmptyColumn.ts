@@ -1,5 +1,5 @@
-import { Solitaire } from "types/game";
-import { MoveCardToEmptyColumnPayload } from "types/gamePayload";
+import { Solitaire } from "typings/game";
+import { MoveCardToEmptyColumnPayload } from "typings/gamePayload";
 import { columnFromLocation, findIndexOfCardWithinColumn, flipLatestCardInColumn } from "lib/util";
 
 export const moveCardToEmptyColumn = (game: Solitaire, payload: MoveCardToEmptyColumnPayload): Solitaire => {

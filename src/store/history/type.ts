@@ -1,4 +1,4 @@
-import { Game } from "types/game";
+import { Game } from "typings/game";
 
 export interface HistoryState {
     games: Game[];

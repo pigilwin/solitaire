@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 
 import { Board } from "./board";
 
-import { currentGameSelector } from "store/game/gameSlice";
+import { currentGameSelector } from "@store/game/gameSlice";
 
 import { FullPageContainer } from "./layout/FullPageContainer";
 import { GameComplete } from "./components/GameComplete";
 import { GameBar } from "./components/GameBar";
-import { useIsTheGameComplete } from "lib/hooks/useIsTheGameComplete";
-import { shouldTheGameBeFinishedAutomaticallySelector } from "store/application/applicationSlice";
+import { useIsTheGameComplete } from "@lib/hooks/useIsTheGameComplete";
+import { shouldTheGameBeFinishedAutomaticallySelector } from "@store/application/applicationSlice";
 import { AutoComplete } from "./autocomplete";
 
 type BackendFactory = typeof HTML5Backend;

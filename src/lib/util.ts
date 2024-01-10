@@ -6,8 +6,8 @@ import {
     SolitaireCard, 
     SolitaireColumn, 
     SolitaireFinal 
-} from "../types/game";
-import { enhanceCard } from "./enhancers/enhancers";
+} from "../typings/game";
+import { enhanceCard } from "./enhancers/cardEnhancer";
 
 export const columnFromLocation = (game: Solitaire, namespace: string, area: string): SolitaireCard[] => {
     const columns: SolitaireColumn = (game[namespace as keyof Solitaire] as SolitaireColumn);

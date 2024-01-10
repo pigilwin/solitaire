@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ApplicationState } from "types/application";
-import { CARD_BACK_GREEN } from "types/back";
+import { ApplicationState } from "typings/application";
+import { CARD_BACK_GREEN } from "typings/back";
 import { RootState } from "../rootReducer";
-import { deepCopy } from "lib/deepCopy";
+import { deepCopy } from "@lib/deepCopy";
 import { localStorageKey } from "./constants";
-import { BACKGROUND_GREEN } from "types/background";
+import { BACKGROUND_GREEN } from "typings/background";
 
 export const initialState: ApplicationState =  {
     allowedToSeeTestingRoute: false,

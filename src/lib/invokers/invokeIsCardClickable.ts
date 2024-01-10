@@ -1,6 +1,6 @@
 import { releaseProxy, wrap } from "comlink";
-import { LocationAwareSolitaireCard, Solitaire } from "types/game";
-import { CanCardMoveFromWorker } from "types/worker";
+import { LocationAwareSolitaireCard, Solitaire } from "typings/game";
+import { CanCardMoveFromWorker } from "typings/worker";
 
 export const invokeIsCardClickable = async (
   solitaire: Solitaire,

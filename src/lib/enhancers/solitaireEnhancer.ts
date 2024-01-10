@@ -1,8 +1,17 @@
-import { enhanceCard } from "lib/enhancers/enhancers";
-import { columnFromLocation, makeCardIndentifier, makeCardLocationAware } from "lib/util";
-import { LocationAwarePotentiallyUndefinedSolitaireCard, LocationAwareSolitaireCard, Solitaire, SolitaireCard } from "types/game";
+import { 
+    columnFromLocation, 
+    makeCardIndentifier, 
+    makeCardLocationAware 
+} from "../util";
+import { 
+    LocationAwarePotentiallyUndefinedSolitaireCard, 
+    LocationAwareSolitaireCard, 
+    Solitaire, 
+    SolitaireCard 
+} from "@typings/game";
+import { enhanceCard } from "./cardEnhancer";
 
-export class SolitaireEnhancer {
+class SolitaireEnhancer {
     
     public constructor(private solitaire: Solitaire) {}
 
@@ -101,4 +110,8 @@ export class SolitaireEnhancer {
     {
         return cards.map(card => makeCardLocationAware(card, namespace, area));
     }
+}
+
+export const enhanceSolitaire = (solitaire: Solitaire): SolitaireEnhancer => {
+    return new SolitaireEnhancer(solitaire);
 }

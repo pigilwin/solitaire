@@ -1,5 +1,5 @@
-import { SUIT } from "types/suit";
-import { SolitaireCard  } from "types/game";
+import { SUIT } from "typings/suit";
+import { SolitaireCard  } from "typings/game";
 
 export const canCardBeDroppedOnToColumn = (target: SolitaireCard, drag: SolitaireCard): boolean => {    
     /**

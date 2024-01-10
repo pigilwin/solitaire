@@ -1,7 +1,7 @@
 import { generateDeck } from "store/game/initialiseGame";
-import { Game } from "types/game";
+import { Game } from "typings/game";
 import { fetchCard } from "lib/util";
-import { SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE, SUIT_TYPE_CLUB } from "types/suit";
+import { SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE, SUIT_TYPE_CLUB } from "typings/suit";
 import { v4 } from "uuid";
 
 export const generateFullBoardWithKingDraw = (): Game => {

@@ -1,11 +1,11 @@
 import { v4 } from "uuid";
-import { Solitaire, SolitaireCard } from "../../types/game";
+import { Solitaire, SolitaireCard } from "../../typings/game";
 import {
     SUIT_TYPE_CLUB, 
     SUIT_TYPE_DIAMOND, 
     SUIT_TYPE_HEART, 
     SUIT_TYPE_SPADE 
-} from "../../types/suit";
+} from "../../typings/suit";
 
 export const standardSuitOrder: string[] = [SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE];
 export const standardCardOrder: string[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];

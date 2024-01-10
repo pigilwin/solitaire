@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../rootReducer";
-import { PotentialMovesFromWorker } from "types/worker";
-import { MovesState } from "types/moves";
+import { PotentialMovesFromWorker } from "typings/worker";
+import { MovesState } from "typings/moves";
 
 export const initialState: MovesState =  {
     moves: []

@@ -1,4 +1,4 @@
-import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "types/suit";
+import { SUIT_TYPE_CLUB, SUIT_TYPE_DIAMOND, SUIT_TYPE_HEART, SUIT_TYPE_SPADE } from "@typings/suit";
 import { Club, Diamond, Spade, Heart } from "./Suit";
 
 export const resolveSuitIcon = (type: string, large: boolean): JSX.Element | null => {

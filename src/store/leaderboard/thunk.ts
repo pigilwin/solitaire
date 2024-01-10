@@ -1,4 +1,4 @@
-import { CompletedGame } from "types/leaderboard";
+import { CompletedGame } from "typings/leaderboard";
 import { v4 } from "uuid";
 import { AppDispatch, AppThunk } from "..";
 import { clearGameAction } from "../game/gameSlice";
